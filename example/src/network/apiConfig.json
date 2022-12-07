@@ -1,0 +1,5 @@
+{
+	"photos": {
+		"search": "?method=flickr.photos.search"
+	}
+}
