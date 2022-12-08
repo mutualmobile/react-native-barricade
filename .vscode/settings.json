@@ -1,0 +1,21 @@
+{
+	"eslint.format.enable": true,
+	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.singleQuote": true,
+	"prettier.tabWidth": 2,
+	"prettier.trailingComma": "all",
+	"prettier.bracketSameLine": true,
+	"prettier.bracketSpacing": true,
+	"prettier.useTabs": false
+}
