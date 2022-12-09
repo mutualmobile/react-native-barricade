@@ -9,12 +9,23 @@ export class UrlUtils {
       pathname = '/' + pathname;
     }
 
+    let params: Record<string, string> | undefined;
+    if (parsedUrl.query) {
+      // TODO: Check and find a better way(URLSearchParams)
+      params = parsedUrl.query
+        .slice(1)
+        .split('&')
+        .reduce(function (previousValue: Record<string, string>, currentValue) {
+          const keyValuePair = currentValue.split('=');
+          previousValue[decodeURIComponent(keyValuePair[0])] =
+            decodeURIComponent(keyValuePair[1]);
+          return previousValue;
+        }, {});
+    }
+
     return {
-      host: parsedUrl.host,
-      protocol: parsedUrl.protocol,
-      search: parsedUrl.query,
-      hash: parsedUrl.hash,
-      href: parsedUrl.href,
+      ...parsedUrl,
+      params,
       pathname: pathname,
       fullpath: pathname + (parsedUrl.query || '') + (parsedUrl.hash || ''),
     };

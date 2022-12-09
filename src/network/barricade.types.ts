@@ -18,14 +18,16 @@ export type RequestConfig = {
   delay?: number;
 };
 
-export type ResponseData = [
-  keyof typeof HttpStatusCodeText,
-  Record<string, string>,
-  string,
-];
+export type ResponseData = {
+  status: keyof typeof HttpStatusCodeText;
+  headers: { [k: string]: string };
+  response: string;
+};
+
 interface ExtraRequestData {
   _url: string;
   _method: string;
+  params?: Record<string, string>;
 }
 
 export type MockedRequest = MockedXMLHttpRequest & ExtraRequestData;

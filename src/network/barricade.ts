@@ -45,6 +45,7 @@ export class Barricade {
 
     if (requestConfig) {
       try {
+        request.params = url.params;
         const result = requestConfig.responseHandler(request);
         if (
           result &&
@@ -72,7 +73,7 @@ export class Barricade {
 
   resolveRequest(request: MockedRequest, response: ResponseData, delay = 400) {
     setTimeout(() => {
-      request.respond(...response);
+      request.respond(response.status, response.headers, response.response);
     }, delay);
   }
 
