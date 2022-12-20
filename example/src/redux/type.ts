@@ -3,5 +3,7 @@ export enum GlobalActions {
 }
 
 export enum PhotoActions {
+  RecentResult = 'RecentResult',
+  ResetSearchResult = 'ResetSearchResult',
   SearchResult = 'SearchResult',
 }

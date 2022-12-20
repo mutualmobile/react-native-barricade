@@ -1,5 +1,6 @@
 {
   "photos": {
-    "search": "?method=flickr.photos.search"
+    "search": "?method=flickr.photos.search",
+    "recent": "?method=flickr.photos.getRecent"
   }
 }

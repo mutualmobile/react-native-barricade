@@ -15,4 +15,16 @@ export class PhotoService {
       },
     });
   };
+
+  static getRecentPhotos = (page: number) => {
+    return NetworkManager.getInstance().appRequest<PhotoServiceTypes.Photos>({
+      method: HttpMethod.GET,
+      url: apiConfig.photos.recent,
+      params: {
+        content_type: SearchContentType.Photos,
+        page,
+        per_page: 20,
+      },
+    });
+  };
 }

@@ -1,0 +1,5 @@
+{
+  "stat": "fail",
+  "code": 3,
+  "message": "Parameterless searches have been disabled. Please use flickr.photos.getRecent instead."
+}

@@ -1,6 +1,8 @@
 import {
   Method,
   MockedRequest,
+  PathEvaluaionType,
+  PathEvaluationClosure,
   RequestConfig,
   RequestConfigForMethod,
   RequestReferences,
@@ -11,6 +13,7 @@ import { interceptor } from './interceptor';
 import { UrlUtils } from './url.utils';
 
 export class Barricade {
+  baseUrl: string;
   handlers: ResponseHandler[] = [];
   requestReferences: RequestReferences = {} as RequestReferences;
   running = false;
@@ -22,17 +25,18 @@ export class Barricade {
     global.XMLHttpRequest = interceptor(this) as any; // TODO: check type here
 
     this.running = true;
-    this.setRequests(baseUrl, requests);
+    this.baseUrl = baseUrl;
+    this.setRequests(requests);
   }
 
-  setRequests(baseUrl: string, requests: Array<RequestConfig>) {
+  setRequests(requests: Array<RequestConfig>) {
     requests.forEach(request => {
-      const url = UrlUtils.parseURL(baseUrl + request.path);
+      const url = UrlUtils.parseURL(this.baseUrl + request.pathEvaluation.path);
       const requestReference =
-        this.requestReferences[url.pathname] ?? ({} as RequestConfigForMethod);
+        this.requestReferences[url.fullpath] ?? ({} as RequestConfigForMethod);
       requestReference[request.method] = request;
 
-      this.requestReferences[url.pathname] = requestReference;
+      this.requestReferences[url.fullpath] = requestReference;
     });
   }
 
@@ -41,12 +45,33 @@ export class Barricade {
     const path = request._url;
 
     const url = UrlUtils.parseURL(path);
-    const requestConfig = this.requestReferences[url.pathname]?.[method];
+    if (!this.baseUrl.includes(url.host)) return;
+
+    // const requestConfig = this.requestReferences[url.pathname]?.[method];
+    const requestConfigKey = Object.keys(this.requestReferences).find(item => {
+      const result = this.requestReferences[item][method];
+      if (result?.pathEvaluation?.type === PathEvaluaionType.Includes) {
+        return url.fullpath.includes(result.pathEvaluation.path);
+      } else if (result?.pathEvaluation?.type === PathEvaluaionType.Suffix) {
+        return url.pathname === result.pathEvaluation.path;
+      } else {
+        return (result.pathEvaluation as PathEvaluationClosure).callback(
+          request,
+        );
+      }
+    });
+
+    const requestConfig = requestConfigKey
+      ? this.requestReferences[requestConfigKey][method]
+      : null;
 
     if (requestConfig) {
       try {
         request.params = url.params;
-        const result = requestConfig.responseHandler(request);
+        const result = (
+          requestConfig.responseHandler.find(item => !!item.isSelected) ??
+          requestConfig.responseHandler[0]
+        ).handler(request);
         if (
           result &&
           typeof (result as PromiseLike<ResponseData>)?.then === 'function'

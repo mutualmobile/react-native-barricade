@@ -1,0 +1,231 @@
+{
+  "photos": {
+    "page": 2,
+    "pages": 3,
+    "perpage": 20,
+    "total": 58,
+    "photo": [
+      {
+        "id": "52571802409",
+        "owner": "193154458@N08",
+        "secret": "d1c5beb34c",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_346",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571057387",
+        "owner": "193154458@N08",
+        "secret": "28c0382d09",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_345",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571056347",
+        "owner": "193154458@N08",
+        "secret": "b445c34f84",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_344",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52572051418",
+        "owner": "193154458@N08",
+        "secret": "07100c2dc3",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_343",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571054837",
+        "owner": "193154458@N08",
+        "secret": "f2c477aaf0",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_342",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571519751",
+        "owner": "193154458@N08",
+        "secret": "da56768b86",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_341",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571796614",
+        "owner": "193154458@N08",
+        "secret": "ccece7f6bb",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_340",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571050642",
+        "owner": "193154458@N08",
+        "secret": "806ab012f2",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_338",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571049662",
+        "owner": "193154458@N08",
+        "secret": "f1efa79b28",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_337",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571048367",
+        "owner": "193154458@N08",
+        "secret": "463aab9f76",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_336",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52572043288",
+        "owner": "193154458@N08",
+        "secret": "f3ecdc56b4",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_335",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571961125",
+        "owner": "193154458@N08",
+        "secret": "096c4f9868",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_334",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571044217",
+        "owner": "193154458@N08",
+        "secret": "c9dccb850f",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_333",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52572038153",
+        "owner": "193154458@N08",
+        "secret": "7dd330250b",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_331",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52572037143",
+        "owner": "193154458@N08",
+        "secret": "0719138a42",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_330",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571783289",
+        "owner": "193154458@N08",
+        "secret": "1c80da250d",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_328",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571037752",
+        "owner": "193154458@N08",
+        "secret": "c875639c18",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_326",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571780534",
+        "owner": "193154458@N08",
+        "secret": "44b3d2823d",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_325",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52572031708",
+        "owner": "193154458@N08",
+        "secret": "61c7c981fc",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_324",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      },
+      {
+        "id": "52571777484",
+        "owner": "193154458@N08",
+        "secret": "f7b90c1355",
+        "server": "65535",
+        "farm": 66,
+        "title": "CITPD-21-08-22_322",
+        "ispublic": 1,
+        "isfriend": 0,
+        "isfamily": 0
+      }
+    ]
+  },
+  "stat": "ok"
+}

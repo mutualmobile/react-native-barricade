@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -12,14 +12,17 @@ import {
 import debounce from 'lodash.debounce';
 
 import { Colors, Fonts, Strings } from '../../assets';
-import { INITIAL_PAGE_NO } from '../../constants/app.constants';
 import {
   GeneralStackParamList,
   GeneralStackRouteName,
 } from '../../navigation/type';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getImageUrl, horizontalScale, verticalScale } from '../../utilities';
-import { getSearchResults } from '../../redux/actions/photo.action';
+import {
+  getRecentResults,
+  getSearchResults,
+  resetSearchResults,
+} from '../../redux/actions/photo.action';
 import { SearchText } from '../../components/SearchText/SearchText';
 import { PhotoServiceTypes } from '../../services/types';
 import { ImageSizeSuffix } from '../../constants/enum.constants';
@@ -29,36 +32,47 @@ type Props = NativeStackScreenProps<
   GeneralStackRouteName.Home
 >;
 export const Home = ({ navigation }: Props) => {
-  const { searchResult } = useAppSelector(store => store.photoReducer);
+  const {
+    recentPage,
+    recentResult,
+    recentTotalPages,
+    searchPage,
+    searchResult,
+    searchTotalPages,
+  } = useAppSelector(store => store.photoReducer);
   const dispatch = useAppDispatch();
-  const page = useRef(INITIAL_PAGE_NO);
-  const pages = useRef(INITIAL_PAGE_NO);
   const [searchText, setSearchText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const searchPhotos = (text: string) => {
+  useEffect(() => {
+    getPhotos();
+  }, []);
+
+  const getPhotos = (text?: string) => {
     setIsLoading(true);
-    dispatch(getSearchResults(text, page.current))
-      .then(response => {
-        page.current = response?.photos?.page + 1 ?? INITIAL_PAGE_NO;
-        pages.current = response?.photos?.pages ?? INITIAL_PAGE_NO;
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    dispatch(
+      text ? getSearchResults(text, searchPage) : getRecentResults(recentPage),
+    ).finally(() => {
+      setIsLoading(false);
+    });
   };
-  const debounceSearchPhotos = useCallback(debounce(searchPhotos, 400), []);
+  const debounceSearchPhotos = useCallback(debounce(getPhotos, 400), []);
 
   const onSearchTextChanged = (text: string) => {
-    page.current = INITIAL_PAGE_NO;
-    pages.current = INITIAL_PAGE_NO;
+    resetSearchResults();
     setSearchText(text);
+    setIsLoading(true);
     debounceSearchPhotos(text);
   };
 
   const onEndReachedThreshold = () => {
-    if (page.current <= pages.current && !isLoading) {
-      searchPhotos(searchText);
+    if (
+      !isLoading &&
+      (searchText?.length
+        ? searchPage <= searchTotalPages
+        : recentPage <= recentTotalPages)
+    ) {
+      getPhotos(searchText);
     }
   };
 
@@ -110,7 +124,7 @@ export const Home = ({ navigation }: Props) => {
   };
 
   const renderNoData = () => {
-    if (!isLoading && searchText?.length) {
+    if (!isLoading) {
       return (
         <View style={styles.loaderContainer}>
           <Text>{Strings.home.no_data}</Text>
@@ -122,7 +136,7 @@ export const Home = ({ navigation }: Props) => {
   const renderSearchResults = () => {
     return (
       <FlatList
-        data={searchResult}
+        data={searchText ? searchResult : recentResult}
         keyExtractor={item => item.id}
         renderItem={renderResultItem}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}

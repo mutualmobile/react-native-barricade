@@ -11,10 +11,29 @@ export enum Method {
   Put = 'PUT',
 }
 
+export enum PathEvaluaionType {
+  Closure,
+  Includes,
+  Suffix,
+}
+
+export interface PathEvaluationBasic {
+  type: PathEvaluaionType.Includes | PathEvaluaionType.Suffix;
+}
+
+export interface PathEvaluationClosure {
+  type: PathEvaluaionType.Closure;
+  callback: (request: MockedRequest) => void;
+}
+
 export type RequestConfig = {
-  path: string;
+  label: string;
   method: Method;
-  responseHandler: ResponseHandler;
+  pathEvaluation: { path: string } & (
+    | PathEvaluationBasic
+    | PathEvaluationClosure
+  );
+  responseHandler: ResponseHandler[];
   delay?: number;
 };
 
@@ -33,7 +52,9 @@ interface ExtraRequestData {
 export type MockedRequest = MockedXMLHttpRequest & ExtraRequestData;
 
 export type ResponseHandler = {
-  (request: MockedRequest): ResponseData | PromiseLike<ResponseData>;
+  handler: (request: MockedRequest) => ResponseData | PromiseLike<ResponseData>;
+  label: string;
+  isSelected?: boolean;
 };
 
 export type RequestConfigForMethod = {
