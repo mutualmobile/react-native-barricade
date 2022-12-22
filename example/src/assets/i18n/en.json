@@ -4,7 +4,8 @@
   },
   "home": {
     "header_title": "Search Image",
-    "no_data": "No Search results found"
+    "recent_no_data": "No recent photos found",
+    "search_no_data": "No Search results found"
   },
   "input": {
     "search_placeholder": "Search image here..."

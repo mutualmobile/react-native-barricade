@@ -1,5 +1,4 @@
 import {
-  Barricade,
   HttpStatusCode,
   Method,
   MockedRequest,
@@ -47,6 +46,25 @@ const errorResponseHandler = (request: MockedRequest) => {
   };
 };
 
+const loadMoreResponseHandler = (request: MockedRequest) => {
+  const { page } = request.params ?? {};
+
+  if (page === '3') {
+    return {
+      status: HttpStatusCode.BAD_REQUEST,
+      headers: { 'Content-Type': 'application/json' },
+      response: JSON.stringify(errorData),
+    };
+  } else {
+    let response = page === '1' ? searchPageOne : searchPageTwo;
+    return {
+      status: HttpStatusCode.OK,
+      headers: { 'Content-Type': 'application/json' },
+      response: JSON.stringify(response),
+    };
+  }
+};
+
 const SearchApiRequestConfig: RequestConfig = {
   label: 'Search',
   method: Method.Get,
@@ -66,6 +84,10 @@ const SearchApiRequestConfig: RequestConfig = {
     {
       label: 'Failure',
       handler: errorResponseHandler,
+    },
+    {
+      label: 'Failure on load more',
+      handler: loadMoreResponseHandler,
     },
   ],
 };

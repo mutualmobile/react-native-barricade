@@ -4,39 +4,39 @@ import {
   PathEvaluaionType,
   PathEvaluationClosure,
   RequestConfig,
+  RequestConfigForLib,
   RequestConfigForMethod,
   RequestReferences,
   ResponseData,
-  ResponseHandler,
 } from './barricade.types';
 import { interceptor } from './interceptor';
 import { UrlUtils } from './url.utils';
 
 export class Barricade {
   baseUrl: string;
-  handlers: ResponseHandler[] = [];
-  requestReferences: RequestReferences = {} as RequestReferences;
   running = false;
+  private _requestConfig: RequestConfigForLib[] = [];
+  private _requestReferences: RequestReferences = {} as RequestReferences;
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
 
-  constructor(baseUrl: string, requests: RequestConfig[]) {
-    this._nativeXMLHttpRequest = global.XMLHttpRequest;
-
-    global.XMLHttpRequest = interceptor(this) as any; // TODO: check type here
-
-    this.running = true;
+  constructor(baseUrl: string, requestConfig: RequestConfig[]) {
     this.baseUrl = baseUrl;
-    this.setRequests(requests);
+    this.updateRequestConfig(requestConfig);
+    this._nativeXMLHttpRequest = global.XMLHttpRequest;
   }
 
-  setRequests(requests: Array<RequestConfig>) {
+  get requestConfig() {
+    return this._requestConfig;
+  }
+
+  private setRequestReferences(requests: Array<RequestConfigForLib>) {
     requests.forEach(request => {
       const url = UrlUtils.parseURL(this.baseUrl + request.pathEvaluation.path);
       const requestReference =
-        this.requestReferences[url.fullpath] ?? ({} as RequestConfigForMethod);
+        this._requestReferences[url.fullpath] ?? ({} as RequestConfigForMethod);
       requestReference[request.method] = request;
 
-      this.requestReferences[url.fullpath] = requestReference;
+      this._requestReferences[url.fullpath] = requestReference;
     });
   }
 
@@ -47,9 +47,8 @@ export class Barricade {
     const url = UrlUtils.parseURL(path);
     if (!this.baseUrl.includes(url.host)) return;
 
-    // const requestConfig = this.requestReferences[url.pathname]?.[method];
-    const requestConfigKey = Object.keys(this.requestReferences).find(item => {
-      const result = this.requestReferences[item][method];
+    const requestConfigKey = Object.keys(this._requestReferences).find(item => {
+      const result = this._requestReferences[item][method];
       if (result?.pathEvaluation?.type === PathEvaluaionType.Includes) {
         return url.fullpath.includes(result.pathEvaluation.path);
       } else if (result?.pathEvaluation?.type === PathEvaluaionType.Suffix) {
@@ -62,7 +61,7 @@ export class Barricade {
     });
 
     const requestConfig = requestConfigKey
-      ? this.requestReferences[requestConfigKey][method]
+      ? this._requestReferences[requestConfigKey][method]
       : null;
 
     if (requestConfig) {
@@ -96,14 +95,62 @@ export class Barricade {
     }
   }
 
-  resolveRequest(request: MockedRequest, response: ResponseData, delay = 400) {
+  resetRequestConfig() {
+    const requests = this._requestConfig.map<RequestConfigForLib>(request => {
+      if (!request.responseHandler[0].isSelected) {
+        request.responseHandler[0].isSelected = true;
+        for (let i = 1; i < request.responseHandler?.length; i++) {
+          request.responseHandler[i].isSelected = false;
+        }
+      }
+
+      const result = request as RequestConfigForLib;
+      result.selectedResponseLabel = request.responseHandler[0].label;
+
+      return result;
+    });
+    this._requestConfig = requests;
+    this.setRequestReferences(requests);
+  }
+
+  private resolveRequest(
+    request: MockedRequest,
+    response: ResponseData,
+    delay = 400,
+  ) {
     setTimeout(() => {
       request.respond(response.status, response.headers, response.response);
     }, delay);
   }
 
+  start() {
+    if (__DEV__) {
+      global.XMLHttpRequest = interceptor(this) as any; // TODO: check type here
+      this.running = true;
+    }
+  }
+
   shutdown() {
     global.XMLHttpRequest = this._nativeXMLHttpRequest;
     this.running = false;
+  }
+
+  updateRequestConfig(requests: RequestConfigForLib[]) {
+    const updatedRequestConfig = requests.map<RequestConfigForLib>(request => {
+      let selectedItem = request.responseHandler.find(
+        item => !!item.isSelected,
+      );
+      if (!selectedItem) {
+        request.responseHandler[0].isSelected = true;
+        selectedItem = request.responseHandler[0];
+      }
+
+      const result = request as RequestConfigForLib;
+      result.selectedResponseLabel = selectedItem.label;
+
+      return result;
+    });
+    this._requestConfig = updatedRequestConfig;
+    this.setRequestReferences(requests);
   }
 }

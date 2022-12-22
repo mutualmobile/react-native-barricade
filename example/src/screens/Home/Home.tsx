@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import debounce from 'lodash.debounce';
 
-import { Colors, Fonts, Strings } from '../../assets';
+import { Colors, Fonts } from '../../assets';
 import {
   GeneralStackParamList,
   GeneralStackRouteName,
@@ -21,6 +21,7 @@ import { getImageUrl, horizontalScale, verticalScale } from '../../utilities';
 import {
   getRecentResults,
   getSearchResults,
+  resetRecentResults,
   resetSearchResults,
 } from '../../redux/actions/photo.action';
 import { SearchText } from '../../components/SearchText/SearchText';
@@ -33,9 +34,11 @@ type Props = NativeStackScreenProps<
 >;
 export const Home = ({ navigation }: Props) => {
   const {
+    recentError,
     recentPage,
     recentResult,
     recentTotalPages,
+    searchError,
     searchPage,
     searchResult,
     searchTotalPages,
@@ -59,7 +62,7 @@ export const Home = ({ navigation }: Props) => {
   const debounceSearchPhotos = useCallback(debounce(getPhotos, 400), []);
 
   const onSearchTextChanged = (text: string) => {
-    resetSearchResults();
+    dispatch(resetSearchResults());
     setSearchText(text);
     setIsLoading(true);
     debounceSearchPhotos(text);
@@ -73,6 +76,13 @@ export const Home = ({ navigation }: Props) => {
         : recentPage <= recentTotalPages)
     ) {
       getPhotos(searchText);
+    }
+  };
+
+  const onRefresh = () => {
+    if (!isLoading && !searchText?.length) {
+      dispatch(resetRecentResults());
+      setTimeout(getPhotos, 1000);
     }
   };
 
@@ -113,21 +123,19 @@ export const Home = ({ navigation }: Props) => {
     );
   };
 
-  const renderLoader = () => {
+  const renderFooter = () => {
     if (isLoading) {
       return (
         <View style={styles.loaderContainer}>
           <ActivityIndicator size={'large'} />
         </View>
       );
-    } else return null;
-  };
-
-  const renderNoData = () => {
-    if (!isLoading) {
+    } else if (
+      searchText?.length ? !!searchError?.length : !!recentError?.length
+    ) {
       return (
         <View style={styles.loaderContainer}>
-          <Text>{Strings.home.no_data}</Text>
+          <Text>{searchText?.length ? searchError : recentError}</Text>
         </View>
       );
     } else return null;
@@ -142,8 +150,9 @@ export const Home = ({ navigation }: Props) => {
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         onEndReached={onEndReachedThreshold}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={renderLoader}
-        ListEmptyComponent={renderNoData}
+        ListFooterComponent={renderFooter}
+        refreshing={isLoading}
+        onRefresh={onRefresh}
       />
     );
   };

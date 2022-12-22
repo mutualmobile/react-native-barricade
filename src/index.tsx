@@ -1,26 +1,51 @@
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NativeSyntheticEvent } from 'react-native';
 
-export * from './network';
+import { BarricadeView as MMBarricade } from './components';
+import { Barricade, RequestConfig } from './network';
+import { ThemeType } from './theme';
 
-export const addOne = (input: number) => input + 1;
+export {
+  Method,
+  MockedRequest,
+  PathEvaluaionType,
+  PathEvaluationClosure,
+  RequestConfig,
+  ResponseData,
+  ResponseHandler,
+} from './network/barricade.types';
+export { HttpStatusCode } from './network/http-codes';
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
+let barricade: Barricade | undefined;
 
-  return (
-    <View style={styles.container}>
-      <Text>You pressed {count} times</Text>
-      <Button onPress={() => setCount(addOne(count))} title="Press Me" />
-    </View>
-  );
+export const enableBarricade = (baseUrl: string, requests: RequestConfig[]) => {
+  barricade = new Barricade(baseUrl, requests);
+  barricade.start();
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 200,
-  },
-});
+export const disableBarricade = () => {
+  barricade?.shutdown();
+};
+
+export const isBarricadeEnabled = () => {
+  return barricade?.running;
+};
+
+export const BarricadeView = ({
+  onRequestClose,
+  theme = 'light',
+  visible,
+}: {
+  onRequestClose?: (event: NativeSyntheticEvent<any>) => void;
+  theme?: ThemeType;
+  visible: boolean;
+}) => {
+  return (
+    <MMBarricade
+      barricade={barricade}
+      onRequestClose={onRequestClose}
+      theme={theme}
+      visible={visible}
+    />
+  );
+};

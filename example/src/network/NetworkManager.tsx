@@ -89,9 +89,9 @@ export class NetworkManager {
       title = Strings.errorMessage.oops;
       message = error.message;
     }
-    if (message) {
-      Alert.alert(title ?? message, title ? message : undefined);
-    }
+    // if (message) {
+    //   Alert.alert(title ?? message, title ? message : undefined);
+    // }
 
     return errorResult;
   };

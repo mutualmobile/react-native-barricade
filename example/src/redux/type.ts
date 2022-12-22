@@ -3,7 +3,10 @@ export enum GlobalActions {
 }
 
 export enum PhotoActions {
+  RecentError = 'RecentError',
   RecentResult = 'RecentResult',
+  ResetRecentResult = 'ResetRecentResult',
   ResetSearchResult = 'ResetSearchResult',
+  SearchError = 'SearchError',
   SearchResult = 'SearchResult',
 }

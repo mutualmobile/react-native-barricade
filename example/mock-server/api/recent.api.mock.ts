@@ -1,5 +1,4 @@
 import {
-  Barricade,
   HttpStatusCode,
   Method,
   MockedRequest,
@@ -40,6 +39,24 @@ const errorResponseHandler = (request: MockedRequest) => {
   };
 };
 
+const loadMoreResponseHandler = (request: MockedRequest) => {
+  const { page } = request.params ?? {};
+
+  if (page === '1') {
+    return {
+      status: HttpStatusCode.OK,
+      headers: { 'Content-Type': 'application/json' },
+      response: JSON.stringify(recentPageOne),
+    };
+  } else {
+    return {
+      status: HttpStatusCode.BAD_REQUEST,
+      headers: { 'Content-Type': 'application/json' },
+      response: JSON.stringify(errorData),
+    };
+  }
+};
+
 const RecentApiRequestConfig: RequestConfig = {
   label: 'Recent',
   method: Method.Get,
@@ -59,6 +76,10 @@ const RecentApiRequestConfig: RequestConfig = {
     {
       label: 'Failure',
       handler: errorResponseHandler,
+    },
+    {
+      label: 'Failure on load more',
+      handler: loadMoreResponseHandler,
     },
   ],
 };

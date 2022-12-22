@@ -26,7 +26,7 @@ export interface PathEvaluationClosure {
   callback: (request: MockedRequest) => void;
 }
 
-export type RequestConfig = {
+export interface RequestConfig {
   label: string;
   method: Method;
   pathEvaluation: { path: string } & (
@@ -35,7 +35,13 @@ export type RequestConfig = {
   );
   responseHandler: ResponseHandler[];
   delay?: number;
-};
+}
+
+export interface RequestConfigForLib
+  extends Omit<RequestConfig, 'responseHandler'> {
+  responseHandler: ResponseHandlerForLib[];
+  selectedResponseLabel?: string;
+}
 
 export type ResponseData = {
   status: keyof typeof HttpStatusCodeText;
@@ -51,13 +57,16 @@ interface ExtraRequestData {
 
 export type MockedRequest = MockedXMLHttpRequest & ExtraRequestData;
 
-export type ResponseHandler = {
+export interface ResponseHandler {
   handler: (request: MockedRequest) => ResponseData | PromiseLike<ResponseData>;
   label: string;
+}
+
+export interface ResponseHandlerForLib extends ResponseHandler {
   isSelected?: boolean;
-};
+}
 
 export type RequestConfigForMethod = {
-  [key in Method]: RequestConfig;
+  [key in Method]: RequestConfigForLib;
 };
 export type RequestReferences = Record<string, RequestConfigForMethod>;

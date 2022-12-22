@@ -1,14 +1,12 @@
-import { Barricade } from 'react-native-barricade';
+import { enableBarricade } from 'react-native-barricade';
 
 import env from '../src/config';
 import { RecentApiRequestConfig } from './api/recent.api.mock';
 import { SearchApiRequestConfig } from './api/search.api.mock';
 
 export const mockServer = () => {
-  const server = new Barricade(env.baseUrl, [
+  enableBarricade(env.baseUrl, [
     RecentApiRequestConfig,
     SearchApiRequestConfig,
   ]);
-
-  return server;
 };
