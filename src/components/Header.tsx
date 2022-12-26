@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   NativeSyntheticEvent,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -52,14 +51,14 @@ const Header = (props: HeaderProps): JSX.Element => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={[
         styles.container,
         themeColorStyle.background,
         themeColorStyle.border,
       ]}>
       {renderHeader()}
-    </SafeAreaView>
+    </View>
   );
 };
 

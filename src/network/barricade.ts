@@ -125,7 +125,7 @@ export class Barricade {
 
   start() {
     if (__DEV__) {
-      global.XMLHttpRequest = interceptor(this) as any; // TODO: check type here
+      global.XMLHttpRequest = interceptor(this) as any;
       this.running = true;
     }
   }

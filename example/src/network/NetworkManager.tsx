@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Alert } from 'react-native';
 import { Strings } from '../assets';
 import env from '../config';
 import { HttpStatusCodes } from '../constants/enum.constants';
@@ -45,7 +44,6 @@ export class NetworkManager {
   }
 
   appRequest = async <T,>(options: AxiosRequestConfig) => {
-    console.log('request -> ', options);
     return appClient(options)
       .then(response => this.onSuccess<T>(response))
       .catch(async error => {
@@ -57,8 +55,6 @@ export class NetworkManager {
   onSuccess: <T>(response: AxiosResponse<ResponseData<T>>) => ResponseData<T> =
     response => {
       const result = response.data;
-      console.log('response.data-> ', result);
-
       return result;
     };
 
@@ -67,31 +63,22 @@ export class NetworkManager {
     let title: string | undefined, message: string | undefined;
     if (error.response) {
       errorResult = error.response;
-      console.log('Error Result:', errorResult);
-
       title = Strings.errorMessage.oops;
       message =
         errorResult.data?.message || Strings.errorMessage.something_went_wrong;
     } else if (error.request) {
       errorResult = error.request;
-      console.log('Error Result:', errorResult);
       if (error.message === 'Network Error') {
-        // Issue with accessing internet even thought phone is connected to network (Eg. Firewall)
         title = Strings.errorMessage.no_internet;
         message = Strings.errorMessage.no_network_desc;
       } else {
-        // The request was made but no response was received
         title = Strings.errorMessage.oops;
         message = Strings.errorMessage.something_went_wrong;
       }
     } else {
-      // Something happened in setting up the request that triggered an Error
       title = Strings.errorMessage.oops;
       message = error.message;
     }
-    // if (message) {
-    //   Alert.alert(title ?? message, title ? message : undefined);
-    // }
 
     return errorResult;
   };

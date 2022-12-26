@@ -7,7 +7,6 @@ import { SearchTextProps } from './SearchText.type';
 
 export const SearchText = (props: SearchTextProps) => {
   const onChangeText = (text: string) => {
-    // TODO: Do any required validation here
     props.onChangeText(text);
   };
 

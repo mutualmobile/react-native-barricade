@@ -26,7 +26,7 @@ import {
 } from '../../redux/actions/photo.action';
 import { SearchText } from '../../components/SearchText/SearchText';
 import { PhotoServiceTypes } from '../../services/types';
-import { ImageSizeSuffix } from '../../constants/enum.constants';
+import { ImageSizeSuffix, INITIAL_PAGE_NO } from '../../constants';
 
 type Props = NativeStackScreenProps<
   GeneralStackParamList,
@@ -51,10 +51,10 @@ export const Home = ({ navigation }: Props) => {
     getPhotos();
   }, []);
 
-  const getPhotos = (text?: string) => {
+  const getPhotos = (text?: string, page: number = INITIAL_PAGE_NO) => {
     setIsLoading(true);
     dispatch(
-      text ? getSearchResults(text, searchPage) : getRecentResults(recentPage),
+      text ? getSearchResults(text, page) : getRecentResults(page),
     ).finally(() => {
       setIsLoading(false);
     });
@@ -69,20 +69,22 @@ export const Home = ({ navigation }: Props) => {
   };
 
   const onEndReachedThreshold = () => {
+    const isSearch = searchText?.length;
     if (
       !isLoading &&
-      (searchText?.length
+      (isSearch
         ? searchPage <= searchTotalPages
         : recentPage <= recentTotalPages)
     ) {
-      getPhotos(searchText);
+      getPhotos(searchText, isSearch ? searchPage : recentPage);
     }
   };
 
   const onRefresh = () => {
-    if (!isLoading && !searchText?.length) {
-      dispatch(resetRecentResults());
-      setTimeout(getPhotos, 1000);
+    const isSearch = searchText?.length;
+    if (!isLoading) {
+      dispatch(isSearch ? resetSearchResults() : resetRecentResults());
+      setTimeout(() => getPhotos(searchText, INITIAL_PAGE_NO), 1000);
     }
   };
 

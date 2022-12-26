@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { Modal, NativeSyntheticEvent } from 'react-native';
+import {
+  Modal,
+  NativeSyntheticEvent,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 
 import { Barricade, RequestConfigForLib } from '../network';
-import { ThemeProvider, ThemeType } from '../theme';
+import { ThemeProvider, ThemeType, useThemedColor } from '../theme';
 import { RequestDetail } from './RequestDetail';
 import { RequestList } from './RequestList';
 
@@ -22,6 +27,7 @@ export const BarricadeView = ({
   theme?: ThemeType;
   visible: boolean;
 }) => {
+  const { themeColorStyle } = useThemedColor();
   const [viewType, setViewType] = useState<ViewType>(ViewType.List);
   const [detailData, setDetailData] = useState<RequestConfigForLib>();
 
@@ -58,8 +64,21 @@ export const BarricadeView = ({
   return (
     <ThemeProvider value={theme}>
       <Modal onRequestClose={onRequestClose} visible={visible}>
-        {renderContent()}
+        <SafeAreaView
+          style={[
+            styles.container,
+            themeColorStyle.background,
+            themeColorStyle.border,
+          ]}>
+          {renderContent()}
+        </SafeAreaView>
       </Modal>
     </ThemeProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 import {
@@ -73,21 +74,23 @@ const RequestDetail = ({
   };
 
   return (
-    <>
+    <View style={[styles.container, themeColorStyle.surface]}>
       <Header
         headerLeft={{ title: ChevronLeft + ' Back', onPress: onBackPressed }}
         title={detailData?.label ?? ''}
       />
       <FlatList
+        style={styles.listContainer}
         contentContainerStyle={[styles.listContainer, themeColorStyle.surface]}
         data={detailData?.responseHandler}
         renderItem={renderDetailItem}
       />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   listContainer: {
     flexGrow: 1,
   },

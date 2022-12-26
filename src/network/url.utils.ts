@@ -11,7 +11,6 @@ export class UrlUtils {
 
     let params: Record<string, string> | undefined;
     if (parsedUrl.query) {
-      // TODO: Check and find a better way(URLSearchParams)
       params = parsedUrl.query
         .slice(1)
         .split('&')

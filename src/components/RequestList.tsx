@@ -6,10 +6,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 import { Barricade, RequestConfigForLib } from '../network';
 import { useThemedColor } from '../theme';
+import { Footer } from './Footer';
 import { Header } from './Header';
 
 const ChevronRight = '\u203A';
@@ -54,23 +56,26 @@ const RequestList = ({
   };
 
   return (
-    <>
+    <View style={[styles.container, themeColorStyle.surface]}>
       <Header
         headerLeft={{ title: 'Reset', onPress: onResetPressed }}
         title={'Barricade'}
         headerRight={{ title: 'Done', onPress: onDonePressed }}
       />
       <FlatList
+        style={styles.listContainer}
         contentContainerStyle={[styles.listContainer, themeColorStyle.surface]}
         data={barricade?.requestConfig}
         renderItem={renderListItem}
         extraData={refreshList}
       />
-    </>
+      <Footer barricade={barricade} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   listContainer: {
     flexGrow: 1,
   },
