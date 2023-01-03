@@ -11,15 +11,7 @@ export class UrlUtils {
 
     let params: Record<string, string> | undefined;
     if (parsedUrl.query) {
-      params = parsedUrl.query
-        .slice(1)
-        .split('&')
-        .reduce(function (previousValue: Record<string, string>, currentValue) {
-          const keyValuePair = currentValue.split('=');
-          previousValue[decodeURIComponent(keyValuePair[0])] =
-            decodeURIComponent(keyValuePair[1]);
-          return previousValue;
-        }, {});
+      params = UrlUtils.getQueryParamsObj(parsedUrl.query);
     }
 
     return {
@@ -28,5 +20,18 @@ export class UrlUtils {
       pathname: pathname,
       fullpath: pathname + (parsedUrl.query || '') + (parsedUrl.hash || ''),
     };
+  }
+
+  static getQueryParamsObj(query: string) {
+    return query
+      .slice(1)
+      .split('&')
+      .reduce(function (previousValue: Record<string, string>, currentValue) {
+        const keyValuePair = currentValue.split('=');
+        previousValue[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(
+          keyValuePair[1],
+        );
+        return previousValue;
+      }, {});
   }
 }

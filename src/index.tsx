@@ -19,8 +19,8 @@ export { HttpStatusCode } from './network/http-codes';
 let barricade: Barricade | undefined;
 const SHOW_BARRICADE_VIEW = 'SHOW_BARRICADE_VIEW';
 
-export const enableBarricade = (baseUrl: string, requests: RequestConfig[]) => {
-  barricade = new Barricade(baseUrl, requests);
+export const enableBarricade = (requests: RequestConfig[]) => {
+  barricade = new Barricade(requests);
   barricade.start();
   DevSettings.addMenuItem('Barricade', () => {
     DeviceEventEmitter.emit(SHOW_BARRICADE_VIEW);

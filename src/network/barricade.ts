@@ -13,14 +13,12 @@ import { interceptor } from './interceptor';
 import { UrlUtils } from './url.utils';
 
 export class Barricade {
-  baseUrl: string;
   running = false;
   private _requestConfig: RequestConfigForLib[] = [];
   private _requestReferences: RequestReferences = {} as RequestReferences;
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
 
-  constructor(baseUrl: string, requestConfig: RequestConfig[]) {
-    this.baseUrl = baseUrl;
+  constructor(requestConfig: RequestConfig[]) {
     this.updateRequestConfig(requestConfig);
     this._nativeXMLHttpRequest = global.XMLHttpRequest;
   }
@@ -31,28 +29,25 @@ export class Barricade {
 
   private setRequestReferences(requests: Array<RequestConfigForLib>) {
     requests.forEach(request => {
-      const url = UrlUtils.parseURL(this.baseUrl + request.pathEvaluation.path);
       const requestReference =
-        this._requestReferences[url.fullpath] ?? ({} as RequestConfigForMethod);
+        this._requestReferences[request.pathEvaluation.path] ??
+        ({} as RequestConfigForMethod);
       requestReference[request.method] = request;
 
-      this._requestReferences[url.fullpath] = requestReference;
+      this._requestReferences[request.pathEvaluation.path] = requestReference;
     });
   }
 
   handleRequest(request: MockedRequest) {
     const method = request._method.toUpperCase() as Method;
-    const path = request._url;
-
-    const url = UrlUtils.parseURL(path);
-    if (!this.baseUrl.includes(url.host)) return;
+    const requestUrl = request._url;
 
     const requestConfigKey = Object.keys(this._requestReferences).find(item => {
       const result = this._requestReferences[item][method];
       if (result?.pathEvaluation?.type === PathEvaluaionType.Includes) {
-        return url.fullpath.includes(result.pathEvaluation.path);
+        return requestUrl.includes(result.pathEvaluation.path);
       } else if (result?.pathEvaluation?.type === PathEvaluaionType.Suffix) {
-        return url.pathname === result.pathEvaluation.path;
+        return requestUrl.endsWith(result.pathEvaluation.path);
       } else {
         return (result.pathEvaluation as PathEvaluationClosure).callback(
           request,
@@ -66,6 +61,7 @@ export class Barricade {
 
     if (requestConfig) {
       try {
+        const url = UrlUtils.parseURL(requestUrl);
         request.params = url.params;
         const result = (
           requestConfig.responseHandler.find(item => !!item.isSelected) ??
@@ -86,12 +82,12 @@ export class Barricade {
           );
         }
       } catch (error) {
-        throw `Barricade intercepted ${path}(${method}) API and threw an error - ${
+        throw `Barricade intercepted ${requestUrl}(${method}) API and threw an error - ${
           (error as Error).message
         }.`;
       }
     } else {
-      throw `Barricade intercepted ${path}(${method}) API but no handler was defined for this.`;
+      throw `Barricade intercepted ${requestUrl}(${method}) API but no handler was defined for this.`;
     }
   }
 

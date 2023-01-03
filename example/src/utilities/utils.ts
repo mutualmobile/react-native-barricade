@@ -6,5 +6,5 @@ export const getImageUrl = (
   item: PhotoServiceTypes.Photo,
   size: ImageSizeSuffix,
 ) => {
-  return `${env.imageBaseUrl}${item.server}/${item.id}_${item.secret}_${size}.jpg`;
+  return `${env.imageBaseUrl}/${item.server}/${item.id}_${item.secret}_${size}.jpg`;
 };
