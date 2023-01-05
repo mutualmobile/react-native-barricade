@@ -1,7 +1,10 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Alert } from 'react-native';
+
 import { Strings } from '../assets';
 import env from '../config';
 import { HttpStatusCodes } from '../constants/enum.constants';
+import store from '../redux/store';
 import { IError, ErrorResponse, ResponseData } from './type';
 
 const DEFAULT_TIMEOUT = 60 * 1000;
@@ -43,13 +46,32 @@ export class NetworkManager {
     return NetworkManager.myInstance;
   }
 
-  appRequest = async <T,>(options: AxiosRequestConfig) => {
-    return appClient(options)
-      .then(response => this.onSuccess<T>(response))
-      .catch(async error => {
-        const result = await this.onError(error);
-        return Promise.reject(result);
+  appRequest = async <T,>(
+    options: AxiosRequestConfig,
+    showError: boolean = false,
+  ) => {
+    if (store.getState().globalReducer.hasNetwork) {
+      return appClient(options)
+        .then(response => this.onSuccess<T>(response))
+        .catch(async error => {
+          const result = await this.onError(error, showError);
+          return Promise.reject(result);
+        });
+    } else {
+      const title = Strings.errorMessage.no_internet,
+        message = Strings.errorMessage.no_network_desc;
+      if (showError) {
+        Alert.alert(title ?? message, title ? message : undefined);
+      }
+      return Promise.reject({
+        data: {
+          message,
+        },
+        status: HttpStatusCodes.NO_NETWORK,
+        errorTitle: title,
+        errorMessage: message,
       });
+    }
   };
 
   onSuccess: <T>(response: AxiosResponse<ResponseData<T>>) => ResponseData<T> =
@@ -58,7 +80,7 @@ export class NetworkManager {
       return result;
     };
 
-  onError = async (error: AxiosError<ErrorResponse>) => {
+  onError = async (error: AxiosError<ErrorResponse>, showError: boolean) => {
     let errorResult: IError = { status: HttpStatusCodes.BAD_REQUEST };
     let title: string | undefined, message: string | undefined;
     if (error.response) {
@@ -78,6 +100,10 @@ export class NetworkManager {
     } else {
       title = Strings.errorMessage.oops;
       message = error.message;
+    }
+
+    if (message && showError) {
+      Alert.alert(title ?? message, title ? message : undefined);
     }
 
     return errorResult;

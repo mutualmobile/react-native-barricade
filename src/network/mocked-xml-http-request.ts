@@ -2,9 +2,12 @@ import { EventSubscription } from 'react-native';
 
 import { Event, EventTarget } from './event';
 import { HttpStatusCodeText } from './http-codes';
-import { Response, ResponseType } from './mocked-xml-http-request.types';
 
-const CookieRegex = /^Set-Cookie2?$/i;
+const UNSENT = 0;
+const OPENED = 1;
+const HEADERS_RECEIVED = 2;
+const LOADING = 3;
+const DONE = 4;
 
 const SUPPORTED_RESPONSE_TYPES = {
   arraybuffer: false,
@@ -14,12 +17,6 @@ const SUPPORTED_RESPONSE_TYPES = {
   text: true,
   '': true,
 };
-
-const UNSENT = 0;
-const OPENED = 1;
-const HEADERS_RECEIVED = 2;
-const LOADING = 3;
-const DONE = 4;
 
 class XMLHttpRequestEventTarget extends EventTarget {
   onload?: Function;
@@ -72,15 +69,13 @@ export class MockedXMLHttpRequest extends EventTarget {
   _lowerCaseResponseHeaders: Record<string, any> = {};
   _method?: string;
   _perfKey?: string;
-  _response: string | undefined = '';
-  _responseType: ResponseType = '';
+  _response: string | Blob | ArrayBuffer | undefined = '';
+  _responseType: XMLHttpRequestResponseType = '';
   _sent = false;
   _url?: string;
   _timedOut = false;
   _incrementalEvents = false;
-  errorFlag?: boolean = false;
 
-  requestBody: any = null;
   statusText = '';
 
   constructor() {
@@ -106,24 +101,13 @@ export class MockedXMLHttpRequest extends EventTarget {
 
     this._clearSubscriptions();
     this._timedOut = false;
-
-    this.errorFlag = false;
   }
 
-  _clearSubscriptions(): void {
-    (this._subscriptions || []).forEach(sub => {
-      if (sub) {
-        sub.remove();
-      }
-    });
-    this._subscriptions = [];
-  }
-
-  get responseType(): ResponseType {
+  get responseType(): XMLHttpRequestResponseType {
     return this._responseType;
   }
 
-  set responseType(responseType: ResponseType) {
+  set responseType(responseType: XMLHttpRequestResponseType) {
     if (this._sent) {
       throw new Error(
         "Failed to set the 'responseType' property on 'XMLHttpRequest': The " +
@@ -176,7 +160,7 @@ export class MockedXMLHttpRequest extends EventTarget {
 
       case 'json':
         try {
-          this._cachedResponse = JSON.parse(this._response ?? '');
+          this._cachedResponse = JSON.parse((this._response as string) ?? '');
         } catch (_) {
           this._cachedResponse = undefined;
         }
@@ -189,37 +173,68 @@ export class MockedXMLHttpRequest extends EventTarget {
     return this._cachedResponse;
   }
 
-  getAllResponseHeaders() {
-    if (this.readyState < this.HEADERS_RECEIVED) {
-      return '';
-    }
-
-    let headers = '';
-    for (const header in this.responseHeaders) {
-      if (
-        this.responseHeaders.hasOwnProperty(header) &&
-        !CookieRegex.test(header)
-      ) {
-        headers += header + ': ' + this.responseHeaders[header] + '\r\n';
+  _clearSubscriptions(): void {
+    (this._subscriptions || []).forEach(sub => {
+      if (sub) {
+        sub.remove();
       }
-    }
-
-    return headers;
+    });
+    this._subscriptions = [];
   }
 
-  getResponseHeader(header: string) {
-    if (this.readyState < this.HEADERS_RECEIVED || CookieRegex.test(header)) {
+  getAllResponseHeaders() {
+    if (!this.responseHeaders) {
+      // according to the spec, return null if no response has been received
       return null;
     }
 
-    header = header?.toLowerCase();
-    for (const h in this.responseHeaders) {
-      if (h.toLowerCase() === header) {
-        return this.responseHeaders[h];
+    // Assign to non-nullable local variable.
+    const responseHeaders = this.responseHeaders;
+
+    const unsortedHeaders: Map<
+      string,
+      { lowerHeaderName: string; upperHeaderName: string; headerValue: string }
+    > = new Map();
+    for (const rawHeaderName of Object.keys(responseHeaders)) {
+      const headerValue = responseHeaders[rawHeaderName];
+      const lowerHeaderName = rawHeaderName.toLowerCase();
+      const header = unsortedHeaders.get(lowerHeaderName);
+      if (header) {
+        header.headerValue += ', ' + headerValue;
+        unsortedHeaders.set(lowerHeaderName, header);
+      } else {
+        unsortedHeaders.set(lowerHeaderName, {
+          lowerHeaderName,
+          upperHeaderName: rawHeaderName.toUpperCase(),
+          headerValue,
+        });
       }
     }
 
-    return null;
+    // Sort in ascending order, with a being less than b if a's name is legacy-uppercased-byte less than b's name.
+    const sortedHeaders = [...unsortedHeaders.values()].sort((a, b) => {
+      if (a.upperHeaderName < b.upperHeaderName) {
+        return -1;
+      }
+      if (a.upperHeaderName > b.upperHeaderName) {
+        return 1;
+      }
+      return 0;
+    });
+
+    // Combine into single text response.
+    return (
+      sortedHeaders
+        .map(header => {
+          return header.lowerHeaderName + ': ' + header.headerValue;
+        })
+        .join('\r\n') + '\r\n'
+    );
+  }
+
+  getResponseHeader(header: string) {
+    const value = this._lowerCaseResponseHeaders[header.toLowerCase()];
+    return value !== undefined ? value : null;
   }
 
   setRequestHeader(header: string, value: any): void {
@@ -245,30 +260,7 @@ export class MockedXMLHttpRequest extends EventTarget {
     this._method = method.toUpperCase();
     this._url = url;
     this._aborted = false;
-    this._response = undefined;
-    this.responseURL = url;
-    this._headers = {};
-    this._sent = false;
     this.setReadyState(this.OPENED);
-  }
-
-  setReadyState(newState: number): void {
-    this.readyState = newState;
-    this.dispatchEvent(new Event('readystatechange'));
-    if (newState === this.DONE) {
-      if (this._aborted) {
-        this.dispatchEvent(new Event('abort'));
-      } else if (this._hasError) {
-        if (this._timedOut) {
-          this.dispatchEvent(new Event('timeout'));
-        } else {
-          this.dispatchEvent(new Event('error'));
-        }
-      } else {
-        this.dispatchEvent(new Event('load', false, false, this));
-      }
-      this.dispatchEvent(new Event('loadend', false, false, this));
-    }
   }
 
   send(data: string) {
@@ -291,13 +283,9 @@ export class MockedXMLHttpRequest extends EventTarget {
       if (!hasContentTypeHeader && !(data || '').toString().match('FormData')) {
         this._headers['Content-Type'] = 'text/plain;charset=UTF-8';
       }
-
-      this.requestBody = data;
     }
 
-    this.errorFlag = false;
     this._sent = true;
-    this.setReadyState(this.OPENED);
 
     this.dispatchEvent(new Event('loadstart', false, false, this));
   }
@@ -317,23 +305,60 @@ export class MockedXMLHttpRequest extends EventTarget {
     this._reset();
   }
 
+  setResponseHeaders(responseHeaders: Record<string, any>) {
+    this.responseHeaders = responseHeaders || {};
+    const headers = responseHeaders || {};
+
+    this._lowerCaseResponseHeaders = Object.keys(headers).reduce(
+      (previousValue: Record<string, any>, currentValue: string) => {
+        previousValue[currentValue.toLowerCase()] = headers[currentValue];
+        return previousValue;
+      },
+      {},
+    );
+  }
+
+  setReadyState(newState: number): void {
+    this.readyState = newState;
+    this.dispatchEvent(new Event('readystatechange'));
+    if (newState === this.DONE) {
+      if (this._aborted) {
+        this.dispatchEvent(new Event('abort'));
+      } else if (this._hasError) {
+        if (this._timedOut) {
+          this.dispatchEvent(new Event('timeout'));
+        } else {
+          this.dispatchEvent(new Event('error'));
+        }
+      } else {
+        this.dispatchEvent(new Event('load', false, false, this));
+      }
+      this.dispatchEvent(new Event('loadend', false, false, this));
+    }
+  }
+
   respond(
     status: keyof typeof HttpStatusCodeText,
     headers: Record<string, string>,
-    body: string,
+    body: string | Blob | ArrayBuffer,
   ) {
-    this._setResponseHeaders(headers || {});
     this.status = typeof status === 'number' ? status : 200;
     this.statusText = HttpStatusCodeText[this.status];
+    this.responseURL = this._url;
+    this.setResponseHeaders(headers || {});
+    this.setReadyState(this.HEADERS_RECEIVED);
     this._setResponseBody(body || '');
   }
 
-  _setResponseBody(body: string) {
+  async _setResponseBody(body: string | Blob | ArrayBuffer) {
     if (this.readyState === this.DONE) {
       throw new Error('Request done');
     } else if (this.readyState !== this.HEADERS_RECEIVED) {
       throw new Error('No headers received');
-    } else if (typeof body !== 'string') {
+    } else if (
+      typeof body !== 'string' &&
+      (this.responseType === 'json' || this.responseType === 'text')
+    ) {
       const error = new Error(
         'Attempted to respond to fake XMLHttpRequest with ' +
           body +
@@ -343,29 +368,7 @@ export class MockedXMLHttpRequest extends EventTarget {
       throw error;
     }
 
-    const chunkSize = 10;
-    let index = 0;
-    this._response = '';
-
-    do {
-      this.setReadyState(this.LOADING);
-
-      this._response += body.substring(index, index + chunkSize);
-      index += chunkSize;
-    } while (index < body.length);
-
+    this._response = body;
     this.setReadyState(this.DONE);
-  }
-
-  _setResponseHeaders(headers: Record<string, any>) {
-    this.responseHeaders = {};
-
-    for (const header in headers) {
-      if (headers.hasOwnProperty(header)) {
-        this.responseHeaders[header] = headers[header];
-      }
-    }
-
-    this.setReadyState(this.HEADERS_RECEIVED);
   }
 }

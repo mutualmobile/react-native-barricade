@@ -10,23 +10,23 @@ export interface FunctionListener<TEvent> {
   (event: TEvent): void;
 }
 
+export const XHR_EVENTS = [
+  'abort',
+  'error',
+  'load',
+  'loadstart',
+  'progress',
+  'timeout',
+  'loadend',
+  'readystatechange',
+];
+
 export class EventTarget {
   _eventListeners: Record<string, any> = [];
 
   constructor() {
-    const events = [
-      'abort',
-      'error',
-      'load',
-      'loadstart',
-      'progress',
-      'timeout',
-      'loadend',
-      'readystatechange',
-    ];
-
-    for (let i = events.length - 1; i >= 0; i--) {
-      const eventName = events[i];
+    for (let i = XHR_EVENTS.length - 1; i >= 0; i--) {
+      const eventName = XHR_EVENTS[i];
       this.addEventListener(eventName, (event: Event) => {
         // @ts-ignore
         const listener = this['on' + eventName];

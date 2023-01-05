@@ -52,6 +52,7 @@
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   },
   "dependencies": {
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "whatwg-fetch": "^3.6.2"
   }
 }

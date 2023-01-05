@@ -1,3 +1,6 @@
+//@ts-ignore
+import * as WhatWgFetch from 'whatwg-fetch';
+
 import {
   Method,
   MockedRequest,
@@ -11,16 +14,25 @@ import {
 } from './barricade.types';
 import { interceptor } from './interceptor';
 import { UrlUtils } from './url.utils';
+import { createNativeXMLHttpRequest } from './xml-http-request';
 
 export class Barricade {
   running = false;
   private _requestConfig: RequestConfigForLib[] = [];
   private _requestReferences: RequestReferences = {} as RequestReferences;
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
+  private _nativeFetch: WhatWgFetch.Fetch;
+  private _nativeHeaders: WhatWgFetch.Headers;
+  private _nativeRequest: WhatWgFetch.Request;
+  private _nativeResponse: WhatWgFetch.Response;
 
   constructor(requestConfig: RequestConfig[]) {
     this.updateRequestConfig(requestConfig);
     this._nativeXMLHttpRequest = global.XMLHttpRequest;
+    this._nativeFetch = global.fetch;
+    this._nativeHeaders = global.Headers;
+    this._nativeRequest = global.Request;
+    this._nativeResponse = global.Response;
   }
 
   get requestConfig() {
@@ -38,15 +50,18 @@ export class Barricade {
     });
   }
 
-  handleRequest(request: MockedRequest) {
+  handleRequest(request: MockedRequest, data: any) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
 
     const requestConfigKey = Object.keys(this._requestReferences).find(item => {
-      const result = this._requestReferences[item][method];
-      if (result?.pathEvaluation?.type === PathEvaluaionType.Includes) {
+      const result: RequestConfigForLib | undefined =
+        this._requestReferences[item][method];
+      if (!result) {
+        return;
+      } else if (result.pathEvaluation?.type === PathEvaluaionType.Includes) {
         return requestUrl.includes(result.pathEvaluation.path);
-      } else if (result?.pathEvaluation?.type === PathEvaluaionType.Suffix) {
+      } else if (result.pathEvaluation?.type === PathEvaluaionType.Suffix) {
         return requestUrl.endsWith(result.pathEvaluation.path);
       } else {
         return (result.pathEvaluation as PathEvaluationClosure).callback(
@@ -87,7 +102,7 @@ export class Barricade {
         }.`;
       }
     } else {
-      throw `Barricade intercepted ${requestUrl}(${method}) API but no handler was defined for this.`;
+      createNativeXMLHttpRequest(data, request, this._nativeXMLHttpRequest);
     }
   }
 
@@ -122,12 +137,20 @@ export class Barricade {
   start() {
     if (__DEV__) {
       global.XMLHttpRequest = interceptor(this) as any;
+      global.fetch = WhatWgFetch.fetch;
+      global.Headers = WhatWgFetch.Headers;
+      global.Request = WhatWgFetch.Request;
+      global.Response = WhatWgFetch.Response;
       this.running = true;
     }
   }
 
   shutdown() {
     global.XMLHttpRequest = this._nativeXMLHttpRequest;
+    global.fetch = this._nativeFetch;
+    global.Headers = this._nativeHeaders;
+    global.Request = this._nativeRequest;
+    global.Response = this._nativeResponse;
     this.running = false;
   }
 
