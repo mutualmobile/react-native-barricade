@@ -8,40 +8,39 @@ export function createNativeXMLHttpRequest(
 ) {
   const xhr = new nativeXMLHttpRequest();
 
+  const setResponseData = () => {
+    request.setResponseData(
+      xhr.status as keyof typeof HttpStatusCodeText,
+      //@ts-ignore
+      xhr._headers ?? {},
+      //@ts-ignore
+      xhr._response,
+    );
+  };
+
   xhr.onload = function () {
-    const response =
-      'response' in xhr && xhr.response ? xhr.response : xhr.responseText;
-    setTimeout(function () {
-      request.respond(
-        xhr.status as keyof typeof HttpStatusCodeText,
-        //@ts-ignore
-        xhr._headers ?? {},
-        response,
-      );
-    }, 0);
+    setResponseData();
   };
 
   xhr.onerror = function () {
-    setTimeout(function () {
-      xhr.dispatchEvent(new Event('error'));
-    }, 0);
+    //@ts-ignore
+    request._hasError = xhr._hasError;
+    setResponseData();
   };
 
   xhr.ontimeout = function () {
-    setTimeout(function () {
-      xhr.dispatchEvent(new Event('timeout'));
-    }, 0);
+    //@ts-ignore
+    request._hasError = xhr._hasError;
+    //@ts-ignore
+    request._timedOut = xhr._timedOut;
+    setResponseData();
   };
 
   xhr.onabort = function () {
-    setTimeout(function () {
-      xhr.dispatchEvent(new Event('abort'));
-    }, 0);
+    request.abort();
   };
 
-  xhr.onreadystatechange = function () {
-    // DONE (success or failure)
-  };
+  xhr.onreadystatechange = function () {};
 
   xhr.open(request._method, request._url, true);
 

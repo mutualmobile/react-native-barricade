@@ -3,6 +3,15 @@ import { EventSubscription } from 'react-native';
 import { Event, EventTarget } from './event';
 import { HttpStatusCodeText } from './http-codes';
 
+const BlobManager = require('react-native/Libraries/Blob/BlobManager');
+const base64 = require('base64-js');
+const invariant = require('invariant');
+
+// The native blob module is optional so inject it here if available.
+if (BlobManager.isAvailable) {
+  BlobManager.addNetworkingHandler();
+}
+
 const UNSENT = 0;
 const OPENED = 1;
 const HEADERS_RECEIVED = 2;
@@ -10,15 +19,15 @@ const LOADING = 3;
 const DONE = 4;
 
 const SUPPORTED_RESPONSE_TYPES = {
-  arraybuffer: false,
-  blob: false,
+  arraybuffer: typeof global.ArrayBuffer === 'function',
+  blob: typeof global.Blob === 'function',
   document: false,
   json: true,
   text: true,
   '': true,
 };
 
-class XMLHttpRequestEventTarget extends EventTarget {
+export class XMLHttpRequestEventTarget extends EventTarget {
   onload?: Function;
   onloadstart?: Function;
   onprogress?: Function;
@@ -121,6 +130,19 @@ export class MockedXMLHttpRequest extends EventTarget {
       return;
     }
 
+    // redboxes early, e.g. for 'arraybuffer' on ios 7
+    invariant(
+      SUPPORTED_RESPONSE_TYPES[responseType] || responseType === 'document',
+      `The provided value '${responseType}' is unsupported in this environment.`,
+    );
+
+    if (responseType === 'blob') {
+      invariant(
+        BlobManager.isAvailable,
+        'Native module BlobModule is required for blob support',
+      );
+    }
+
     this._responseType = responseType;
   }
 
@@ -153,7 +175,19 @@ export class MockedXMLHttpRequest extends EventTarget {
 
     switch (responseType) {
       case 'arraybuffer':
+        this._cachedResponse = base64.toByteArray(this._response).buffer;
+        break;
+
       case 'blob':
+        if (typeof this._response === 'object' && this._response) {
+          this._cachedResponse = BlobManager.createFromOptions(this._response);
+        } else if (this._response === '') {
+          this._cachedResponse = BlobManager.createFromParts([]);
+        } else {
+          throw new Error(`Invalid response for blob: ${this._response}`);
+        }
+        break;
+
       case 'document':
         this._cachedResponse = undefined;
         break;
@@ -337,7 +371,7 @@ export class MockedXMLHttpRequest extends EventTarget {
     }
   }
 
-  respond(
+  setResponseData(
     status: keyof typeof HttpStatusCodeText,
     headers: Record<string, string>,
     body: string | Blob | ArrayBuffer,
@@ -369,6 +403,7 @@ export class MockedXMLHttpRequest extends EventTarget {
     }
 
     this._response = body;
+    this._cachedResponse = undefined; // force lazy recomputation
     this.setReadyState(this.DONE);
   }
 }

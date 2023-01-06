@@ -49,9 +49,18 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "dependencies": {
+    "base64-js": "^1.5.1",
+    "invariant": "^2.2.4",
     "url-parse": "^1.5.10",
     "whatwg-fetch": "^3.6.2"
   }

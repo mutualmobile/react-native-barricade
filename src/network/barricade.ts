@@ -130,7 +130,11 @@ export class Barricade {
     delay = 400,
   ) {
     setTimeout(() => {
-      request.respond(response.status, response.headers, response.response);
+      request.setResponseData(
+        response.status,
+        response.headers,
+        response.response,
+      );
     }, delay);
   }
 
