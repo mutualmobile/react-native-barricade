@@ -1,5 +1,5 @@
 //@ts-ignore
-import * as WhatWgFetch from 'whatwg-fetch';
+import * as RNFetch from 'react-native/Libraries/Network/fetch';
 
 import {
   Method,
@@ -21,10 +21,10 @@ export class Barricade {
   private _requestConfig: RequestConfigForLib[] = [];
   private _requestReferences: RequestReferences = {} as RequestReferences;
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
-  private _nativeFetch: WhatWgFetch.Fetch;
-  private _nativeHeaders: WhatWgFetch.Headers;
-  private _nativeRequest: WhatWgFetch.Request;
-  private _nativeResponse: WhatWgFetch.Response;
+  private _nativeFetch: RNFetch.Fetch;
+  private _nativeHeaders: RNFetch.Headers;
+  private _nativeRequest: RNFetch.Request;
+  private _nativeResponse: RNFetch.Response;
 
   constructor(requestConfig: RequestConfig[]) {
     this.updateRequestConfig(requestConfig);
@@ -141,10 +141,10 @@ export class Barricade {
   start() {
     if (__DEV__) {
       global.XMLHttpRequest = interceptor(this) as any;
-      global.fetch = WhatWgFetch.fetch;
-      global.Headers = WhatWgFetch.Headers;
-      global.Request = WhatWgFetch.Request;
-      global.Response = WhatWgFetch.Response;
+      global.fetch = RNFetch.fetch;
+      global.Headers = RNFetch.Headers;
+      global.Request = RNFetch.Request;
+      global.Response = RNFetch.Response;
       this.running = true;
     }
   }
