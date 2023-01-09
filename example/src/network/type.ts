@@ -17,4 +17,6 @@ export interface ErrorResponse {
 export interface ResponseData<T> {
   stat: HttpStatus;
   photos: T;
+  message?: string;
+  code?: number;
 }

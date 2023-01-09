@@ -1,3 +1,4 @@
+import { Strings } from '../../assets';
 import { PhotoService } from '../../services/photo.service';
 import { PhotoServiceTypes } from '../../services/types';
 import { AppDispatch } from '../store';
@@ -7,7 +8,15 @@ export function getSearchResults(searchText: string, page: number) {
   return (dispatch: AppDispatch) => {
     return PhotoService.searchPhotos(searchText, page)
       .then(response => {
-        dispatch(setSearchResults(response?.photos));
+        if (response.stat === 'ok') {
+          dispatch(setSearchResults(response?.photos));
+        } else {
+          dispatch(
+            setSearchError(
+              response.message ?? Strings.errorMessage.something_went_wrong,
+            ),
+          );
+        }
         return response;
       })
       .catch(error => {
@@ -22,10 +31,10 @@ export function resetSearchResults() {
   };
 }
 
-export function setSearchError(message: string) {
+export function setSearchError(message?: string) {
   return {
     type: PhotoActions.SearchError,
-    payload: message,
+    payload: message ?? Strings.errorMessage.something_went_wrong,
   };
 }
 
@@ -42,10 +51,10 @@ export function resetRecentResults() {
   };
 }
 
-export function setRecentError(message: string) {
+export function setRecentError(message?: string) {
   return {
     type: PhotoActions.RecentError,
-    payload: message,
+    payload: message ?? Strings.errorMessage.something_went_wrong,
   };
 }
 
@@ -60,7 +69,15 @@ export function getRecentResults(page: number) {
   return (dispatch: AppDispatch) => {
     return PhotoService.getRecentPhotos(page)
       .then(response => {
-        dispatch(setRecentResults(response?.photos));
+        if (response.stat === 'ok') {
+          dispatch(setRecentResults(response?.photos));
+        } else {
+          dispatch(
+            setRecentError(
+              response.message ?? Strings.errorMessage.something_went_wrong,
+            ),
+          );
+        }
         return response;
       })
       .catch(error => {

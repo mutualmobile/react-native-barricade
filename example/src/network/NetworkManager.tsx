@@ -87,7 +87,7 @@ export class NetworkManager {
       errorResult = error.response;
       title = Strings.errorMessage.oops;
       message =
-        errorResult.data?.message || Strings.errorMessage.something_went_wrong;
+        errorResult.data?.message ?? Strings.errorMessage.something_went_wrong;
     } else if (error.request) {
       errorResult = error.request;
       if (error.message === 'Network Error') {
