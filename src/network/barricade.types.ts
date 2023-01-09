@@ -12,7 +12,7 @@ export enum Method {
 }
 
 export enum PathEvaluaionType {
-  Closure,
+  Callback,
   Includes,
   Suffix,
 }
@@ -21,9 +21,9 @@ export interface PathEvaluationBasic {
   type: PathEvaluaionType.Includes | PathEvaluaionType.Suffix;
 }
 
-export interface PathEvaluationClosure {
-  type: PathEvaluaionType.Closure;
-  callback: (request: MockedRequest) => void;
+export interface PathEvaluationCallback {
+  type: PathEvaluaionType.Callback;
+  callback: (request: MockedRequest) => boolean;
 }
 
 export interface RequestConfig {
@@ -31,7 +31,7 @@ export interface RequestConfig {
   method: Method;
   pathEvaluation: { path: string } & (
     | PathEvaluationBasic
-    | PathEvaluationClosure
+    | PathEvaluationCallback
   );
   responseHandler: ResponseHandler[];
   delay?: number;

@@ -16,7 +16,7 @@ export function interceptor(ctx: Barricade) {
       }
 
       super.send(data);
-      ctx.handleRequest(this as MockedRequest, data);
+      ctx.handleRequest(this as MockedRequest);
     }
   }
 

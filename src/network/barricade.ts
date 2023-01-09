@@ -5,7 +5,7 @@ import {
   Method,
   MockedRequest,
   PathEvaluaionType,
-  PathEvaluationClosure,
+  PathEvaluationCallback,
   RequestConfig,
   RequestConfigForLib,
   RequestConfigForMethod,
@@ -50,9 +50,11 @@ export class Barricade {
     });
   }
 
-  handleRequest(request: MockedRequest, data: any) {
+  handleRequest(request: MockedRequest) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
+    const url = UrlUtils.parseURL(requestUrl);
+    request.params = url.params;
 
     const requestConfigKey = Object.keys(this._requestReferences).find(item => {
       const result: RequestConfigForLib | undefined =
@@ -64,7 +66,7 @@ export class Barricade {
       } else if (result.pathEvaluation?.type === PathEvaluaionType.Suffix) {
         return requestUrl.endsWith(result.pathEvaluation.path);
       } else {
-        return (result.pathEvaluation as PathEvaluationClosure).callback(
+        return (result.pathEvaluation as PathEvaluationCallback).callback(
           request,
         );
       }
@@ -76,8 +78,6 @@ export class Barricade {
 
     if (requestConfig) {
       try {
-        const url = UrlUtils.parseURL(requestUrl);
-        request.params = url.params;
         const result = (
           requestConfig.responseHandler.find(item => !!item.isSelected) ??
           requestConfig.responseHandler[0]
@@ -102,7 +102,7 @@ export class Barricade {
         }.`;
       }
     } else {
-      createNativeXMLHttpRequest(data, request, this._nativeXMLHttpRequest);
+      createNativeXMLHttpRequest(request, this._nativeXMLHttpRequest);
     }
   }
 

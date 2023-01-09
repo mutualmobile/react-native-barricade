@@ -2,7 +2,6 @@ import { MockedRequest } from './barricade.types';
 import { HttpStatusCodeText } from './http-codes';
 
 export function createNativeXMLHttpRequest(
-  data: string,
   request: MockedRequest,
   nativeXMLHttpRequest: typeof XMLHttpRequest,
 ) {
@@ -51,5 +50,6 @@ export function createNativeXMLHttpRequest(
     xhr.setRequestHeader(h, request._headers[h]);
   }
 
-  xhr.send(data);
+  // Use _requestBody and not parsed requestBody
+  xhr.send(request._requestBody);
 }

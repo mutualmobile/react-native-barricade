@@ -9,7 +9,7 @@ export {
   Method,
   MockedRequest,
   PathEvaluaionType,
-  PathEvaluationClosure,
+  PathEvaluationCallback,
   RequestConfig,
   ResponseData,
   ResponseHandler,
