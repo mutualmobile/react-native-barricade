@@ -8,8 +8,6 @@ import {
   PathEvaluationCallback,
   RequestConfig,
   RequestConfigForLib,
-  RequestConfigForMethod,
-  RequestReferences,
   ResponseData,
 } from './barricade.types';
 import { interceptor } from './interceptor';
@@ -19,9 +17,8 @@ import { createNativeXMLHttpRequest } from './xml-http-request';
 export class Barricade {
   running = false;
   private _requestConfig: RequestConfigForLib[] = [];
-  private _requestReferences: RequestReferences = {} as RequestReferences;
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
-  private _nativeFetch: RNFetch.Fetch;
+  private _nativeFetch: RNFetch.fetch;
   private _nativeHeaders: RNFetch.Headers;
   private _nativeRequest: RNFetch.Request;
   private _nativeResponse: RNFetch.Response;
@@ -39,42 +36,28 @@ export class Barricade {
     return this._requestConfig;
   }
 
-  private setRequestReferences(requests: Array<RequestConfigForLib>) {
-    requests.forEach(request => {
-      const requestReference =
-        this._requestReferences[request.pathEvaluation.path] ??
-        ({} as RequestConfigForMethod);
-      requestReference[request.method] = request;
-
-      this._requestReferences[request.pathEvaluation.path] = requestReference;
-    });
-  }
-
   handleRequest(request: MockedRequest) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
-    const url = UrlUtils.parseURL(requestUrl);
-    request.params = url.params;
+    const parsedRequestUrl = UrlUtils.parseURL(requestUrl);
+    request.params = parsedRequestUrl.params;
 
-    const requestConfigKey = Object.keys(this._requestReferences).find(item => {
-      const result: RequestConfigForLib | undefined =
-        this._requestReferences[item][method];
-      if (!result) {
+    const requestConfig = this._requestConfig.find(item => {
+      if (
+        item.method !== method ||
+        !requestUrl.includes(item.pathEvaluation.path)
+      ) {
         return;
-      } else if (result.pathEvaluation?.type === PathEvaluaionType.Includes) {
-        return requestUrl.includes(result.pathEvaluation.path);
-      } else if (result.pathEvaluation?.type === PathEvaluaionType.Suffix) {
-        return requestUrl.endsWith(result.pathEvaluation.path);
+      } else if (item.pathEvaluation?.type === PathEvaluaionType.Includes) {
+        return true;
+      } else if (item.pathEvaluation?.type === PathEvaluaionType.Suffix) {
+        return requestUrl.endsWith(item.pathEvaluation.path);
       } else {
-        return (result.pathEvaluation as PathEvaluationCallback).callback(
+        return (item.pathEvaluation as PathEvaluationCallback).callback(
           request,
         );
       }
     });
-
-    const requestConfig = requestConfigKey
-      ? this._requestReferences[requestConfigKey][method]
-      : null;
 
     if (requestConfig) {
       try {
@@ -121,19 +104,23 @@ export class Barricade {
       return result;
     });
     this._requestConfig = requests;
-    this.setRequestReferences(requests);
   }
 
   private resolveRequest(
     request: MockedRequest,
-    response: ResponseData,
+    responseData: ResponseData,
     delay = 400,
   ) {
+    let response = responseData.response;
+    if (request.responseType === 'blob') {
+      // @ts-ignore
+      response = (responseData.response as Blob)._data;
+    }
     setTimeout(() => {
       request.setResponseData(
-        response.status,
-        response.headers,
-        response.response,
+        responseData.status,
+        responseData.headers,
+        response,
       );
     }, delay);
   }
@@ -174,6 +161,5 @@ export class Barricade {
       return result;
     });
     this._requestConfig = updatedRequestConfig;
-    this.setRequestReferences(requests);
   }
 }

@@ -46,7 +46,7 @@ export interface RequestConfigForLib
 export type ResponseData = {
   status: keyof typeof HttpStatusCodeText;
   headers: { [k: string]: string };
-  response: string;
+  response: string | ArrayBuffer | Blob;
 };
 
 interface ExtraRequestData {
@@ -65,8 +65,3 @@ export interface ResponseHandler {
 export interface ResponseHandlerForLib extends ResponseHandler {
   isSelected?: boolean;
 }
-
-export type RequestConfigForMethod = {
-  [key in Method]: RequestConfigForLib;
-};
-export type RequestReferences = Record<string, RequestConfigForMethod>;

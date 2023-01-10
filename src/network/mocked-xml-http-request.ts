@@ -86,6 +86,7 @@ export class MockedXMLHttpRequest extends EventTarget {
   _incrementalEvents = false;
 
   statusText = '';
+  _cachedRequestBody: any = null;
   _requestBody: any = null;
 
   constructor() {
@@ -108,6 +109,8 @@ export class MockedXMLHttpRequest extends EventTarget {
     this._responseType = '';
     this._sent = false;
     this._lowerCaseResponseHeaders = {};
+    this._cachedRequestBody = undefined;
+    this._requestBody = undefined;
 
     this._clearSubscriptions();
     this._timedOut = false;
@@ -209,13 +212,17 @@ export class MockedXMLHttpRequest extends EventTarget {
   }
 
   get requestBody() {
-    let requestBody = this._requestBody;
-    if (this.requestBody) {
-      try {
-        requestBody = JSON.parse((this._requestBody as string) ?? '');
-      } catch (_) {}
+    if (!this._cachedRequestBody) {
+      this._cachedRequestBody = this._requestBody;
+      if (this._requestBody) {
+        try {
+          this._cachedRequestBody = JSON.parse(
+            (this._requestBody as string) ?? '',
+          );
+        } catch (_) {}
+      }
     }
-    return requestBody;
+    return this._cachedRequestBody;
   }
 
   _clearSubscriptions(): void {
