@@ -1,5 +1,5 @@
 import { Barricade } from './barricade';
-import { MockedRequest } from './barricade.types';
+import { Request } from './barricade.types';
 import { MockedXMLHttpRequest } from './mocked-xml-http-request';
 
 export function interceptor(ctx: Barricade) {
@@ -16,7 +16,7 @@ export function interceptor(ctx: Barricade) {
       }
 
       super.send(data);
-      ctx.handleRequest(this as MockedRequest);
+      ctx.handleRequest(this as Request);
     }
   }
 

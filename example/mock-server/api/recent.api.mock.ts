@@ -1,8 +1,8 @@
 import {
   HttpStatusCode,
   Method,
-  MockedRequest,
   PathEvaluaionType,
+  Request,
   RequestConfig,
 } from 'react-native-barricade';
 
@@ -12,7 +12,7 @@ import * as errorData from '../mocks/recent/error/recentError.mock.json';
 import * as noData from '../mocks/common/noData.mock.json';
 import { apiConfig } from '../../src/network';
 
-const successResponseHandler = (request: MockedRequest) => {
+const successResponseHandler = (request: Request) => {
   const { page } = request.params ?? {};
   const response = page === '1' ? recentPageOne : recentPageTwo;
 
@@ -23,7 +23,7 @@ const successResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const noDataResponseHandler = (request: MockedRequest) => {
+const noDataResponseHandler = (request: Request) => {
   return {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,7 @@ const noDataResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const errorResponseHandler = (request: MockedRequest) => {
+const errorResponseHandler = (request: Request) => {
   return {
     status: HttpStatusCode.BAD_REQUEST,
     headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ const errorResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const loadMoreResponseHandler = (request: MockedRequest) => {
+const loadMoreResponseHandler = (request: Request) => {
   const { page } = request.params ?? {};
 
   if (page === '1') {
@@ -72,6 +72,7 @@ const RecentApiRequestConfig: RequestConfig = {
     {
       label: 'No data',
       handler: noDataResponseHandler,
+      isSelected: true,
     },
     {
       label: 'Failure',

@@ -1,6 +1,7 @@
+import cloneDeep from 'lodash.clonedeep';
 import urlParse from 'url-parse';
 
-export class UrlUtils {
+export class Utils {
   static parseURL(url: string) {
     const parsedUrl = new urlParse(url);
 
@@ -11,7 +12,7 @@ export class UrlUtils {
 
     let params: Record<string, string> | undefined;
     if (parsedUrl.query) {
-      params = UrlUtils.getQueryParamsObj(parsedUrl.query);
+      params = Utils.getQueryParamsObj(parsedUrl.query);
     }
 
     return {
@@ -33,5 +34,13 @@ export class UrlUtils {
         );
         return previousValue;
       }, {});
+  }
+
+  static cloneDeep<T>(value: T) {
+    try {
+      return cloneDeep(value);
+    } catch {
+      return value;
+    }
   }
 }

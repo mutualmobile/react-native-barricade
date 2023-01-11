@@ -3,19 +3,21 @@ import * as RNFetch from 'react-native/Libraries/Network/fetch';
 
 import {
   Method,
-  MockedRequest,
   PathEvaluaionType,
   PathEvaluationCallback,
+  Request,
   RequestConfig,
   RequestConfigForLib,
   ResponseData,
+  ResponseHandler,
 } from './barricade.types';
 import { interceptor } from './interceptor';
-import { UrlUtils } from './url.utils';
+import { Utils } from './utils';
 import { createNativeXMLHttpRequest } from './xml-http-request';
 
 export class Barricade {
   running = false;
+  private readonly _originalRequestConfig: RequestConfigForLib[] = [];
   private _requestConfig: RequestConfigForLib[] = [];
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
   private _nativeFetch: RNFetch.fetch;
@@ -24,7 +26,8 @@ export class Barricade {
   private _nativeResponse: RNFetch.Response;
 
   constructor(requestConfig: RequestConfig[]) {
-    this.updateRequestConfig(requestConfig);
+    this.initRequestConfig(requestConfig);
+    this._originalRequestConfig = Utils.cloneDeep(this.requestConfig);
     this._nativeXMLHttpRequest = global.XMLHttpRequest;
     this._nativeFetch = global.fetch;
     this._nativeHeaders = global.Headers;
@@ -32,14 +35,18 @@ export class Barricade {
     this._nativeResponse = global.Response;
   }
 
+  set requestConfig(value: RequestConfigForLib[]) {
+    this._requestConfig = value;
+  }
+
   get requestConfig() {
     return this._requestConfig;
   }
 
-  handleRequest(request: MockedRequest) {
+  handleRequest(request: Request) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
-    const parsedRequestUrl = UrlUtils.parseURL(requestUrl);
+    const parsedRequestUrl = Utils.parseURL(requestUrl);
     request.params = parsedRequestUrl.params;
 
     const requestConfig = this._requestConfig.find(item => {
@@ -90,24 +97,11 @@ export class Barricade {
   }
 
   resetRequestConfig() {
-    const requests = this._requestConfig.map<RequestConfigForLib>(request => {
-      if (!request.responseHandler[0].isSelected) {
-        request.responseHandler[0].isSelected = true;
-        for (let i = 1; i < request.responseHandler?.length; i++) {
-          request.responseHandler[i].isSelected = false;
-        }
-      }
-
-      const result = request as RequestConfigForLib;
-      result.selectedResponseLabel = request.responseHandler[0].label;
-
-      return result;
-    });
-    this._requestConfig = requests;
+    this._requestConfig = Utils.cloneDeep(this._originalRequestConfig);
   }
 
   private resolveRequest(
-    request: MockedRequest,
+    request: Request,
     responseData: ResponseData,
     delay = 400,
   ) {
@@ -145,21 +139,25 @@ export class Barricade {
     this.running = false;
   }
 
-  updateRequestConfig(requests: RequestConfigForLib[]) {
-    const updatedRequestConfig = requests.map<RequestConfigForLib>(request => {
-      let selectedItem = request.responseHandler.find(
-        item => !!item.isSelected,
-      );
-      if (!selectedItem) {
-        request.responseHandler[0].isSelected = true;
-        selectedItem = request.responseHandler[0];
+  initRequestConfig(requests: RequestConfig[]) {
+    const updatedRequestConfig = requests.map<RequestConfig>(request => {
+      let selectedItem: ResponseHandler | undefined;
+      for (let i = 0; i < request.responseHandler.length; i++) {
+        if (selectedItem) {
+          request.responseHandler[i].isSelected = false;
+        } else if (request.responseHandler[i].isSelected) {
+          selectedItem = request.responseHandler[i];
+        } else if (i === request.responseHandler.length - 1) {
+          request.responseHandler[0].isSelected = true;
+          selectedItem = request.responseHandler[0];
+        }
       }
-
       const result = request as RequestConfigForLib;
-      result.selectedResponseLabel = selectedItem.label;
+      result.selectedResponseLabel = selectedItem!.label;
 
       return result;
     });
-    this._requestConfig = updatedRequestConfig;
+
+    this.requestConfig = updatedRequestConfig;
   }
 }

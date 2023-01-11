@@ -1,8 +1,8 @@
-import { MockedRequest } from './barricade.types';
+import { Request } from './barricade.types';
 import { HttpStatusCodeText } from './http-codes';
 
 export function createNativeXMLHttpRequest(
-  request: MockedRequest,
+  request: Request,
   nativeXMLHttpRequest: typeof XMLHttpRequest,
 ) {
   const xhr = new nativeXMLHttpRequest();

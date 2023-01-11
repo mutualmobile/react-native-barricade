@@ -9,12 +9,11 @@ import {
   View,
 } from 'react-native';
 
+import { Strings, Unicode } from '../constants';
 import { Barricade, RequestConfigForLib } from '../network';
 import { useThemedColor } from '../theme';
 import { Footer } from './Footer';
 import { Header } from './Header';
-
-const ChevronRight = '\u203A';
 
 const RequestList = ({
   barricade,
@@ -23,7 +22,7 @@ const RequestList = ({
 }: {
   barricade: Barricade | undefined;
   onDonePressed?: (event: NativeSyntheticEvent<any>) => void;
-  onListItemPressed: (item: RequestConfigForLib) => void;
+  onListItemPressed: (index: number) => void;
 }): JSX.Element => {
   const { themeColorStyle } = useThemedColor();
   const [refreshList, setRefreshList] = useState(0);
@@ -35,20 +34,19 @@ const RequestList = ({
 
   const renderListItem = ({
     item,
+    index,
   }: ListRenderItemInfo<RequestConfigForLib>) => {
     return (
       <TouchableOpacity
         style={[styles.listItemContainer, themeColorStyle.border]}
-        onPress={() => {
-          onListItemPressed(item);
-        }}>
+        onPress={() => onListItemPressed(index)}>
         <Text style={[styles.label, themeColorStyle.textDark]}>
           {item.label}
         </Text>
         <Text style={[styles.value, themeColorStyle.textLight]}>
           {item.selectedResponseLabel}{' '}
           <Text style={[styles.icon, themeColorStyle.textLight]}>
-            {ChevronRight}
+            {Unicode.ChevronRight}
           </Text>
         </Text>
       </TouchableOpacity>
@@ -58,9 +56,9 @@ const RequestList = ({
   return (
     <View style={[styles.container, themeColorStyle.surface]}>
       <Header
-        headerLeft={{ title: 'Reset', onPress: onResetPressed }}
-        title={'Barricade'}
-        headerRight={{ title: 'Done', onPress: onDonePressed }}
+        headerLeft={{ title: Strings.Reset, onPress: onResetPressed }}
+        title={Strings.Barricade}
+        headerRight={{ title: Strings.Done, onPress: onDonePressed }}
       />
       <FlatList
         style={styles.listContainer}

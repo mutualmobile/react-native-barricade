@@ -1,7 +1,7 @@
 import {
   HttpStatusCode,
   Method,
-  MockedRequest,
+  Request,
   PathEvaluaionType,
   RequestConfig,
 } from 'react-native-barricade';
@@ -13,7 +13,7 @@ import * as errorData from '../mocks/search/error/searchError.mock.json';
 import * as noData from '../mocks/common/noData.mock.json';
 import { apiConfig } from '../../src/network';
 
-const successResponseHandler = (request: MockedRequest) => {
+const successResponseHandler = (request: Request) => {
   const { page } = request.params ?? {};
 
   let response = searchPageThree;
@@ -30,7 +30,7 @@ const successResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const noDataResponseHandler = (request: MockedRequest) => {
+const noDataResponseHandler = (request: Request) => {
   return {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ const noDataResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const errorResponseHandler = (request: MockedRequest) => {
+const errorResponseHandler = (request: Request) => {
   return {
     status: HttpStatusCode.BAD_REQUEST,
     headers: { 'Content-Type': 'application/json' },
@@ -46,7 +46,7 @@ const errorResponseHandler = (request: MockedRequest) => {
   };
 };
 
-const loadMoreResponseHandler = (request: MockedRequest) => {
+const loadMoreResponseHandler = (request: Request) => {
   const { page } = request.params ?? {};
 
   if (page === '3') {

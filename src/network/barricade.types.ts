@@ -23,7 +23,7 @@ export interface PathEvaluationBasic {
 
 export interface PathEvaluationCallback {
   type: PathEvaluaionType.Callback;
-  callback: (request: MockedRequest) => boolean;
+  callback: (request: Request) => boolean;
 }
 
 export interface RequestConfig {
@@ -37,9 +37,7 @@ export interface RequestConfig {
   delay?: number;
 }
 
-export interface RequestConfigForLib
-  extends Omit<RequestConfig, 'responseHandler'> {
-  responseHandler: ResponseHandlerForLib[];
+export interface RequestConfigForLib extends RequestConfig {
   selectedResponseLabel?: string;
 }
 
@@ -49,19 +47,14 @@ export type ResponseData = {
   response: string | ArrayBuffer | Blob;
 };
 
-interface ExtraRequestData {
+export interface Request extends MockedXMLHttpRequest {
   _url: string;
   _method: string;
   params?: Record<string, string>;
 }
 
-export type MockedRequest = MockedXMLHttpRequest & ExtraRequestData;
-
 export interface ResponseHandler {
-  handler: (request: MockedRequest) => ResponseData | PromiseLike<ResponseData>;
+  handler: (request: Request) => ResponseData | PromiseLike<ResponseData>;
   label: string;
-}
-
-export interface ResponseHandlerForLib extends ResponseHandler {
   isSelected?: boolean;
 }

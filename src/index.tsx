@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { DeviceEventEmitter, DevSettings } from 'react-native';
 
-import { BarricadeView as MMBarricade } from './components';
-import { Barricade, RequestConfig } from './network';
-import { ThemeType } from './theme';
-
-export {
+import { BarricadeView as MMBarricadeView } from './components';
+import { SHOW_BARRICADE_VIEW, Strings } from './constants';
+import {
+  Barricade,
+  HttpStatusCode,
   Method,
-  MockedRequest,
   PathEvaluaionType,
+  PathEvaluationBasic,
   PathEvaluationCallback,
+  Request,
   RequestConfig,
   ResponseData,
   ResponseHandler,
-} from './network/barricade.types';
-export { HttpStatusCode } from './network/http-codes';
+} from './network';
+import { ThemeType } from './theme';
 
 let barricade: Barricade | undefined;
-const SHOW_BARRICADE_VIEW = 'SHOW_BARRICADE_VIEW';
 
-export const enableBarricade = (requests: RequestConfig[]) => {
+const enableBarricade = (requests: RequestConfig[]) => {
   barricade = new Barricade(requests);
   barricade.start();
-  DevSettings.addMenuItem('Barricade', () => {
+  DevSettings.addMenuItem(Strings.Barricade, () => {
     DeviceEventEmitter.emit(SHOW_BARRICADE_VIEW);
   });
 };
 
-export const disableBarricade = () => {
+const disableBarricade = () => {
   barricade?.shutdown();
 };
 
-export const isBarricadeEnabled = () => {
+const isBarricadeEnabled = () => {
   return barricade?.running;
 };
 
-export const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
+const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
   const [visible, setVisibility] = useState(false);
 
   useEffect(() => {
@@ -54,11 +54,28 @@ export const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
   };
 
   return (
-    <MMBarricade
+    <MMBarricadeView
       barricade={barricade}
       onRequestClose={hideBarricadeView}
       theme={theme}
       visible={visible}
     />
   );
+};
+
+export {
+  BarricadeView,
+  disableBarricade,
+  enableBarricade,
+  HttpStatusCode,
+  isBarricadeEnabled,
+  Method,
+  PathEvaluaionType,
+  PathEvaluationBasic,
+  PathEvaluationCallback,
+  Request,
+  RequestConfig,
+  ResponseData,
+  ResponseHandler,
+  ThemeType,
 };

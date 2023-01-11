@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { Strings } from '../constants';
 import { Barricade } from '../network';
 import { useThemedColor } from '../theme';
 
@@ -36,7 +37,9 @@ const Footer = (props: FooterProps): JSX.Element => {
               ? themeColorStyle.error
               : themeColorStyle.primary,
           ]}>
-          {props.barricade?.running ? 'Disable Barricade' : 'Enable Barricade'}
+          {props.barricade?.running
+            ? Strings.DisableBarricade
+            : Strings.EnableBarricade}
         </Text>
       </TouchableOpacity>
     </View>

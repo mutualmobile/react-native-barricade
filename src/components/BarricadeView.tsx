@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { Barricade, RequestConfigForLib } from '../network';
+import { Barricade } from '../network';
 import { ThemeProvider, ThemeType, useThemedColor } from '../theme';
 import { RequestDetail } from './RequestDetail';
 import { RequestList } from './RequestList';
@@ -29,15 +29,15 @@ export const BarricadeView = ({
 }) => {
   const { themeColorStyle } = useThemedColor();
   const [viewType, setViewType] = useState<ViewType>(ViewType.List);
-  const [detailData, setDetailData] = useState<RequestConfigForLib>();
+  const [selectedListItemIndex, setSelectedListItemIndex] = useState<number>();
 
   const _onBackPressed = () => {
-    setDetailData(undefined);
+    setSelectedListItemIndex(undefined);
     setViewType(ViewType.List);
   };
 
-  const _onListItemPressed = (item: RequestConfigForLib) => {
-    setDetailData(item);
+  const _onListItemPressed = (index: number) => {
+    setSelectedListItemIndex(index);
     setViewType(ViewType.Detail);
   };
 
@@ -54,7 +54,7 @@ export const BarricadeView = ({
       return (
         <RequestDetail
           barricade={barricade}
-          detailData={detailData}
+          selectedListItemIndex={selectedListItemIndex}
           onBackPressed={_onBackPressed}
         />
       );

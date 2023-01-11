@@ -8,47 +8,31 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Barricade,
-  RequestConfig,
-  RequestConfigForLib,
-  ResponseHandlerForLib,
-} from '../network';
+import { Strings, Unicode } from '../constants';
+import { Barricade, ResponseHandler } from '../network';
 import { useThemedColor } from '../theme';
 import { Header } from './Header';
 
-const CheckMark = '\u2713';
-const ChevronLeft = '\u2039';
-
 const RequestDetail = ({
   barricade,
-  detailData,
+  selectedListItemIndex,
   onBackPressed,
 }: {
   barricade: Barricade | undefined;
-  detailData?: RequestConfigForLib;
+  selectedListItemIndex?: number;
   onBackPressed: () => void;
 }): JSX.Element => {
   const { themeColorStyle } = useThemedColor();
 
-  const onDeailItemPressed = (item: ResponseHandlerForLib) => {
+  const onDeailItemPressed = (item: ResponseHandler, index: number) => {
     if (!item.isSelected) {
-      detailData?.responseHandler.map(responseHandler => {
-        responseHandler.isSelected = responseHandler.label === item.label;
-        return responseHandler;
-      });
-      const requestConfig = barricade?.requestConfig.map<RequestConfig>(
-        config => {
-          if (config.label === detailData?.label) {
-            config = detailData;
-          }
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { selectedResponseLabel, ...result } = config;
-          return result;
-        },
-      );
+      const requestConfig = barricade?.requestConfig[selectedListItemIndex!];
       if (requestConfig) {
-        barricade?.updateRequestConfig(requestConfig);
+        requestConfig.responseHandler.map((responseHandler, i) => {
+          responseHandler.isSelected = index === i;
+          return responseHandler;
+        });
+        requestConfig.selectedResponseLabel = item.label;
       }
       onBackPressed();
     }
@@ -56,17 +40,18 @@ const RequestDetail = ({
 
   const renderDetailItem = ({
     item,
-  }: ListRenderItemInfo<ResponseHandlerForLib>) => {
+    index,
+  }: ListRenderItemInfo<ResponseHandler>) => {
     return (
       <TouchableOpacity
         style={[styles.listItemContainer, themeColorStyle.border]}
-        onPress={() => onDeailItemPressed(item)}>
+        onPress={() => onDeailItemPressed(item, index)}>
         <Text style={[styles.label, themeColorStyle.textDark]}>
           {item.label}
         </Text>
         {item.isSelected && (
           <Text style={[styles.icon, themeColorStyle.primary]}>
-            {CheckMark}
+            {Unicode.CheckMark}
           </Text>
         )}
       </TouchableOpacity>
@@ -76,13 +61,16 @@ const RequestDetail = ({
   return (
     <View style={[styles.container, themeColorStyle.surface]}>
       <Header
-        headerLeft={{ title: ChevronLeft + ' Back', onPress: onBackPressed }}
-        title={detailData?.label ?? ''}
+        headerLeft={{
+          title: Unicode.ChevronLeft + Strings.Space + Strings.Back,
+          onPress: onBackPressed,
+        }}
+        title={barricade?.requestConfig[selectedListItemIndex!]?.label ?? ''}
       />
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={[styles.listContainer, themeColorStyle.surface]}
-        data={detailData?.responseHandler}
+        data={barricade?.requestConfig[selectedListItemIndex!]?.responseHandler}
         renderItem={renderDetailItem}
       />
     </View>

@@ -1,13 +1,5 @@
-export type EventDefinition = {
-  readonly [key: string]: Event;
-};
-
 export interface EventListener {
   (evt: Event): void;
-}
-
-export interface FunctionListener<TEvent> {
-  (event: TEvent): void;
 }
 
 export const XHR_EVENTS = [
