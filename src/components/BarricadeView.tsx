@@ -16,17 +16,15 @@ enum ViewType {
   Detail,
 }
 
-export const BarricadeView = ({
-  barricade,
-  onRequestClose,
-  theme = 'light',
-  visible,
-}: {
+type BarricadeViewProps = {
   barricade?: Barricade;
   onRequestClose?: (event: NativeSyntheticEvent<any>) => void;
   theme?: ThemeType;
   visible: boolean;
-}) => {
+};
+
+export const BarricadeView = (props: BarricadeViewProps) => {
+  const { barricade, onRequestClose, theme = 'light', visible } = props;
   const { themeColorStyle } = useThemedColor();
   const [viewType, setViewType] = useState<ViewType>(ViewType.List);
   const [selectedListItemIndex, setSelectedListItemIndex] = useState<number>();
@@ -42,7 +40,9 @@ export const BarricadeView = ({
   };
 
   const renderContent = () => {
-    if (viewType === ViewType.List) {
+    if (!barricade) {
+      return;
+    } else if (viewType === ViewType.List) {
       return (
         <RequestList
           barricade={barricade}

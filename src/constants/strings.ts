@@ -5,5 +5,4 @@ export const Strings = {
   Done: 'Done',
   EnableBarricade: 'Enable Barricade',
   Reset: 'Reset',
-  Space: ' ',
 };

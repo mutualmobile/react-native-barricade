@@ -4,20 +4,20 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Strings } from '../constants';
 import { Barricade } from '../network';
 import { useThemedColor } from '../theme';
+import { hScale } from '../utils';
 
 export type FooterProps = {
-  barricade?: Barricade;
+  barricade: Barricade;
 };
 
 const Footer = (props: FooterProps): JSX.Element => {
+  const { barricade } = props;
   const { themeColorStyle } = useThemedColor();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [refreshList, setRefreshList] = useState(0);
 
   const onButtonPressed = () => {
-    props.barricade?.running
-      ? props.barricade?.shutdown()
-      : props.barricade?.start();
+    barricade.running ? barricade.shutdown() : barricade.start();
     setRefreshList(Math.random());
   };
 
@@ -33,11 +33,9 @@ const Footer = (props: FooterProps): JSX.Element => {
           numberOfLines={1}
           style={[
             styles.title,
-            props.barricade?.running
-              ? themeColorStyle.error
-              : themeColorStyle.primary,
+            barricade.running ? themeColorStyle.error : themeColorStyle.primary,
           ]}>
-          {props.barricade?.running
+          {barricade.running
             ? Strings.DisableBarricade
             : Strings.EnableBarricade}
         </Text>
@@ -55,11 +53,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 12,
+    marginHorizontal: hScale(12),
   },
   title: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: hScale(18),
   },
 });
 

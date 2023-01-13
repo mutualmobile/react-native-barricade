@@ -11,17 +11,17 @@ import {
 import { Strings, Unicode } from '../constants';
 import { Barricade, ResponseHandler } from '../network';
 import { useThemedColor } from '../theme';
+import { hScale, vScale } from '../utils';
 import { Header } from './Header';
 
-const RequestDetail = ({
-  barricade,
-  selectedListItemIndex,
-  onBackPressed,
-}: {
-  barricade: Barricade | undefined;
+type RequestDetailProps = {
+  barricade: Barricade;
   selectedListItemIndex?: number;
   onBackPressed: () => void;
-}): JSX.Element => {
+};
+
+const RequestDetail = (props: RequestDetailProps): JSX.Element => {
+  const { barricade, selectedListItemIndex, onBackPressed } = props;
   const { themeColorStyle } = useThemedColor();
 
   const onDeailItemPressed = (item: ResponseHandler, index: number) => {
@@ -62,7 +62,7 @@ const RequestDetail = ({
     <View style={[styles.container, themeColorStyle.surface]}>
       <Header
         headerLeft={{
-          title: Unicode.ChevronLeft + Strings.Space + Strings.Back,
+          title: `${Unicode.ChevronLeft} ${Strings.Back}`,
           onPress: onBackPressed,
         }}
         title={barricade?.requestConfig[selectedListItemIndex!]?.label ?? ''}
@@ -85,16 +85,16 @@ const styles = StyleSheet.create({
   listItemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingHorizontal: hScale(20),
+    paddingVertical: vScale(12),
     borderBottomWidth: 1,
   },
   label: {
-    fontSize: 18,
+    fontSize: hScale(18),
     fontWeight: '400',
   },
   icon: {
-    fontSize: 18,
+    fontSize: hScale(18),
   },
 });
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DeviceEventEmitter, DevSettings } from 'react-native';
 
 import { BarricadeView as MMBarricadeView } from './components';
-import { SHOW_BARRICADE_VIEW, Strings } from './constants';
+import { EventType, Strings } from './constants';
 import {
   Barricade,
   HttpStatusCode,
@@ -23,7 +23,7 @@ const enableBarricade = (requests: RequestConfig[]) => {
   barricade = new Barricade(requests);
   barricade.start();
   DevSettings.addMenuItem(Strings.Barricade, () => {
-    DeviceEventEmitter.emit(SHOW_BARRICADE_VIEW);
+    DeviceEventEmitter.emit(EventType.ShowBarricadeView);
   });
 };
 
@@ -39,9 +39,12 @@ const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
   const [visible, setVisibility] = useState(false);
 
   useEffect(() => {
-    DeviceEventEmitter.addListener(SHOW_BARRICADE_VIEW, showBarricadeView);
+    DeviceEventEmitter.addListener(
+      EventType.ShowBarricadeView,
+      showBarricadeView,
+    );
     return () => {
-      DeviceEventEmitter.removeAllListeners(SHOW_BARRICADE_VIEW);
+      DeviceEventEmitter.removeAllListeners(EventType.ShowBarricadeView);
     };
   }, []);
 

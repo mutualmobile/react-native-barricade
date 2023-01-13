@@ -12,18 +12,18 @@ import {
 import { Strings, Unicode } from '../constants';
 import { Barricade, RequestConfigForLib } from '../network';
 import { useThemedColor } from '../theme';
+import { hScale, vScale } from '../utils';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
-const RequestList = ({
-  barricade,
-  onDonePressed,
-  onListItemPressed,
-}: {
-  barricade: Barricade | undefined;
+type RequestListProps = {
+  barricade: Barricade;
   onDonePressed?: (event: NativeSyntheticEvent<any>) => void;
   onListItemPressed: (index: number) => void;
-}): JSX.Element => {
+};
+
+const RequestList = (props: RequestListProps): JSX.Element => {
+  const { barricade, onDonePressed, onListItemPressed } = props;
   const { themeColorStyle } = useThemedColor();
   const [refreshList, setRefreshList] = useState(0);
 
@@ -80,19 +80,19 @@ const styles = StyleSheet.create({
   listItemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingHorizontal: hScale(20),
+    paddingVertical: vScale(12),
     borderBottomWidth: 1,
   },
   label: {
-    fontSize: 18,
+    fontSize: hScale(18),
     fontWeight: '400',
   },
   value: {
-    fontSize: 16,
+    fontSize: hScale(16),
   },
   icon: {
-    fontSize: 18,
+    fontSize: hScale(18),
   },
 });
 

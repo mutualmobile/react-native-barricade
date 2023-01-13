@@ -1,1 +1,3 @@
-export const SHOW_BARRICADE_VIEW = 'SHOW_BARRICADE_VIEW';
+export const EventType = {
+  ShowBarricadeView: 'ShowBarricadeView',
+};

@@ -1,6 +1,7 @@
 //@ts-ignore
 import * as RNFetch from 'react-native/Libraries/Network/fetch';
 
+import { ObjectUtils, UrlUtils } from '../utils';
 import {
   Method,
   PathEvaluaionType,
@@ -12,7 +13,6 @@ import {
   ResponseHandler,
 } from './barricade.types';
 import { interceptor } from './interceptor';
-import { Utils } from './utils';
 import { createNativeXMLHttpRequest } from './xml-http-request';
 
 export class Barricade {
@@ -27,7 +27,7 @@ export class Barricade {
 
   constructor(requestConfig: RequestConfig[]) {
     this.initRequestConfig(requestConfig);
-    this._originalRequestConfig = Utils.cloneDeep(this.requestConfig);
+    this._originalRequestConfig = ObjectUtils.cloneDeep(this.requestConfig);
     this._nativeXMLHttpRequest = global.XMLHttpRequest;
     this._nativeFetch = global.fetch;
     this._nativeHeaders = global.Headers;
@@ -46,7 +46,7 @@ export class Barricade {
   handleRequest(request: Request) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
-    const parsedRequestUrl = Utils.parseURL(requestUrl);
+    const parsedRequestUrl = UrlUtils.parseURL(requestUrl);
     request.params = parsedRequestUrl.params;
 
     const requestConfig = this._requestConfig.find(item => {
@@ -97,7 +97,7 @@ export class Barricade {
   }
 
   resetRequestConfig() {
-    this._requestConfig = Utils.cloneDeep(this._originalRequestConfig);
+    this._requestConfig = ObjectUtils.cloneDeep(this._originalRequestConfig);
   }
 
   private resolveRequest(

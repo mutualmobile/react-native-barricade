@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { useThemedColor } from '../theme';
+import { hScale, vScale } from '../utils';
 
 export type ButtonProps = {
   onPress?: (event: NativeSyntheticEvent<any>) => void;
@@ -22,6 +23,7 @@ export type HeaderProps = {
 };
 
 const Header = (props: HeaderProps): JSX.Element => {
+  const { headerLeft, headerRight, title } = props;
   const { themeColorStyle } = useThemedColor();
 
   const renderButton = (buttonProps: ButtonProps, style: ViewStyle) => {
@@ -40,12 +42,11 @@ const Header = (props: HeaderProps): JSX.Element => {
         <Text
           numberOfLines={1}
           style={[styles.title, themeColorStyle.textDark]}>
-          {props.title}
+          {title}
         </Text>
-        {props.headerLeft && renderButton(props.headerLeft, styles.headerLeft)}
+        {headerLeft && renderButton(headerLeft, styles.headerLeft)}
         <View style={styles.flex} />
-        {props.headerRight &&
-          renderButton(props.headerRight, styles.headerRight)}
+        {headerRight && renderButton(headerRight, styles.headerRight)}
       </View>
     );
   };
@@ -70,30 +71,30 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   header: {
-    marginHorizontal: 12,
-    height: 50,
+    marginHorizontal: hScale(12),
+    height: vScale(50),
     alignItems: 'center',
     flexDirection: 'row',
   },
   title: {
     position: 'absolute',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: hScale(20),
     fontWeight: 'bold',
-    marginHorizontal: 60,
+    marginHorizontal: hScale(60),
     left: 0,
     right: 0,
   },
   buttonText: {
-    fontSize: 18,
-    margin: 8,
+    fontSize: hScale(18),
+    margin: hScale(8),
     textAlign: 'center',
   },
   headerLeft: {
-    marginRight: 10,
+    marginRight: hScale(10),
   },
   headerRight: {
-    marginLeft: 10,
+    marginLeft: hScale(10),
   },
 });
 
