@@ -1,6 +1,6 @@
-import { HttpMethod, SearchContentType } from '../constants/enum.constants';
-import { apiConfig, NetworkManager } from '../network';
-import { PhotoServiceTypes } from './types';
+import { HttpMethod, SearchContentType } from '../../constants';
+import { apiConfig, NetworkManager } from '../../network';
+import { PhotoServiceTypes } from './type';
 
 export class PhotoService {
   static searchPhotos = (searchText: string, page: number, perPage = 20) => {

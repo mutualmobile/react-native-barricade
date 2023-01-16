@@ -2,16 +2,16 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Alert } from 'react-native';
 
 import { Strings } from '../assets';
-import env from '../config';
-import { HttpStatusCodes } from '../constants/enum.constants';
-import store from '../redux/store';
+import { Env } from '../config';
+import { HttpStatusCodes } from '../constants';
+import { store } from '../redux';
 import { IError, ErrorResponse, ResponseData } from './type';
 
 const DEFAULT_TIMEOUT = 60 * 1000;
 const RESPONSE_FORMAT = 'json';
 
 const appClient = axios.create({
-  baseURL: env.baseUrl,
+  baseURL: Env.baseUrl,
   timeout: DEFAULT_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const appClient = axios.create({
 appClient.interceptors.request.use(config => {
   config.params = {
     ...config.params,
-    api_key: env.flickrKey,
+    api_key: Env.flickrKey,
     format: RESPONSE_FORMAT,
     nojsoncallback: 1,
   };
@@ -46,10 +46,7 @@ export class NetworkManager {
     return NetworkManager.myInstance;
   }
 
-  appRequest = async <T,>(
-    options: AxiosRequestConfig,
-    showError: boolean = false,
-  ) => {
+  appRequest = async <T,>(options: AxiosRequestConfig, showError = false) => {
     if (store.getState().globalReducer.hasNetwork) {
       return appClient(options)
         .then(response => this.onSuccess<T>(response))

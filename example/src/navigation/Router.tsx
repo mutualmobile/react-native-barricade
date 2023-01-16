@@ -3,30 +3,19 @@ import React, { Suspense } from 'react';
 import { View } from 'react-native';
 
 import { Colors } from '../assets';
-import { NavigationService } from '../services/navigation.service';
 
 const Stack = React.lazy(() => import('./Stack'));
 
-const AppRouter = function (): JSX.Element {
-  React.useEffect(() => {
-    return () => {
-      NavigationService.getInstance().isNavigationReady = false;
-    };
-  }, []);
-
+export const AppRouter = function (): JSX.Element {
   return (
     <NavigationContainer
-      ref={NavigationService.getInstance().navigationRef}
-      onReady={() => {
-        NavigationService.getInstance().isNavigationReady = true;
-      }}
       theme={{
         dark: false,
         colors: {
           primary: Colors.primary,
-          background: Colors.bgPrimary,
+          background: Colors.background,
           card: Colors.primary,
-          text: Colors.body,
+          text: Colors.text,
           border: Colors.border,
           notification: Colors.secondary,
         },
@@ -37,5 +26,3 @@ const AppRouter = function (): JSX.Element {
     </NavigationContainer>
   );
 };
-
-export default AppRouter;

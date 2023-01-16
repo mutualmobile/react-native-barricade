@@ -2,9 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { Colors, Strings } from '../assets';
-import { Details } from '../screens/Details/Details';
-import { Home } from '../screens/Home/Home';
-import { Splash } from '../screens/Splash/Splash';
+import { Details, Home, Splash } from '../screens';
 import { GeneralStackParamList, GeneralStackRouteName } from './type';
 
 const Stack = createNativeStackNavigator<GeneralStackParamList>();
@@ -12,7 +10,7 @@ const GeneralStack = (): JSX.Element => {
   return (
     <Stack.Navigator
       initialRouteName={GeneralStackRouteName.Splash}
-      screenOptions={{ headerTintColor: Colors.bodyAlt }}>
+      screenOptions={{ headerTintColor: Colors.textAlt }}>
       <Stack.Screen
         name={GeneralStackRouteName.Home}
         component={Home}

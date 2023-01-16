@@ -6,7 +6,7 @@ const initialState: {
   hasNetwork: false,
 };
 
-const globalReducer = (
+export const globalReducer = (
   state = initialState,
   action: { type: GlobalActions; payload: any },
 ) => {
@@ -20,4 +20,3 @@ const globalReducer = (
       return state;
   }
 };
-export default globalReducer;

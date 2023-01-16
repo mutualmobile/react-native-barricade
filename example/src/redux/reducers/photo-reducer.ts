@@ -1,6 +1,6 @@
 import { Strings } from '../../assets';
-import { INITIAL_PAGE_NO } from '../../constants/app.constants';
-import { PhotoServiceTypes } from '../../services/types';
+import { INITIAL_PAGE_NO } from '../../constants';
+import { PhotoServiceTypes } from '../../services';
 import { PhotoActions } from '../type';
 
 const initialState: {
@@ -23,7 +23,7 @@ const initialState: {
   searchTotalPages: INITIAL_PAGE_NO,
 };
 
-const photoReducer = (
+export const photoReducer = (
   state = initialState,
   action: { type: PhotoActions; payload: any },
 ) => {
@@ -104,4 +104,3 @@ const photoReducer = (
       return state;
   }
 };
-export default photoReducer;

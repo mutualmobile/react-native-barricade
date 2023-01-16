@@ -1,11 +1,11 @@
 export const Colors = {
-  bgPrimary: '#fff',
+  background: '#fff',
 
   primary: '#ff0084',
   secondary: '#0063dc',
 
-  body: '#000',
-  bodyAlt: '#fff',
+  text: '#000',
+  textAlt: '#fff',
 
   input: '#000',
   inputLabel: '#303030',
@@ -15,13 +15,3 @@ export const Colors = {
 
   transparent: 'transparent',
 };
-
-export function getColorWithOpacity(hex: string, opacity: number) {
-  hex = hex.replace('#', '');
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-
-  const result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
-  return result;
-}

@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useCallback, useEffect, useState } from 'react';
+import debounce from 'lodash.debounce';
+import React, { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,24 +10,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import debounce from 'lodash.debounce';
 
-import { Colors, Fonts } from '../../assets';
-import {
-  GeneralStackParamList,
-  GeneralStackRouteName,
-} from '../../navigation/type';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { getImageUrl, horizontalScale, verticalScale } from '../../utilities';
+import { Colors, Fonts } from '../assets';
+import { SearchText } from '../components';
+import { ImageSizeSuffix, INITIAL_PAGE_NO } from '../constants';
+import { useAppDispatch, useAppSelector, useMountEffect } from '../hooks';
+import { GeneralStackParamList, GeneralStackRouteName } from '../navigation';
 import {
   getRecentResults,
   getSearchResults,
   resetRecentResults,
   resetSearchResults,
-} from '../../redux/actions/photo.action';
-import { SearchText } from '../../components/SearchText/SearchText';
-import { PhotoServiceTypes } from '../../services/types';
-import { ImageSizeSuffix, INITIAL_PAGE_NO } from '../../constants';
+} from '../redux';
+import { PhotoServiceTypes } from '../services';
+import { getImageUrl, hScale, vScale } from '../utils';
 
 type Props = NativeStackScreenProps<
   GeneralStackParamList,
@@ -47,9 +44,9 @@ export const Home = ({ navigation }: Props) => {
   const [searchText, setSearchText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
+  useMountEffect(() => {
     getPhotos();
-  }, []);
+  });
 
   const getPhotos = (text?: string, page: number = INITIAL_PAGE_NO) => {
     setIsLoading(true);
@@ -59,6 +56,7 @@ export const Home = ({ navigation }: Props) => {
       setIsLoading(false);
     });
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSearchPhotos = useCallback(debounce(getPhotos, 400), []);
 
   const onSearchTextChanged = (text: string) => {
@@ -104,7 +102,6 @@ export const Home = ({ navigation }: Props) => {
 
   const renderResultItem = ({
     item,
-    index,
   }: {
     item: PhotoServiceTypes.Photo;
     index: number;
@@ -172,28 +169,28 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: Colors.bgPrimary,
-    paddingHorizontal: horizontalScale(20),
-    paddingVertical: verticalScale(30),
+    backgroundColor: Colors.background,
+    paddingHorizontal: hScale(20),
+    paddingVertical: vScale(30),
   },
   searchText: {
-    marginBottom: verticalScale(20),
+    marginBottom: vScale(20),
   },
   resultItem: {},
   itemSeparator: {
-    height: verticalScale(20),
+    height: vScale(20),
   },
-  img: { height: verticalScale(200), width: '100%' },
+  img: { height: vScale(200), width: '100%' },
   imgTitle: {
-    color: Colors.body,
+    color: Colors.text,
     fontFamily: Fonts.Bold,
-    fontSize: horizontalScale(18),
-    marginTop: verticalScale(5),
+    fontSize: hScale(18),
+    marginTop: vScale(5),
   },
   loaderContainer: {
     alignItems: 'center',
-    paddingHorizontal: horizontalScale(20),
-    paddingVertical: verticalScale(50),
+    paddingHorizontal: hScale(20),
+    paddingVertical: vScale(50),
     width: '100%',
   },
 });

@@ -1,4 +1,4 @@
-import { HttpStatus, HttpStatusCodes } from '../constants/enum.constants';
+import { HttpStatus, HttpStatusCodes } from '../constants';
 
 export interface IError {
   data?: ErrorResponse;

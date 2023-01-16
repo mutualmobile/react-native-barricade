@@ -1,4 +1,4 @@
-import { PhotoServiceTypes } from '../services/types';
+import { PhotoServiceTypes } from '../services';
 
 export enum GeneralStackRouteName {
   Home = 'Home',

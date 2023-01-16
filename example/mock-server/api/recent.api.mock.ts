@@ -23,7 +23,7 @@ const successResponseHandler = (request: Request) => {
   };
 };
 
-const noDataResponseHandler = (request: Request) => {
+const noDataResponseHandler = () => {
   return {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -31,7 +31,7 @@ const noDataResponseHandler = (request: Request) => {
   };
 };
 
-const errorResponseHandler = (request: Request) => {
+const errorResponseHandler = () => {
   return {
     status: HttpStatusCode.BAD_REQUEST,
     headers: { 'Content-Type': 'application/json' },

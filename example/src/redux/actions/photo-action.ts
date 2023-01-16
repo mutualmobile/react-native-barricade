@@ -1,6 +1,5 @@
 import { Strings } from '../../assets';
-import { PhotoService } from '../../services/photo.service';
-import { PhotoServiceTypes } from '../../services/types';
+import { PhotoService, PhotoServiceTypes } from '../../services';
 import { AppDispatch } from '../store';
 import { PhotoActions } from '../type';
 
