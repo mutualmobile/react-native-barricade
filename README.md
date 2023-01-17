@@ -18,6 +18,25 @@ Now select the type of response from the screen you are navigated after selectin
 Click on Done and refresh the api, you will get the mocked response.
 
 If this project has helped you out, please support us with a star 🌟.
+
+
+# Why Barricade ?
+MMBarricade is a framework for setting up a run-time configurable local server. This works by enabling "barricade" that blocks outgoing network traffic and redirects it to a custom, local response, without requiring any changes to existing networking code.
+
+Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface for modifying which response will be returned for a request at runtime.
+
+
+
+# When to use ?
+During development barricade is useful for easily exercising all edge cases of a feature while you are building it without needing to frequently adjust the live server state.
+
+For unit tests and integration tests barricade allows you to easily toggle through each predefined response for a request so tests can cover edge cases thoroughly.
+
+Similarly, UI tests, such as KIF, can programmatically update selected responses as well, which allows your test suite to cover failure cases as well as the "happy path".
+
+Take a look at the unit tests for several examples of how unit tests can be implemented utilizing Barricade.
+
+
 ## Features
 
 - Mocked the response of apis.
