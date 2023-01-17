@@ -103,6 +103,8 @@ You can refer the examle app for generating the config files.
 
 **SearchApiRequestConfig:**  
 - The object contains the configuration for a mocked api.
+
+
 | Method                         | Description                                                                            | Default |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
 | **`label`**                    | Name by which api appears in the Barricade View.                                       | `string`  |
