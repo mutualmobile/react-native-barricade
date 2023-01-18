@@ -1,13 +1,10 @@
 
-# Developed by Mutual Mobile Team 👋
+# react-native-barricade
 
+The module is used to mock the responses of apis.
 
-# React Native Barricade
-
-The project is used to mock the responses of apis.
-
-You have to navigate to the react native debub menu and you will se one more option
-of enable Barricade at the last of the bebugger menu. 
+You have to navigate to the react native `debug` menu and you will se one more option
+of `Enable Barricade` at the last of the debugger menu. 
 
 Just click on it and the Barricade 
 view come into action. Later select the api which you want to mock from the list of option
@@ -20,10 +17,10 @@ Click on Done and refresh the api, you will get the mocked response.
 If this project has helped you out, please support us with a star 🌟.
 
 
-# Why Barricade ?
-MMBarricade is a framework for setting up a run-time configurable local server. This works by enabling "barricade" that blocks outgoing network traffic and redirects it to a custom, local response, without requiring any changes to existing networking code.
+# Why barricade ?
+`react-native-barricade` is a module for setting up a run-time configurable local server for react native apps. This works by enabling "barricade" that blocks outgoing network traffic and redirects it to a custom, local response, without requiring any changes to existing networking code.
 
-Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface for modifying which response will be returned for a request at runtime.
+Most other local server implementations only support a single response per request, but `react-native-barricade` supports multiple responses per request. This allows us to present the user with an interface for modifying which response will be returned for a request at runtime.
 
 
 
@@ -32,9 +29,6 @@ During development barricade is useful for easily exercising all edge cases of a
 
 For unit tests and integration tests barricade allows you to easily toggle through each predefined response for a request so tests can cover edge cases thoroughly.
 
-Similarly, UI tests, such as KIF, can programmatically update selected responses as well, which allows your test suite to cover failure cases as well as the "happy path".
-
-Take a look at the unit tests for several examples of how unit tests can be implemented utilizing Barricade.
 
 
 ## Features
@@ -43,14 +37,11 @@ Take a look at the unit tests for several examples of how unit tests can be impl
 - Support various rest methods - get, post, put and delete.
 - You can create your own json file for the response type as per your api response.
 - Support both android and IOS platforms. 
-- The three main functionalities are Enable Barricade, Disable Barricade and Barricade View.
+- The main features are `enableBarricade`, `shutdown` and `BarricadeView`.
 
 
 
 
-## Screenshots
-
-![App Screenshot](https://user-images.githubusercontent.com/113414293/212898114-6c32b25c-6c9f-47c7-b748-5996492e8510.png)
 ## Demo
 
 Insert gif or link to demo
@@ -71,23 +62,23 @@ or
 ```
 ## Usage/Examples
 
-The three main functionalities are Barricade View, Enable Barricade amd Disable Barricade.
+
 
  
 **1. Barricade View**
 
-Adding Barricade View is the second step after enabling the mock server in index.ts file.
- Add the following code to app.ts file to enable the Barricade View.
+Adding `BarricadeView` is the second step after enabling the mock server.
+ Add the following code to app.ts file to enable the `BarricadeView`.
 
 ```tsx
 import { BarricadeView } from 'react-native-barricade';
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <View>
     // rest of the app code
       <BarricadeView /> // add Barricade view at the end so that it overlays the entire app.
-    </Provider>
+    </View>
   );
 };
 
@@ -95,7 +86,7 @@ const App = () => {
 
 **2. Enable Barricade**
 
- - You have to enable the Barricade View to add the barricade to the debug menu. You can do that in index.ts file.
+ - You have to enable the Barricade View to add the barricade to the debug menu. You can do that in root index.ts file.
 
 
 ```tsx
@@ -110,33 +101,39 @@ AppRegistry.registerComponent('App', () => App);
 Create the config files for all the mocked apis. 
 You can refer the examle app for generating the config files.
 
- **Methods**
 
-| Method                    | Description                                                                            | Return Type |
-| ----------------------- | -------------------------------------------------------------------------------------- | ------- |
-| **`successResponseHandler`**   | It will return the response for successful mocked api call.                     | `json`  |
-| **`noDataResponseHandler`**    | It will return empty response for successful mocked api call.                   | `json` |
-| **`errorResponseHandler`**     | It will return the response for failed mocked api request.                      | `json`  |
-| **`loadMoreResponseHandler`**  | It will return the next items for paginated apis.                               | `json`   |
-
-
-**SearchApiRequestConfig:**  
+**RequestConfig:**  
 - The object contains the configuration for a mocked api.
 
 
-| Method                         | Description                                                                            | Default |
+| Property                         | Description                                                                            | Default |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
-| **`label`**                    | Name by which api appears in the Barricade View.                                       | `string`  |
+| **`label`**                    | Represent api in the Barricade View.                                       | `string`  |
 | **`Method`**                   | The request method type(get, post , put or delete).                                    | `string` |
 | **`pathEvaluation`**           | An object defining path(endpoint) and type of an api call.                             | `string`  |
-| **`path`**                     | endpoint for an api call.                                                              | `string` |
+| **`responseHandler`**          | Type of responses the api can return.                                              |  `array`   |
+
+
+**pathEvaluation:**  
+| Property                         | Description                                                                            | Default |
+| -----------------------        | -------------------------------------------------------------------------------------- | ------- |
+| **`path`**                     | endpoint of an api call.                                                              | `string` |
 | **`type`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
-| **`include`**                  |                                                                                        | `string` |
-| **`callback`**                 |                                                                                        | `function` |
-| **`suffix`**                   |                                                                                        | `string` |
-| **`responseHandler`**          | An array of responses the api can return.                                              |  `array`   |
-| **`responseHandler-label`**    |  `label` is the name by which response type appears in Barricade View.                 | `string` |
-| **`responseHandler-handler`**  | `handler` is the method corresponding to the `label` .                                 | `function` |
+
+
+**type:**  
+| Property                         | Description                                                                            | Default |
+| -----------------------        | -------------------------------------------------------------------------------------- | ------- |
+| **`suffix`**                     | endpoint of an api call.                                                              | `string` |
+| **`callback`**                     | endpoint of an api call.                                                              | `string` |
+| **`include`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
+
+
+**pathEvaluation:**  
+| Property                         | Description                                                                            | Default |
+| -----------------------        | -------------------------------------------------------------------------------------- | ------- |
+| **`label`**                     | endpoint of an api call.                                                              | `string` |
+| **`handler`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
 
 **3. Disable Barricade**
 - To disable the barricade, open the debug menu and select `Disable Barricade` option to close the Barricade mock server.
