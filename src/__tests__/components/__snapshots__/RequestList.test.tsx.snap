@@ -152,6 +152,7 @@ exports[`should match RequestList snapshot 1`] = `
     data={
       Array [
         Object {
+          "delay": 2000,
           "label": "First API",
           "method": "GET",
           "pathEvaluation": Object {

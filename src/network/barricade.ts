@@ -12,8 +12,8 @@ import {
   ResponseData,
   ResponseHandler,
 } from './barricade.types';
+import { HttpStatusCodeText } from './http-codes';
 import { interceptor } from './interceptor';
-import { createNativeXMLHttpRequest } from './xml-http-request';
 
 export class Barricade {
   running = false;
@@ -43,22 +43,14 @@ export class Barricade {
     return this._requestConfig;
   }
 
-  handleRequest(request: Request) {
-    const method = request._method.toUpperCase() as Method;
-    const requestUrl = request._url;
-    const parsedRequestUrl = UrlUtils.parseURL(requestUrl);
-    request.params = parsedRequestUrl.params;
-
+  getCurrentRequestConfig(request: Request, method: Method, url: string) {
     const requestConfig = this._requestConfig.find(item => {
-      if (
-        item.method !== method ||
-        !requestUrl.includes(item.pathEvaluation.path)
-      ) {
+      if (item.method !== method || !url.includes(item.pathEvaluation.path)) {
         return;
       } else if (item.pathEvaluation?.type === PathEvaluationType.Includes) {
         return true;
       } else if (item.pathEvaluation?.type === PathEvaluationType.Suffix) {
-        return requestUrl.endsWith(item.pathEvaluation.path);
+        return url.endsWith(item.pathEvaluation.path);
       } else {
         return (item.pathEvaluation as PathEvaluationCallback).callback(
           request,
@@ -66,34 +58,124 @@ export class Barricade {
       }
     });
 
+    return requestConfig;
+  }
+
+  handleRequest(request: Request) {
+    const method = request._method.toUpperCase() as Method;
+    const requestUrl = request._url;
+    const parsedRequestUrl = UrlUtils.parseURL(requestUrl);
+    request.params = parsedRequestUrl.params;
+
+    const requestConfig = this.getCurrentRequestConfig(
+      request,
+      method,
+      requestUrl,
+    );
+
     if (requestConfig) {
-      try {
-        const result = (
-          requestConfig.responseHandler.find(item => !!item.isSelected) ??
-          requestConfig.responseHandler[0]
-        ).handler(request);
-        if (
-          result &&
-          typeof (result as PromiseLike<ResponseData>)?.then === 'function'
-        ) {
-          (result as PromiseLike<ResponseData>).then(resolvedResult => {
-            this.resolveRequest(request, resolvedResult, requestConfig.delay);
-          });
-        } else {
-          this.resolveRequest(
-            request,
-            result as ResponseData,
-            requestConfig.delay,
-          );
-        }
-      } catch (error) {
-        throw `Barricade intercepted ${requestUrl}(${method}) API and threw an error - ${
-          (error as Error).message
-        }.`;
-      }
+      this.handleMockedXMLHttpRequest(
+        request,
+        requestConfig,
+        method,
+        requestUrl,
+      );
     } else {
-      createNativeXMLHttpRequest(request, this._nativeXMLHttpRequest);
+      this.handleNativeXMLHttpRequest(request);
     }
+  }
+
+  handleMockedXMLHttpRequest(
+    request: Request,
+    requestConfig: RequestConfigForLib,
+    method: Method,
+    url: string,
+  ) {
+    try {
+      const result = (
+        requestConfig.responseHandler.find(item => !!item.isSelected) ??
+        requestConfig.responseHandler[0]
+      ).handler(request);
+      if (
+        result &&
+        typeof (result as PromiseLike<ResponseData>)?.then === 'function'
+      ) {
+        (result as PromiseLike<ResponseData>).then(resolvedResult => {
+          this.resolveRequest(request, resolvedResult, requestConfig.delay);
+        });
+      } else {
+        this.resolveRequest(
+          request,
+          result as ResponseData,
+          requestConfig.delay,
+        );
+      }
+    } catch (error) {
+      throw `Barricade intercepted ${url}(${method}) API and threw an error - ${
+        (error as Error).message
+      }.`;
+    }
+  }
+
+  handleNativeXMLHttpRequest(request: Request) {
+    const xhr = new this._nativeXMLHttpRequest();
+
+    const setResponseData = () => {
+      request.setResponseData(
+        xhr.status as keyof typeof HttpStatusCodeText,
+        //@ts-ignore
+        xhr._headers ?? {},
+        //@ts-ignore
+        xhr._response,
+        xhr.responseURL,
+      );
+    };
+
+    xhr.onload = function () {
+      setResponseData();
+    };
+
+    xhr.onerror = function () {
+      //@ts-ignore
+      request._hasError = xhr._hasError;
+      setResponseData();
+    };
+
+    xhr.ontimeout = function () {
+      //@ts-ignore
+      request._hasError = xhr._hasError;
+      //@ts-ignore
+      request._timedOut = xhr._timedOut;
+      setResponseData();
+    };
+
+    xhr.onabort = function () {
+      request.abort();
+    };
+
+    if (xhr.upload) {
+      xhr.upload.onprogress = function ({
+        loaded,
+        total,
+      }: {
+        loaded: number;
+        total: number;
+      }) {
+        request._progress(total >= 0, loaded, total);
+      };
+    }
+
+    xhr.open(request._method, request._url, true);
+
+    xhr.responseType = request.responseType;
+    xhr.timeout = request.timeout ?? 0;
+    xhr.withCredentials = request.withCredentials;
+    for (let h in request._headers) {
+      xhr.setRequestHeader(h, request._headers[h]);
+    }
+
+    // Use _requestBody and not parsed requestBody
+    xhr.send(request._requestBody);
   }
 
   resetRequestConfig() {

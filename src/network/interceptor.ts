@@ -8,7 +8,7 @@ export function interceptor(ctx: Barricade) {
       super();
     }
 
-    send(data: string) {
+    send(data?: string) {
       if (!ctx.running) {
         throw new Error(
           'Barricade instance was shut down while there was a pending request that just tried to complete.',

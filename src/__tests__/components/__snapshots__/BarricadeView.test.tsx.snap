@@ -475,6 +475,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
         data={
           Array [
             Object {
+              "delay": 2000,
               "label": "First API",
               "method": "GET",
               "pathEvaluation": Object {
@@ -1298,6 +1299,7 @@ exports[`given that theme is light and list view is selected, should match Barri
         data={
           Array [
             Object {
+              "delay": 2000,
               "label": "First API",
               "method": "GET",
               "pathEvaluation": Object {

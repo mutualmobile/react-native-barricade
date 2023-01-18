@@ -72,7 +72,7 @@ export class MockedXMLHttpRequest extends EventTarget {
   _subscriptions: Array<EventSubscription> = [];
 
   _aborted = false;
-  _cachedResponse?: Response;
+  _cachedResponse?: Response | null;
   _hasError = false;
   _headers: Record<string, any> = {};
   _lowerCaseResponseHeaders: Record<string, any> = {};
@@ -191,19 +191,19 @@ export class MockedXMLHttpRequest extends EventTarget {
         break;
 
       case 'document':
-        this._cachedResponse = undefined;
+        this._cachedResponse = null;
         break;
 
       case 'json':
         try {
           this._cachedResponse = JSON.parse((this._response as string) ?? '');
         } catch (_) {
-          this._cachedResponse = undefined;
+          this._cachedResponse = null;
         }
         break;
 
       default:
-        this._cachedResponse = undefined;
+        this._cachedResponse = null;
     }
 
     return this._cachedResponse;

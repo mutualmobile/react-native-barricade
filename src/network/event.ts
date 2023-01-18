@@ -14,7 +14,7 @@ export const XHR_EVENTS = [
 ];
 
 export class EventTarget {
-  _eventListeners: Record<string, any> = [];
+  _eventListeners: Record<string, any> = {};
 
   constructor() {
     for (let i = XHR_EVENTS.length - 1; i >= 0; i--) {
@@ -52,7 +52,10 @@ export class EventTarget {
     for (let i = 0; i < listeners.length; i++) {
       if (typeof listeners[i] === 'function') {
         listeners[i].call(this, event);
-      } else {
+      } else if (
+        listeners[i].handleEvent &&
+        typeof listeners[i].handleEvent === 'function'
+      ) {
         listeners[i].handleEvent(event);
       }
     }

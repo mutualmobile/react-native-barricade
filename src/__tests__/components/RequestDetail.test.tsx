@@ -17,6 +17,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  jest.clearAllMocks();
   barricade.shutdown();
 });
 
