@@ -26,14 +26,12 @@ const RequestDetail = (props: RequestDetailProps): JSX.Element => {
 
   const onDeailItemPressed = (item: ResponseHandler, index: number) => {
     if (!item.isSelected) {
-      const requestConfig = barricade?.requestConfig[selectedListItemIndex!];
-      if (requestConfig) {
-        requestConfig.responseHandler.map((responseHandler, i) => {
-          responseHandler.isSelected = index === i;
-          return responseHandler;
-        });
-        requestConfig.selectedResponseLabel = item.label;
-      }
+      const requestConfig = barricade.requestConfig[selectedListItemIndex!];
+      requestConfig.responseHandler.map((responseHandler, i) => {
+        responseHandler.isSelected = index === i;
+        return responseHandler;
+      });
+      requestConfig.selectedResponseLabel = item.label;
       onBackPressed();
     }
   };

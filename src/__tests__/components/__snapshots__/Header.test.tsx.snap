@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given that Header is called with only title props, should match Header snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+      },
+      Object {
+        "backgroundColor": "#EBEBEB",
+      },
+      Object {
+        "borderColor": "#DEDEDE",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 82.14285714285714,
+        "marginHorizontal": 24,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "fontSize": 40,
+            "fontWeight": "bold",
+            "left": 0,
+            "marginHorizontal": 120,
+            "position": "absolute",
+            "right": 0,
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#181818",
+          },
+        ]
+      }
+    >
+      Header
+    </Text>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`given that Header is called with title and headerLeft props, should match Header snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+      },
+      Object {
+        "backgroundColor": "#EBEBEB",
+      },
+      Object {
+        "borderColor": "#DEDEDE",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 82.14285714285714,
+        "marginHorizontal": 24,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "fontSize": 40,
+            "fontWeight": "bold",
+            "left": 0,
+            "marginHorizontal": 120,
+            "position": "absolute",
+            "right": 0,
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#181818",
+          },
+        ]
+      }
+    >
+      Header with left button
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "marginRight": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 36,
+              "margin": 16,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#007aa3",
+            },
+          ]
+        }
+      >
+        Reset
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`given that Header is called with title and headerRight props, should match Header snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+      },
+      Object {
+        "backgroundColor": "#EBEBEB",
+      },
+      Object {
+        "borderColor": "#DEDEDE",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 82.14285714285714,
+        "marginHorizontal": 24,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "fontSize": 40,
+            "fontWeight": "bold",
+            "left": 0,
+            "marginHorizontal": 120,
+            "position": "absolute",
+            "right": 0,
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#181818",
+          },
+        ]
+      }
+    >
+      Header with right button
+    </Text>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "marginLeft": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 36,
+              "margin": 16,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#007aa3",
+            },
+          ]
+        }
+      >
+        Done
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`given that Header is called with title, headerLeft and headerRight props, should match Header snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 1,
+      },
+      Object {
+        "backgroundColor": "#EBEBEB",
+      },
+      Object {
+        "borderColor": "#DEDEDE",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 82.14285714285714,
+        "marginHorizontal": 24,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "fontSize": 40,
+            "fontWeight": "bold",
+            "left": 0,
+            "marginHorizontal": 120,
+            "position": "absolute",
+            "right": 0,
+            "textAlign": "center",
+          },
+          Object {
+            "color": "#181818",
+          },
+        ]
+      }
+    >
+      Header with left and right buttons
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "marginRight": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 36,
+              "margin": 16,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#007aa3",
+            },
+          ]
+        }
+      >
+        Reset
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "marginLeft": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 36,
+              "margin": 16,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#007aa3",
+            },
+          ]
+        }
+      >
+        Done
+      </Text>
+    </View>
+  </View>
+</View>
+`;

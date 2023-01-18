@@ -15,9 +15,3 @@ export const hScale = (size: number) =>
 
 export const vScale = (size: number) =>
   (usableHeight / guidelineBaseHeight) * size;
-
-export const mScale = (size: number, factor = 0.5) =>
-  size + (hScale(size) - size) * factor;
-
-export const mvScale = (size: number, factor = 0.5) =>
-  size + (vScale(size) - size) * factor;

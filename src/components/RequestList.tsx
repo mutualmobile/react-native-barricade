@@ -38,6 +38,7 @@ const RequestList = (props: RequestListProps): JSX.Element => {
   }: ListRenderItemInfo<RequestConfigForLib>) => {
     return (
       <TouchableOpacity
+        testID={`listItem${index}`}
         style={[styles.listItemContainer, themeColorStyle.border]}
         onPress={() => onListItemPressed(index)}>
         <Text style={[styles.label, themeColorStyle.textDark]}>

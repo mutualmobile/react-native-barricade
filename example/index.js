@@ -4,7 +4,7 @@ import { name as appName } from './app.json';
 import { mockServer } from './mock-server';
 
 const enableMock = true;
-if (enableMock) {
+if (enableMock && __DEV__) {
   mockServer();
 }
 

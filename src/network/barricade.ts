@@ -120,14 +120,12 @@ export class Barricade {
   }
 
   start() {
-    if (__DEV__) {
-      global.XMLHttpRequest = interceptor(this) as any;
-      global.fetch = RNFetch.fetch;
-      global.Headers = RNFetch.Headers;
-      global.Request = RNFetch.Request;
-      global.Response = RNFetch.Response;
-      this.running = true;
-    }
+    global.XMLHttpRequest = interceptor(this) as any;
+    global.fetch = RNFetch.fetch;
+    global.Headers = RNFetch.Headers;
+    global.Request = RNFetch.Request;
+    global.Response = RNFetch.Response;
+    this.running = true;
   }
 
   shutdown() {
@@ -148,8 +146,11 @@ export class Barricade {
         } else if (request.responseHandler[i].isSelected) {
           selectedItem = request.responseHandler[i];
         } else if (i === request.responseHandler.length - 1) {
+          request.responseHandler[i].isSelected = false;
           request.responseHandler[0].isSelected = true;
           selectedItem = request.responseHandler[0];
+        } else {
+          request.responseHandler[i].isSelected = false;
         }
       }
       const result = request as RequestConfigForLib;

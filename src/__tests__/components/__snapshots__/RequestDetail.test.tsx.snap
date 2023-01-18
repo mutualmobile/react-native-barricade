@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match RequestDetail snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "backgroundColor": "#ffffff",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "borderBottomWidth": 1,
+        },
+        Object {
+          "backgroundColor": "#EBEBEB",
+        },
+        Object {
+          "borderColor": "#DEDEDE",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 82.14285714285714,
+          "marginHorizontal": 24,
+        }
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "fontSize": 40,
+              "fontWeight": "bold",
+              "left": 0,
+              "marginHorizontal": 120,
+              "position": "absolute",
+              "right": 0,
+              "textAlign": "center",
+            },
+            Object {
+              "color": "#181818",
+            },
+          ]
+        }
+      >
+        First API
+      </Text>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginRight": 20,
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "fontSize": 36,
+                "margin": 16,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "#007aa3",
+              },
+            ]
+          }
+        >
+          ‹ Back
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+  <RCTScrollView
+    contentContainerStyle={
+      Array [
+        Object {
+          "flexGrow": 1,
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+      ]
+    }
+    data={
+      Array [
+        Object {
+          "handler": [Function],
+          "isSelected": true,
+          "label": "Success",
+        },
+        Object {
+          "handler": [Function],
+          "isSelected": false,
+          "label": "Error",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "flexGrow": 1,
+      }
+    }
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#DEDEDE",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "opacity": 1,
+              "paddingHorizontal": 40,
+              "paddingVertical": 19.714285714285715,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 36,
+                  "fontWeight": "400",
+                },
+                Object {
+                  "color": "#181818",
+                },
+              ]
+            }
+          >
+            Success
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 36,
+                },
+                Object {
+                  "color": "#007aa3",
+                },
+              ]
+            }
+          >
+            ✓
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#DEDEDE",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "opacity": 1,
+              "paddingHorizontal": 40,
+              "paddingVertical": 19.714285714285715,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "fontSize": 36,
+                  "fontWeight": "400",
+                },
+                Object {
+                  "color": "#181818",
+                },
+              ]
+            }
+          >
+            Error
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

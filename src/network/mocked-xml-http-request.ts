@@ -77,13 +77,11 @@ export class MockedXMLHttpRequest extends EventTarget {
   _headers: Record<string, any> = {};
   _lowerCaseResponseHeaders: Record<string, any> = {};
   _method?: string;
-  _perfKey?: string;
   _response: string | Blob | ArrayBuffer | undefined = '';
   _responseType: XMLHttpRequestResponseType = '';
   _sent = false;
   _url?: string;
   _timedOut = false;
-  _incrementalEvents = false;
 
   statusText = '';
   _cachedRequestBody: any = null;
@@ -315,7 +313,7 @@ export class MockedXMLHttpRequest extends EventTarget {
     this.setReadyState(this.OPENED);
   }
 
-  send(data: string) {
+  send(data?: string) {
     if (this.readyState !== this.OPENED) {
       throw new Error('Request has not been opened');
     }
@@ -323,22 +321,7 @@ export class MockedXMLHttpRequest extends EventTarget {
       throw new Error('Request has already been sent');
     }
 
-    if (!/^(get|head)$/i.test(this._method ?? '')) {
-      let hasContentTypeHeader = false;
-
-      Object.keys(this._headers).forEach(function (key) {
-        if (key.toLowerCase() === 'content-type') {
-          hasContentTypeHeader = true;
-        }
-      });
-
-      if (!hasContentTypeHeader && !(data || '').toString().match('FormData')) {
-        this._headers['Content-Type'] = 'text/plain;charset=UTF-8';
-      }
-
-      this._requestBody = data;
-    }
-
+    this._requestBody = data;
     this._sent = true;
 
     this.dispatchEvent(new Event('loadstart', false, false, this));
@@ -395,16 +378,21 @@ export class MockedXMLHttpRequest extends EventTarget {
     status: keyof typeof HttpStatusCodeText,
     headers: Record<string, string>,
     body: string | Blob | ArrayBuffer,
+    responseURL?: string,
   ) {
     this.status = typeof status === 'number' ? status : 200;
     this.statusText = HttpStatusCodeText[this.status];
-    this.responseURL = this._url;
+    if (responseURL || responseURL === '') {
+      this.responseURL = responseURL;
+    } else {
+      delete this.responseURL;
+    }
     this.setResponseHeaders(headers || {});
     this.setReadyState(this.HEADERS_RECEIVED);
     this._setResponseBody(body || '');
   }
 
-  async _setResponseBody(body: string | Blob | ArrayBuffer) {
+  _setResponseBody(body: string | Blob | ArrayBuffer) {
     if (this.readyState === this.DONE) {
       throw new Error('Request done');
     } else if (this.readyState !== this.HEADERS_RECEIVED) {

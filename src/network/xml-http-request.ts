@@ -14,6 +14,7 @@ export function createNativeXMLHttpRequest(
       xhr._headers ?? {},
       //@ts-ignore
       xhr._response,
+      xhr.responseURL,
     );
   };
 
@@ -38,6 +39,18 @@ export function createNativeXMLHttpRequest(
   xhr.onabort = function () {
     request.abort();
   };
+
+  if (xhr.upload) {
+    xhr.upload.onprogress = function ({
+      loaded,
+      total,
+    }: {
+      loaded: number;
+      total: number;
+    }) {
+      request._progress(total >= 0, loaded, total);
+    };
+  }
 
   xhr.onreadystatechange = function () {};
 

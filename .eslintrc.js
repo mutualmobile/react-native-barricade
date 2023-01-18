@@ -8,4 +8,7 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'sort-imports': 'off',
   },
+  env: {
+    jest: true,
+  },
 };

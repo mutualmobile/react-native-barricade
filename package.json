@@ -67,14 +67,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native(-.*)?|@react-native(-community)?)/)"
+    ],
+    "setupFiles": ["<rootDir>/jestSetup.js"],
+    "modulePathIgnorePatterns": ["<rootDir>/src/__tests__/data/"]
   },
   "dependencies": {
     "lodash.clonedeep": "^4.5.0",
