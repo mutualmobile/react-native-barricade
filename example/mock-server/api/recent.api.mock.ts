@@ -1,7 +1,7 @@
 import {
   HttpStatusCode,
   Method,
-  PathEvaluaionType,
+  PathEvaluationType,
   Request,
   RequestConfig,
 } from 'react-native-barricade';
@@ -62,7 +62,7 @@ const RecentApiRequestConfig: RequestConfig = {
   method: Method.Get,
   pathEvaluation: {
     path: apiConfig.photos.recent,
-    type: PathEvaluaionType.Includes,
+    type: PathEvaluationType.Includes,
   },
   responseHandler: [
     {
@@ -83,6 +83,7 @@ const RecentApiRequestConfig: RequestConfig = {
       handler: loadMoreResponseHandler,
     },
   ],
+  delay: 5000,
 };
 
 export { RecentApiRequestConfig };

@@ -11,18 +11,18 @@ export enum Method {
   Put = 'PUT',
 }
 
-export enum PathEvaluaionType {
+export enum PathEvaluationType {
   Callback,
   Includes,
   Suffix,
 }
 
 export interface PathEvaluationBasic {
-  type: PathEvaluaionType.Includes | PathEvaluaionType.Suffix;
+  type: PathEvaluationType.Includes | PathEvaluationType.Suffix;
 }
 
 export interface PathEvaluationCallback {
-  type: PathEvaluaionType.Callback;
+  type: PathEvaluationType.Callback;
   callback: (request: Request) => boolean;
 }
 

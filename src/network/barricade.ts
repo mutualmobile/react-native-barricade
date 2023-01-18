@@ -4,8 +4,8 @@ import * as RNFetch from 'react-native/Libraries/Network/fetch';
 import { ObjectUtils, UrlUtils } from '../utils';
 import {
   Method,
-  PathEvaluaionType,
   PathEvaluationCallback,
+  PathEvaluationType,
   Request,
   RequestConfig,
   RequestConfigForLib,
@@ -55,9 +55,9 @@ export class Barricade {
         !requestUrl.includes(item.pathEvaluation.path)
       ) {
         return;
-      } else if (item.pathEvaluation?.type === PathEvaluaionType.Includes) {
+      } else if (item.pathEvaluation?.type === PathEvaluationType.Includes) {
         return true;
-      } else if (item.pathEvaluation?.type === PathEvaluaionType.Suffix) {
+      } else if (item.pathEvaluation?.type === PathEvaluationType.Suffix) {
         return requestUrl.endsWith(item.pathEvaluation.path);
       } else {
         return (item.pathEvaluation as PathEvaluationCallback).callback(

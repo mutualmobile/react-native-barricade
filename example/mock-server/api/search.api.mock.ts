@@ -2,7 +2,7 @@ import {
   HttpStatusCode,
   Method,
   Request,
-  PathEvaluaionType,
+  PathEvaluationType,
   RequestConfig,
 } from 'react-native-barricade';
 
@@ -70,7 +70,7 @@ const SearchApiRequestConfig: RequestConfig = {
   method: Method.Get,
   pathEvaluation: {
     path: apiConfig.photos.search,
-    type: PathEvaluaionType.Includes,
+    type: PathEvaluationType.Includes,
   },
   responseHandler: [
     {
