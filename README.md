@@ -124,16 +124,16 @@ You can refer the examle app for generating the config files.
 **type:**  
 | Property                         | Description                                                                            | Default |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
-| **`suffix`**                     | endpoint of an api call.                                                              | `string` |
-| **`callback`**                     | endpoint of an api call.                                                              | `string` |
-| **`include`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
+| **`suffix`**                     |                                                              | `string` |
+| **`callback`**                     |                                                       | `string` |
+| **`include`**                     |                                    | `string` |
 
 
-**pathEvaluation:**  
+**responseHandler:**  
 | Property                         | Description                                                                            | Default |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
-| **`label`**                     | endpoint of an api call.                                                              | `string` |
-| **`handler`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
+| **`label`**                     | Represent api response type | `string` |
+| **`handler`**                     | Controls the response for an api call                            | `function` |
 
 **3. Disable Barricade**
 - To disable the barricade, open the debug menu and select `Disable Barricade` option to close the Barricade mock server.
