@@ -44,9 +44,7 @@ For unit tests and integration tests barricade allows you to easily toggle throu
 
 ## Demo
 
-![](https://github.com/mutualmobile/react-native-barricade/blob/feature/readme/src/constants/media/recording.gif)
-
-
+<img src="https://user-images.githubusercontent.com/113414293/213397681-50768a84-abb1-4b16-81d7-9cbe2785b54c.gif" width="250" height="450"/>
 ## Installation
 
 
