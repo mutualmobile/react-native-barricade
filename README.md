@@ -76,7 +76,7 @@ import { BarricadeView } from 'react-native-barricade';
 const App = () => {
   return (
     <View>
-    // rest of the app code
+      // rest of the app code
       <BarricadeView /> // add Barricade view at the end so that it overlays the entire app.
     </View>
   );
@@ -106,34 +106,36 @@ You can refer the examle app for generating the config files.
 - The object contains the configuration for a mocked api.
 
 
-| Property                         | Description                                                                            | Default |
+| Property                         | Description                                                                            | Type |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
 | **`label`**                    | Represent api in the Barricade View.                                       | `string`  |
 | **`Method`**                   | The request method type(get, post , put or delete).                                    | `string` |
-| **`pathEvaluation`**           | An object defining path(endpoint) and type of an api call.                             | `string`  |
-| **`responseHandler`**          | Type of responses the api can return.                                              |  `array`   |
+| **`pathEvaluation`**           | An object defining path(endpoint) and additional params of an api call.                             | `string`  |
+| **`responseHandler`**          | Collection of responses the api can return.                                              |  `array`   |
+| **`delay`**                    | Delay in api response.                                          |  `number`   |
 
 
 **pathEvaluation:**  
-| Property                         | Description                                                                            | Default |
+| Property                       | Description                                                                            | Type |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
 | **`path`**                     | endpoint of an api call.                                                              | `string` |
-| **`type`**                     | api type can be `include`, `callback` or `suffix`.                                     | `string` |
+| **`type`**                     | api type can be `include` or `suffix`.                                     | `string` |
+| **`callback`**                 | Identify if the current requestConfig needs to be used for resolving response by executing the callback function which passed the request object.                          | `string` |
 
 
 **type:**  
-| Property                         | Description                                                                            | Default |
+| Property                         | Description                                                                            | Type |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
-| **`suffix`**                     |                                                              | `string` |
-| **`callback`**                     |                                                       | `string` |
-| **`include`**                     |                                    | `string` |
+| **`suffix`**                     |  Check the path presence at the end in the requested url to consider it for mocking.                                            | `string` |
+| **`include`**                     |Check the path presence anywhere in the requested url to consider it for mocking.                                 | `string` |
 
 
 **responseHandler:**  
-| Property                         | Description                                                                            | Default |
+| Property                         | Description                                                                            | Type |
 | -----------------------        | -------------------------------------------------------------------------------------- | ------- |
-| **`label`**                     | Represent api response type | `string` |
-| **`handler`**                     | Controls the response for an api call                            | `function` |
+| **`label`**                    | Represent api response type | `string` |
+| **`handler`**                  | Returns the response for an api call                            | `function` |
+| **`isSelected`**               | Which response is selected by default| `boolean` |
 
 **3. Disable Barricade**
 - To disable the barricade, open the debug menu and select `Disable Barricade` option to close the Barricade mock server.
