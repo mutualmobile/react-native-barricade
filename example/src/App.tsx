@@ -1,10 +1,12 @@
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
-import { BarricadeView } from 'react-native-barricade';
+import { BarricadeView, showBarricadeView } from 'react-native-barricade';
 import { Provider } from 'react-redux';
 
-import { Colors } from './assets';
+import { Colors, Images } from './assets';
+import { IconButton } from './components';
+import { Env } from './config';
 import { useAppDispatch, useMountEffect } from './hooks';
 import { AppRouter } from './navigation';
 import { setNetworkChange, store } from './redux';
@@ -28,7 +30,10 @@ const AppContent = () => {
         backgroundColor={Colors.primary}
       />
       <AppRouter />
-      <BarricadeView />
+      {!__DEV__ && Env.enableBarricade && (
+        <IconButton icon={Images.logo} onPress={showBarricadeView} />
+      )}
+      {Env.enableBarricade && <BarricadeView />}
     </>
   );
 };

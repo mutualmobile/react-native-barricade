@@ -43,7 +43,11 @@ export class Barricade {
     return this._requestConfig;
   }
 
-  getCurrentRequestConfig(request: Request, method: Method, url: string) {
+  private getCurrentRequestConfig(
+    request: Request,
+    method: Method,
+    url: string,
+  ) {
     const requestConfig = this._requestConfig.find(item => {
       if (item.method !== method || !url.includes(item.pathEvaluation.path)) {
         return;
@@ -59,6 +63,31 @@ export class Barricade {
     });
 
     return requestConfig;
+  }
+
+  private initRequestConfig(requests: RequestConfig[]) {
+    const updatedRequestConfig = requests.map<RequestConfig>(request => {
+      let selectedItem: ResponseHandler | undefined;
+      for (let i = 0; i < request.responseHandler.length; i++) {
+        if (selectedItem) {
+          request.responseHandler[i].isSelected = false;
+        } else if (request.responseHandler[i].isSelected) {
+          selectedItem = request.responseHandler[i];
+        } else if (i === request.responseHandler.length - 1) {
+          request.responseHandler[i].isSelected = false;
+          request.responseHandler[0].isSelected = true;
+          selectedItem = request.responseHandler[0];
+        } else {
+          request.responseHandler[i].isSelected = false;
+        }
+      }
+      const result = request as RequestConfigForLib;
+      result.selectedResponseLabel = selectedItem!.label;
+
+      return result;
+    });
+
+    this.requestConfig = updatedRequestConfig;
   }
 
   handleRequest(request: Request) {
@@ -85,7 +114,7 @@ export class Barricade {
     }
   }
 
-  handleMockedXMLHttpRequest(
+  private handleMockedXMLHttpRequest(
     request: Request,
     requestConfig: RequestConfigForLib,
     method: Method,
@@ -117,7 +146,7 @@ export class Barricade {
     }
   }
 
-  handleNativeXMLHttpRequest(request: Request) {
+  private handleNativeXMLHttpRequest(request: Request) {
     const xhr = new this._nativeXMLHttpRequest();
 
     const setResponseData = () => {
@@ -217,30 +246,5 @@ export class Barricade {
     global.Request = this._nativeRequest;
     global.Response = this._nativeResponse;
     this.running = false;
-  }
-
-  initRequestConfig(requests: RequestConfig[]) {
-    const updatedRequestConfig = requests.map<RequestConfig>(request => {
-      let selectedItem: ResponseHandler | undefined;
-      for (let i = 0; i < request.responseHandler.length; i++) {
-        if (selectedItem) {
-          request.responseHandler[i].isSelected = false;
-        } else if (request.responseHandler[i].isSelected) {
-          selectedItem = request.responseHandler[i];
-        } else if (i === request.responseHandler.length - 1) {
-          request.responseHandler[i].isSelected = false;
-          request.responseHandler[0].isSelected = true;
-          selectedItem = request.responseHandler[0];
-        } else {
-          request.responseHandler[i].isSelected = false;
-        }
-      }
-      const result = request as RequestConfigForLib;
-      result.selectedResponseLabel = selectedItem!.label;
-
-      return result;
-    });
-
-    this.requestConfig = updatedRequestConfig;
   }
 }

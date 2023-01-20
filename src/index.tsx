@@ -19,23 +19,31 @@ import { ThemeType } from './theme';
 
 let barricade: Barricade | undefined;
 
-const enableBarricade = (requests: RequestConfig[]) => {
+const createBarricade = (requests: RequestConfig[]) => {
   barricade = new Barricade(requests);
-  barricade.start();
-  DevSettings.addMenuItem(Strings.Barricade, () => {
-    DeviceEventEmitter.emit(EventType.ShowBarricadeView);
-  });
+  if (__DEV__) {
+    DevSettings.addMenuItem(Strings.Barricade, () => {
+      showBarricadeView();
+    });
+  }
+
+  return barricade;
 };
 
-const disableBarricade = () => {
-  barricade?.shutdown();
+const getBarricadeInstance = () => {
+  return barricade;
 };
 
-const isBarricadeEnabled = () => {
-  return barricade?.running;
+const showBarricadeView = () => {
+  DeviceEventEmitter.emit(EventType.ShowBarricadeView);
 };
 
-const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
+export type BarricadeViewProps = {
+  theme?: ThemeType;
+};
+
+const BarricadeView = (props: BarricadeViewProps) => {
+  const { theme = 'light' } = props;
   const [visible, setVisibility] = useState(false);
 
   useEffect(() => {
@@ -68,10 +76,9 @@ const BarricadeView = ({ theme = 'light' }: { theme?: ThemeType }) => {
 
 export {
   BarricadeView,
-  disableBarricade,
-  enableBarricade,
+  createBarricade,
+  getBarricadeInstance,
   HttpStatusCode,
-  isBarricadeEnabled,
   Method,
   PathEvaluationBasic,
   PathEvaluationCallback,
@@ -80,5 +87,6 @@ export {
   RequestConfig,
   ResponseData,
   ResponseHandler,
+  showBarricadeView,
   ThemeType,
 };

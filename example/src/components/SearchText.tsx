@@ -4,20 +4,19 @@ import React from 'react';
 import { Colors, Fonts, Strings } from '../assets';
 import { hScale, vScale } from '../utils';
 
-interface SearchTextProps extends TextInputProps {
+interface SearchTextProps extends Omit<TextInputProps, 'placeholder'> {
   onChangeText: (text: string) => void;
 }
 
 export const SearchText = (props: SearchTextProps) => {
-  const onChangeText = (text: string) => {
-    props.onChangeText(text);
-  };
+  const { onChangeText, style, ...restProps } = props;
 
   return (
     <TextInput
-      value={props.value}
-      style={[styles.input, props.style]}
+      {...restProps}
+      style={[styles.input, style]}
       placeholder={Strings.input.search_placeholder}
+      placeholderTextColor={Colors.placeholder}
       onChangeText={onChangeText}
       underlineColorAndroid={Colors.transparent}
     />

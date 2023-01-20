@@ -134,7 +134,9 @@ export const Home = ({ navigation }: Props) => {
     ) {
       return (
         <View style={styles.loaderContainer}>
-          <Text>{searchText?.length ? searchError : recentError}</Text>
+          <Text style={styles.error}>
+            {searchText?.length ? searchError : recentError}
+          </Text>
         </View>
       );
     } else return null;
@@ -192,5 +194,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: hScale(20),
     paddingVertical: vScale(50),
     width: '100%',
+  },
+  error: {
+    color: Colors.text,
+    fontFamily: Fonts.Regular,
+    fontSize: hScale(14),
   },
 });

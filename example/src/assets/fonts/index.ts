@@ -6,7 +6,7 @@ export const Fonts = {
   Italic: 'OpenSans-Italic',
   Light: 'OpenSans-Light',
   LightItalic: 'OpenSans-LightItalic',
-  Regular: 'OpenSans-Regular',
+  Regular: 'Open Sans',
   Semibold: 'OpenSans-Semibold',
   SemiboldItalic: 'OpenSans-SemiboldItalic',
 };

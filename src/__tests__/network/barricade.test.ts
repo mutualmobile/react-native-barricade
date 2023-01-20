@@ -692,7 +692,7 @@ describe('given that handleNativeXMLHttpRequest is called,', () => {
         timeout: 60000,
         withCredentials: true,
         upload: {
-          onprogress: ({ loaded, total }) => {},
+          onprogress: () => {},
         },
         onload: () => {},
         open: jest.fn(),
