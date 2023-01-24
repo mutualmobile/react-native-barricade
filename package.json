@@ -1,7 +1,7 @@
 {
-  "name": "react-native-barricade",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@mutualmobile/react-native-barricade",
+  "version": "1.0.0-beta.1",
+  "description": "A local server configurable at runtime to develop, test, and prototype your React Native app. Using just mock responses, Barricade can build the whole app without getting blocked by the unavailability of APIs.",
   "homepage": "https://github.com/mutualmobile/react-native-barricade#readme",
   "main": "lib/index.js",
   "react-native": "src/index.tsx",
@@ -78,5 +78,20 @@
   "dependencies": {
     "lodash.clonedeep": "^4.5.0",
     "url-parse": "^1.5.10"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "example",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutualmobile/react-native-barricade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mutualmobile/react-native-barricade/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

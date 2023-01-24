@@ -4,7 +4,7 @@ import {
   PathEvaluationType,
   Request,
   RequestConfig,
-} from 'react-native-barricade';
+} from '@mutualmobile/react-native-barricade';
 
 import * as recentPageOne from '../mocks/recent/success/recentPage1.mock.json';
 import * as recentPageTwo from '../mocks/recent/success/recentPage2.mock.json';

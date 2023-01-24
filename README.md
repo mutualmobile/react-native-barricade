@@ -1,15 +1,15 @@
-# react-native-barricade
+# @mutualmobile/react-native-barricade
 
 A local server configurable at runtime to develop, test, and prototype your React Native app. Using just mock responses, Barricade can build the whole app without getting blocked by the unavailability of APIs.
 
 `Barricade` works by replacing the global `XMLHttpRequest` and `fetch` object with the `MockedXMLHttpRequest`. It blocks all outgoing network calls that are configured with Barricade and returns a registered local response without requiring any changes to the existing network code.
 
-## Why react-native-barricade?
+## Why Barricade?
 
 Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface to modify the selected mock response for a request at runtime.
 
 <p align="center">
-<img src="docs/media/demo.gif" alt="Example App" width="231" height="500" />
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/media/demo.gif?raw=true" alt="Example App" width="231" height="500" />
 </p>
 
 ## How does Barricade help?
@@ -28,10 +28,11 @@ Barricade also helps you test edge cases better during **unit and integration te
 
 ## Installation
 ```bash
-$ npm install --save react-native-barricade
+$ npm install --save @mutualmobile/react-native-barricade
 # --- or ---
-$ yarn add react-native-barricade
+$ yarn add @mutualmobile/react-native-barricade
 ```
+
 ## Usage
 
 **1. Create and start Barricade**
@@ -41,7 +42,7 @@ Create an instance of Barricade with the help of the `createBarricade` function 
 **:warning: Make sure to do this in index.js so that you can start Barricade before hitting any API.**
 
 ```tsx
-import { createBarricade } from 'react-native-barricade';
+import { createBarricade } from '@mutualmobile/react-native-barricade';
 
 const requestConfig = []; // Array of RequestConfigs for all the APIs that needs to be mocked
 const barricade = createBarricade(requestConfig);
@@ -57,7 +58,7 @@ Add `BarricadeView` to the root component (App.tsx) of your app. This shows the 
 **:warning: Make sure you add BarricadeView at the end so that it overlays the entire app.**
 
 ```tsx
-import { BarricadeView } from 'react-native-barricade';
+import { BarricadeView } from '@mutualmobile/react-native-barricade';
 
 const App = () => {
   return (
@@ -158,9 +159,9 @@ const successResponseHandler = (request: Request) => {
 Barricade comes packaged with an in-app interface that allows you to select  the network responses at runtime. For this to be visible, you need to add the `BarricadeView` mentioned in Step 2 under **Usage**.
 
 <p align="center">
-<img src="docs/screenshots/menu.png") alt="Developer Menu" width="231" height="500"/>
-<img src="docs/screenshots/list.png") alt="List View" width="231" height="500"/>
-<img src="docs/screenshots/detail.png") alt="Detail View" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/menu.png?raw=true" alt="Developer Menu" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/list.png?raw=true" alt="List View" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/detail.png?raw=true" alt="Detail View" width="231" height="500"/>
 </p>
 
 With this in place and the device shaken, you'll be able to see an option for `Barricade` in React Native's developer menu. On tapping the `Barricade` option, you’ll be redirected to a screen with the list of mocked APIs.
@@ -171,7 +172,7 @@ If you want to use Barricade in release mode, you will need to create a tappable
 
 App.tsx:
 ```tsx
-import { BarricadeView, showBarricadeView } from 'react-native-barricade';
+import { BarricadeView, showBarricadeView } from '@mutualmobile/react-native-barricade';
 
 const App = () => {
   return (
@@ -190,7 +191,7 @@ const App = () => {
 
 ## Store Submission
 
-react-native-barricade is safe to include with store builds (and could be used to support things like a demo mode for your app), but most of the time you will probably want to ensure that Barricade is disabled for store builds. You can achieve this by wrapping the creation of Barricade and BarricadeView inside an ENV check.
+Barricade is safe to include with store builds (and could be used to support things like a demo mode for your app), but most of the time you will probably want to ensure that Barricade is disabled for store builds. You can achieve this by wrapping the creation of Barricade and BarricadeView inside an ENV check.
 
 index.js:
 ```tsx
@@ -205,7 +206,7 @@ if (Env.enableBarricade) { // enableBarricade will be false in case of Productio
 
 App.tsx:
 ```tsx
-import { BarricadeView } from 'react-native-barricade';
+import { BarricadeView } from '@mutualmobile/react-native-barricade';
 import { Env } from './config';
 
 const App = () => {
@@ -218,9 +219,35 @@ const App = () => {
 };
 ```
 
+## Testing with jest
+
+Testing code which uses this library requires some setup since we might need to mock `XMLHttpRequest` and `fetch`.
+
+To add the mocks, create a file jestSetup.ts (or any other file name) containing the following code:
+
+```tsx
+jest.mock("@mutualmobile/react-native-barricade", () => {
+	return {
+		fetch: jest.fn(),
+		Headers: jest.fn(),
+		Request: jest.fn(),
+		Response: jest.fn(),
+		XMLHttpRequest: jest.fn()
+	};
+});
+```
+
+After that, we need to add the setup file in the jest config. You can add it under setupFiles option in your jest config file:
+
+```json
+{
+  "setupFiles": ["<rootDir>/jestSetup.ts"]
+}
+```
+
 ## Credits
 
-react-native-barricade was created by [Prajna Boloor](https://www.linkedin.com/in/prajna-boloor/) at [Mutual Mobile](http://www.mutualmobile.com).
+Barricade was created by [Prajna Boloor](https://www.linkedin.com/in/prajna-boloor/) at [Mutual Mobile](http://www.mutualmobile.com).
 
 A special shout-out to the React Nativeteam at Mutual Mobile for their feedback.
 

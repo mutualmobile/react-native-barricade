@@ -47,27 +47,22 @@ const BarricadeView = (props: BarricadeViewProps) => {
   const [visible, setVisibility] = useState(false);
 
   useEffect(() => {
-    DeviceEventEmitter.addListener(
-      EventType.ShowBarricadeView,
-      showBarricadeView,
+    DeviceEventEmitter.addListener(EventType.ShowBarricadeView, () =>
+      toggleBarricadeView(true),
     );
     return () => {
       DeviceEventEmitter.removeAllListeners(EventType.ShowBarricadeView);
     };
   }, []);
 
-  const showBarricadeView = () => {
-    setVisibility(true);
-  };
-
-  const hideBarricadeView = () => {
-    setVisibility(false);
+  const toggleBarricadeView = (value: boolean) => {
+    setVisibility(value);
   };
 
   return (
     <MMBarricadeView
       barricade={barricade}
-      onRequestClose={hideBarricadeView}
+      onRequestClose={() => toggleBarricadeView(false)}
       theme={theme}
       visible={visible}
     />

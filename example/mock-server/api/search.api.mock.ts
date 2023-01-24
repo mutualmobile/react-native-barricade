@@ -4,7 +4,7 @@ import {
   Request,
   PathEvaluationType,
   RequestConfig,
-} from 'react-native-barricade';
+} from '@mutualmobile/react-native-barricade';
 
 import * as searchPageOne from '../mocks/search/success/searchPage1.mock.json';
 import * as searchPageTwo from '../mocks/search/success/searchPage2.mock.json';

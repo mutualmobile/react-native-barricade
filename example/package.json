@@ -9,9 +9,10 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "preinstall": "rm -rf node_modules/",
-    "postinstall": "DESTINATION='node_modules/react-native-barricade' LIB_FILE=`cd .. && echo \\`pwd\\`/\\`npm pack\\`` && (rm -rf $DESTINATION || true) && mkdir $DESTINATION && tar -xvzf $LIB_FILE -C $DESTINATION --strip-components 1 && rm $LIB_FILE"
+    "postinstall": "DESTINATION='node_modules/@mutualmobile/react-native-barricade' LIB_FILE=`cd .. && echo \\`pwd\\`/\\`npm pack\\`` && (rm -rf $DESTINATION || true) && mkdir $DESTINATION && tar -xvzf $LIB_FILE -C $DESTINATION --strip-components 1 && rm $LIB_FILE"
   },
   "dependencies": {
+    "@mutualmobile/react-native-barricade": "../",
     "@react-native-community/netinfo": "^9.3.7",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
@@ -20,7 +21,6 @@
     "lodash.debounce": "^4.0.8",
     "react": "18.1.0",
     "react-native": "0.70.6",
-    "react-native-barricade": "../",
     "react-native-device-info": "^8.4.8",
     "react-native-localization": "^2.1.7",
     "react-native-safe-area-context": "^3.3.2",

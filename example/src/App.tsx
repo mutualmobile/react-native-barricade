@@ -1,7 +1,10 @@
+import {
+  BarricadeView,
+  showBarricadeView,
+} from '@mutualmobile/react-native-barricade';
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
-import { BarricadeView, showBarricadeView } from 'react-native-barricade';
 import { Provider } from 'react-redux';
 
 import { Colors, Images } from './assets';
