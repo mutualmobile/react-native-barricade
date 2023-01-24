@@ -12,6 +12,7 @@
   "files": [
     "lib",
     "src",
+    "!docs",
     "!.vscode",
     "!example",
     "!**/__tests__",
