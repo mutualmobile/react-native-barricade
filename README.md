@@ -1,29 +1,31 @@
 
 # react-native-barricade
 
-A runtime configurable local server to develop, test and prototype your react-native app. With just mock responses, the whole application can be built without being blocked due to unavailability of APIs. `Barricade` works by replacing the global `XMLHttpRequest` and `fetch` object with the `MockedXMLHttpRequest`. It blocks all outgoing network calls that are configured with Barricade and returns a registered local response without requiring any changes to the existing network code.
+A local server configurable at runtime to develop, test, and prototype your React Native app. Using just mock responses, Barricade can build the whole app without getting blocked by the unavailability of APIs.
+
+`Barricade` works by replacing the global `XMLHttpRequest` and `fetch` object with the `MockedXMLHttpRequest`. It blocks all outgoing network calls that are configured with Barricade and returns a registered local response without requiring any changes to the existing network code.
 
 # Why react-native-barricade?
 
-Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface for modifying which response will be returned for a request at runtime.
+Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface to modify the selected mock response for a request at runtime.
 
 <p align="center">
-<img src="docs/media/demo.gif") alt="Example App" width="231" height="500"/>
+<img src="docs/media/demo.gif" alt="Example App" width="231" height="500" />
 </p>
 
-# When to use?
+# How does Barricade help?
 
-During development, barricade is useful for easily exercising all edge cases of a feature while you are building it without needing to frequently adjust the live server state.
+During **development**, Barricade is useful for easily exercising all edge cases of a feature while you are building it without needing to frequently adjust the live server state.
 
-For unit tests and integration tests barricade allows you to easily toggle through each predefined response for a request so tests can cover edge cases thoroughly.
+Barricade also helps you test edge cases better during **unit and integration testing** as it can easily let you toggle each predefined response to a request.
 
 ## Features
 
 - Mock API responses.
-- Dynamically change mocked API responses at runtime.
-- Disable mocking API responses at runtime.
-- Support both android and iOS platforms.
-- Built-in typescript definitions.
+- Change mocked API responses at runtime.
+- Disable/Enable mocking API responses at runtime.
+- Support both Android and iOS platforms.
+- Built-in TypeScript definitions.
 
 ## Installation
 ```bash
@@ -33,27 +35,27 @@ $ yarn add react-native-barricade
 ```
 ## Usage
 
-**1. Create and Start Barricade**
+**1. Create and start Barricade**
 
-Create an instance of Barricade with the help of `createBarricade` function along with an array of `RequestConfig` as function argument.
+Create an instance of Barricade with the help of the `createBarricade` function along with an array of `RequestConfig` as its function argument.
 
-**:warning: Make sure to do this in index.js so that Barricade is created before hitting any API**
+**:warning: Make sure to do this in index.js so that you can start Barricade before hitting any API.**
 
 ```tsx
 import { createBarricade } from 'react-native-barricade';
 
 const requestConfig = []; // Array of RequestConfigs for all the APIs that needs to be mocked
 const barricade = createBarricade(requestConfig);
-barricade.start(); // Start the barricade
+barricade.start(); // Start the Barricade
 
 AppRegistry.registerComponent('App', () => App);
 ```
 
 **2. Add BarricadeView**
 
-Add `BarricadeView` to your root component(App.tsx) of your app. This shows the list of mocked APIs and is used to change the selected response at runtime.
+Add `BarricadeView` to the root component (App.tsx) of your app. This shows the list of mocked APIs and is used to change the selected response at runtime.
 
-**:warning: Make sure to add BarricadeView at the end so that it overlays the entire app**
+**:warning: Make sure you add BarricadeView at the end so that it overlays the entire app.**
 
 ```tsx
 import { BarricadeView } from 'react-native-barricade';
@@ -70,27 +72,27 @@ const App = () => {
 **BarricadeView:**  
 | Property              | Description                                                                                                                                                            | Type                      |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| **`theme`**           | Use this to select the preferred color scheme. It can be `dark` or `light` and by default its `light`.                                                                 | `ThemeType` / `undefined` |
+| **`theme`**           | Use this to select the preferred color scheme. It can be `dark` or `light`. This is optional and by default it's `light`.                                              | `ThemeType` / `undefined` |
 
 **3. Create RequestConfigs**
 
-We need to create a `RequestConfig` for each API that should be mocked. Then these need to be added to the list of request configs shown in step 1.
+Create a `RequestConfig` for each API you want to mock. Then, add these to the list of request configs shown in Step 1.
 
 **RequestConfig:**  
 | Property              | Description                                                                                                                                                            | Type                      |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| **`label`**           | String used to identify the request by the developer in BarricadeView.                                                                                                 | `string`                  |
+| **`label`**           | String used by developer to identify the request in BarricadeView.                                                                                                     | `string`                  |
 | **`method`**          | Request method type. It can be `Delete`, `Get`, `Head`, `Options`, `Patch`, `Post` or `Put`.                                                                           | `Method`                  |
 | **`pathEvaluation`**  | Data used to identify the current API triggered from the list of RequestConfigs.                                                                                       | `PathEvaluation`          |
 | **`responseHandler`** | List of mocked responses the current API can return with. By default, the first response from the list is selected.                                                    | `ResponseHandler[]`       |
-| **`delay`**           | Time in milliseconds the barricade needs to wait before responding with the mocked response. This is optional and it defaults to `400`.                                | `number` / `undefined`    |
+| **`delay`**           | The time (in milliseconds) Barricade needs to wait before responding with the mocked response. This is optional and by default it's `400`.                             | `number` / `undefined`    |
 
 **PathEvaluation:**  
 | Property              | Description                                                                                                                                                            | Type                      |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | **`path`**            | Request URL endpoint.                                                                                                                                                  | `string`                  |
 | **`type`**            | Type of evaluation that needs to be done on path/request to identify the RequestConfig. It can be `Callback`, `Include` or `Suffix`.                                   | `PathEvaluationType`      |
-| **`callback`**        | Function used to identify if this requestConfig needs to be used for resolving the current API with the help of `Request` argument.                                    | `function`                |
+| **`callback`**        | Function used to identify if this requestConfig needs to be used for resolving the current API with the help of the `Request` argument.                                | `function`                |
 
 **PathEvaluationType:**  
 | Enum Options          | Description                                                                                                                                                            | Type                      |
@@ -102,13 +104,13 @@ We need to create a `RequestConfig` for each API that should be mocked. Then the
 **ResponseHandler:**  
 | Property              | Description                                                                                                                                                            | Type                      |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| **`label`**           | String used to identify the response by the developer in BarricadeView.                                                                                                 | `string`                  |
-| **`handler`**         | Function that returns the mocked response for the current API call. It can also tweak the response with the help of the `Request` argument.                                | `function`                |
-| **`isSelected`**      | Used to identify the selected response from the `ResponseHandler[]`. This is optional and by default the first response from the list will be selected by Barricade.    | `boolean` / `undefined`   |
+| **`label`**           | String used by developer to identify the response in BarricadeView.                                                                                                    | `string`                  |
+| **`handler`**         | Function that returns the mocked response for the current API call. It can also tweak the response with the help of the `Request` argument.                            | `function`                |
+| **`isSelected`**      | Used to identify the selected response from the `ResponseHandler[]`. This is optional and by default Barricade selects the first response on the list.                 | `boolean` / `undefined`   |
 
 ## Example
 
-In this example, we will setup react-native-barricade to be able to respond to `flickr search` API with one of two possible responses.
+In this example, we will setup Barricade to be able to respond to the `flickr search` API with one of two possible responses.
 
 ```tsx
 const SearchApiRequestConfig: RequestConfig = {
@@ -137,7 +139,7 @@ const SearchApiRequestConfig: RequestConfig = {
 };
 ```
 
-Everytime we hit the above API, barricade executes the `successResponseHandler` function and returns the response data. This function will be useful in cases like below where we have to return the paginated response to the same API call.
+Everytime we hit the above API, Barricade executes the `successResponseHandler` function and returns the response data. This function will be useful in cases like the one below, where we have to return the paginated response to the same API call.
 
 ```tsx
 const successResponseHandler = (request: Request) => {
@@ -154,7 +156,7 @@ const successResponseHandler = (request: Request) => {
 
 ## Selection Interface
 
-Barricade comes with an in-app interface that can be presented to allow selection of network responses at runtime. For this to be visible, you need to add `BarricadeView` mentioned in Step 2 of **Usage**.
+Barricade comes packaged with an in-app interface that allows you to select  the network responses at runtime. For this to be visible, you need to add the `BarricadeView` mentioned in Step 2 under **Usage**.
 
 <p align="center">
 <img src="docs/screenshots/menu.png") alt="Developer Menu" width="231" height="500"/>
@@ -162,11 +164,11 @@ Barricade comes with an in-app interface that can be presented to allow selectio
 <img src="docs/screenshots/detail.png") alt="Detail View" width="231" height="500"/>
 </p>
 
-With this in place and the device is shaken, you will be able to see an option for `Barricade` in react-native's developer menu. On tapping the `Barricade` option you will be taken to the screen with a list of mocked APIs.
+With this in place and the device shaken, you'll be able to see an option for `Barricade` in React Native's developer menu. On tapping the `Barricade` option, you’ll be redirected to a screen with the list of mocked APIs.
 
-**:warning: The Developer Menu is disabled in release (production) builds**
+**:warning: The Developer Menu is disabled in release (production) builds.**
 
-If you want to use barricade in release mode, you will need to create a tappable text/button and call `showBarricadeView` on tapping the same.
+If you want to use Barricade in release mode, you will need to create a tappable text/button and onPress call `showBarricadeView`.
 
 App.tsx:
 ```tsx
@@ -176,7 +178,7 @@ const App = () => {
   return (
     <View>
       /* Rest of your app */
-      <Button onPress={showBarricadeView} title={"Open barricade view"}/>
+      <Button onPress={showBarricadeView} title={"Open Barricade view"}/>
       <BarricadeView />
     </View>
   );
@@ -184,12 +186,12 @@ const App = () => {
 ```
 
 **Note:** In BarricadeView, apart from changing the selected response for any of the listed APIs, we can also:
-- Disable/Enable barricade. This will stop mocking all the APIs and you can check the app with actual response at runtime.
+- Disable/Enable Barricade. This will stop/start mocking API calls and lets you check the app with the actual/mocked API responses at runtime.
 - Reset all the changes done to the list of selected responses.
 
 ## Store Submission
 
-react-native-barricade is safe to include with store builds (and could be used to support things like a demo mode for your app), but most of the time you will probably want to ensure that the barricade is disabled for store builds. You can achieve this by wrapping the creation of barricade and BarricadeView inside an ENV check.
+react-native-barricade is safe to include with store builds (and could be used to support things like a demo mode for your app), but most of the time you will probably want to ensure that Barricade is disabled for store builds. You can achieve this by wrapping the creation of Barricade and BarricadeView inside an ENV check.
 
 index.js:
 ```tsx
@@ -221,7 +223,7 @@ const App = () => {
 
 react-native-barricade was created by [Prajna Boloor](https://www.linkedin.com/in/prajna-boloor/) at [Mutual Mobile](http://www.mutualmobile.com).
 
-Credits also to the react-native team at Mutual Mobile for their feedback.
+A special shout-out to the React Nativeteam at Mutual Mobile for their feedback.
 
 ## License
 
