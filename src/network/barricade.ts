@@ -1,4 +1,4 @@
-//@ts-ignore
+// @ts-ignore
 import * as RNFetch from 'react-native/Libraries/Network/fetch';
 
 import { ObjectUtils, UrlUtils } from '../utils';
@@ -16,6 +16,7 @@ import { HttpStatusCodeText } from './http-codes';
 import { interceptor } from './interceptor';
 
 export class Barricade {
+  /** Boolean that indicates whether the Barricade is enabled/disabled. */
   running = false;
   private readonly _originalRequestConfig: RequestConfigForLib[] = [];
   private _requestConfig: RequestConfigForLib[] = [];
@@ -35,14 +36,18 @@ export class Barricade {
     this._nativeResponse = global.Response;
   }
 
-  set requestConfig(value: RequestConfigForLib[]) {
-    this._requestConfig = value;
-  }
-
+  /** Gets the registered RequestConfig with selected response data */
   get requestConfig() {
     return this._requestConfig;
   }
 
+  /**
+   * Checks and finds if there is a RequestConfig with a mocked response for the current API call.
+   * @param request Current API request made by the app.
+   * @param method Current API's request Method.
+   * @param url Current API's request URL.
+   * @returns Returns **ReqestConfig** when the current API is registered for mocking and returns **undefined** when it is not registered for mocking.
+   */
   private getCurrentRequestConfig(
     request: Request,
     method: Method,
@@ -65,31 +70,51 @@ export class Barricade {
     return requestConfig;
   }
 
-  private initRequestConfig(requests: RequestConfig[]) {
-    const updatedRequestConfig = requests.map<RequestConfig>(request => {
-      let selectedItem: ResponseHandler | undefined;
-      for (let i = 0; i < request.responseHandler.length; i++) {
-        if (selectedItem) {
-          request.responseHandler[i].isSelected = false;
-        } else if (request.responseHandler[i].isSelected) {
-          selectedItem = request.responseHandler[i];
-        } else if (i === request.responseHandler.length - 1) {
-          request.responseHandler[i].isSelected = false;
-          request.responseHandler[0].isSelected = true;
-          selectedItem = request.responseHandler[0];
-        } else {
-          request.responseHandler[i].isSelected = false;
-        }
+  /**
+   * Loops through the responseHandler for a RequestConfig and sets the data regrding the selected response for the request.
+   * By default the first item in the list is selected.
+   * @param request RequestConfig
+   * @returns formatted RequestConfigForLib
+   */
+  private getRequestConfigForLib(request: RequestConfig) {
+    let selectedItem: ResponseHandler | undefined;
+    for (let i = 0; i < request.responseHandler.length; i++) {
+      if (selectedItem) {
+        request.responseHandler[i].isSelected = false;
+      } else if (request.responseHandler[i].isSelected) {
+        selectedItem = request.responseHandler[i];
+      } else if (i === request.responseHandler.length - 1) {
+        request.responseHandler[i].isSelected = false;
+        request.responseHandler[0].isSelected = true;
+        selectedItem = request.responseHandler[0];
+      } else {
+        request.responseHandler[i].isSelected = false;
       }
-      const result = request as RequestConfigForLib;
-      result.selectedResponseLabel = selectedItem!.label;
+    }
+    const result = request as RequestConfigForLib;
+    result.selectedResponseLabel = selectedItem!.label;
 
-      return result;
-    });
-
-    this.requestConfig = updatedRequestConfig;
+    return result;
   }
 
+  /**
+   * Formats the RequestConfig[] to RequestConfigForLib[] and sets it to _requestConfig
+   * @param requests Array of RequestConfigs passed to be registered while creating an instance of Barricade.
+   */
+  private initRequestConfig(requests: RequestConfig[]) {
+    const updatedRequestConfig = requests.map<RequestConfig>(
+      this.getRequestConfigForLib,
+    );
+
+    this._requestConfig = updatedRequestConfig;
+  }
+
+  /**
+   * This method is called whenever an API request is sent and it will handle the request with mocked/actual response.
+   *
+   * **WARNING:** Do not use this method as its only for the barricade's internal purpose.
+   * @param request Current API request made by the app.
+   */
   handleRequest(request: Request) {
     const method = request._method.toUpperCase() as Method;
     const requestUrl = request._url;
@@ -114,6 +139,13 @@ export class Barricade {
     }
   }
 
+  /**
+   * Handles the current API request with the selected mocked response.
+   * @param request Current API request made by the app.
+   * @param requestConfig RequestConfig containing the mocked response.
+   * @param method Current API's request Method.
+   * @param url Current API's request URL.
+   */
   private handleMockedXMLHttpRequest(
     request: Request,
     requestConfig: RequestConfigForLib,
@@ -146,15 +178,19 @@ export class Barricade {
     }
   }
 
+  /**
+   * Handles the current API request with an actual API call by making use of _nativeXMLHttpRequest
+   * @param request Current API request made by the app.
+   */
   private handleNativeXMLHttpRequest(request: Request) {
     const xhr = new this._nativeXMLHttpRequest();
 
     const setResponseData = () => {
       request.setResponseData(
         xhr.status as keyof typeof HttpStatusCodeText,
-        //@ts-ignore
+        // @ts-ignore
         xhr._headers ?? {},
-        //@ts-ignore
+        // @ts-ignore
         xhr._response,
         xhr.responseURL,
       );
@@ -165,15 +201,15 @@ export class Barricade {
     };
 
     xhr.onerror = function () {
-      //@ts-ignore
+      // @ts-ignore
       request._hasError = xhr._hasError;
       setResponseData();
     };
 
     xhr.ontimeout = function () {
-      //@ts-ignore
+      // @ts-ignore
       request._hasError = xhr._hasError;
-      //@ts-ignore
+      // @ts-ignore
       request._timedOut = xhr._timedOut;
       setResponseData();
     };
@@ -207,10 +243,19 @@ export class Barricade {
     xhr.send(request._requestBody);
   }
 
+  /**
+   * Resets selected responses for all the registered request config to its default value.
+   */
   resetRequestConfig() {
     this._requestConfig = ObjectUtils.cloneDeep(this._originalRequestConfig);
   }
 
+  /**
+   *
+   * @param request Current API request made by the app
+   * @param responseData Mocked response that was selected for this API
+   * @param delay Time(in milliseconds) barricade needs to wait before responding with the mocked response
+   */
   private resolveRequest(
     request: Request,
     responseData: ResponseData,
@@ -230,6 +275,9 @@ export class Barricade {
     }, delay);
   }
 
+  /**
+   * Barricade starts intercepting all the API calls and mocking the registered requests
+   */
   start() {
     global.XMLHttpRequest = interceptor(this) as any;
     global.fetch = RNFetch.fetch;
@@ -239,6 +287,9 @@ export class Barricade {
     this.running = true;
   }
 
+  /**
+   * Barricade stops intercepting all the API calls and mocking the registered requests
+   */
   shutdown() {
     global.XMLHttpRequest = this._nativeXMLHttpRequest;
     global.fetch = this._nativeFetch;

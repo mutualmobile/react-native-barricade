@@ -24,7 +24,7 @@ const RequestDetail = (props: RequestDetailProps): JSX.Element => {
   const { barricade, selectedListItemIndex, onBackPressed } = props;
   const { themeColorStyle } = useThemedColor();
 
-  const onDeailItemPressed = (item: ResponseHandler, index: number) => {
+  const onDetailItemPressed = (item: ResponseHandler, index: number) => {
     if (!item.isSelected) {
       const requestConfig = barricade.requestConfig[selectedListItemIndex!];
       requestConfig.responseHandler.map((responseHandler, i) => {
@@ -43,7 +43,7 @@ const RequestDetail = (props: RequestDetailProps): JSX.Element => {
     return (
       <TouchableOpacity
         style={[styles.listItemContainer, themeColorStyle.border]}
-        onPress={() => onDeailItemPressed(item, index)}>
+        onPress={() => onDetailItemPressed(item, index)}>
         <Text style={[styles.label, themeColorStyle.textDark]}>
           {item.label}
         </Text>
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   listItemContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: hScale(20),
@@ -88,8 +89,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   label: {
+    flex: 1,
     fontSize: hScale(18),
     fontWeight: '400',
+    marginEnd: hScale(10),
   },
   icon: {
     fontSize: hScale(18),

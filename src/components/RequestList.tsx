@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   listItemContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: hScale(20),
@@ -86,10 +87,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   label: {
+    flex: 1,
     fontSize: hScale(18),
     fontWeight: '400',
+    flexWrap: 'wrap',
+    textAlign: 'left',
   },
   value: {
+    flex: 1,
+    flexWrap: 'wrap',
+    textAlign: 'right',
     fontSize: hScale(16),
   },
   icon: {

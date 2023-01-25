@@ -40,6 +40,7 @@ const errorResponseHandler = () => {
 };
 
 const loadMoreResponseHandler = (request: Request) => {
+  // Here we can make use of many other properties in Request like headers/params to return mocked response.
   const { page } = request.params ?? {};
 
   if (page === '1') {
@@ -62,7 +63,11 @@ const RecentApiRequestConfig: RequestConfig = {
   method: Method.Get,
   pathEvaluation: {
     path: apiConfig.photos.recent,
-    type: PathEvaluationType.Includes,
+    type: PathEvaluationType.Callback,
+    callback: (request: Request) => {
+      // Here we can make use of many other properties in Request like headers / params to identify the API call.
+      return request._url.includes(apiConfig.photos.recent);
+    },
   },
   responseHandler: [
     {
@@ -83,7 +88,7 @@ const RecentApiRequestConfig: RequestConfig = {
       handler: loadMoreResponseHandler,
     },
   ],
-  delay: 5000,
+  delay: 3000,
 };
 
 export { RecentApiRequestConfig };

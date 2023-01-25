@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: hScale(20),
     fontWeight: 'bold',
-    marginHorizontal: hScale(60),
+    marginHorizontal: hScale(70),
     left: 0,
     right: 0,
   },

@@ -34,7 +34,7 @@ const AppContent = () => {
       />
       <AppRouter />
       {!__DEV__ && Env.enableBarricade && (
-        <IconButton icon={Images.logo} onPress={showBarricadeView} />
+        <IconButton icon={Images.logo} onPress={showBarricadeView} /> // This is optional and is required only when you want to mock API in release mode.
       )}
       {Env.enableBarricade && <BarricadeView />}
     </>

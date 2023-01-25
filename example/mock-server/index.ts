@@ -8,5 +8,5 @@ export const mockServer = () => {
     RecentApiRequestConfig,
     SearchApiRequestConfig,
   ]);
-  barricade.start();
+  barricade.start(); // We can all call this like - getBarricadeInstance()?.start();
 };

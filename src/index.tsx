@@ -19,6 +19,11 @@ import { ThemeType } from './theme';
 
 let barricade: Barricade | undefined;
 
+/**
+ * Creates an instance of Barricade and initializes the array of RequestConfig passed to the function.
+ * @param requests : Array of RequestConfig. Each item in this array should contain configuration of each API that you want to mock.
+ * @returns Instance of Barricade that was created.
+ */
 const createBarricade = (requests: RequestConfig[]) => {
   barricade = new Barricade(requests);
   if (__DEV__) {
@@ -30,10 +35,18 @@ const createBarricade = (requests: RequestConfig[]) => {
   return barricade;
 };
 
+/**
+ * Get the instance of Barricade that was created using createBarricade function
+ * @returns Instance of Barricade
+ */
 const getBarricadeInstance = () => {
   return barricade;
 };
 
+/**
+ * Shows the BarricadeView component. This is useful when you want use Barricade in release mode as Developer menu is disabled.
+ * Call this function on any text/button press.
+ */
 const showBarricadeView = () => {
   DeviceEventEmitter.emit(EventType.ShowBarricadeView);
 };
@@ -42,6 +55,11 @@ export type BarricadeViewProps = {
   theme?: ThemeType;
 };
 
+/**
+ * Component used to display the mocked Request and Response list for the developer to view or change at runtime.
+ * @param props.theme Use this to select the preferred color scheme. It can be `dark` or `light`. This is optional and by default it's `light`.
+ * @returns BarricadeView component.
+ */
 const BarricadeView = (props: BarricadeViewProps) => {
   const { theme = 'light' } = props;
   const [visible, setVisibility] = useState(false);
