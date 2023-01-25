@@ -1,5 +1,6 @@
 jest.useFakeTimers();
 
+import { Method } from '../../network/barricade.types';
 import { HttpStatusCode } from '../../network/http-codes';
 import {
   asyncResponseApiConfig,
@@ -15,7 +16,7 @@ import {
   successResponse,
 } from '../data/request-test-data';
 
-test('given that an instance of Barricade is created, should format and set requestConfig', () => {
+test('given that an instance of Barricade is created with requestConfig, should format and set requestConfig', () => {
   const firstConfig = {
     ...firstApiConfig,
     responseHandler: [
@@ -38,7 +39,7 @@ test('given that an instance of Barricade is created, should format and set requ
       { label: 'Error', isSelected: false, handler: jest.fn() },
     ],
   };
-  const formattedSeconfConfig = {
+  const formattedSecondConfig = {
     ...secondApiConfig,
     selectedResponseLabel: 'Error',
     responseHandler: [
@@ -51,10 +52,102 @@ test('given that an instance of Barricade is created, should format and set requ
   const barricade = new Barricade.Barricade([firstConfig, secondConfig]);
 
   expect(JSON.stringify(barricade.requestConfig)).toEqual(
-    JSON.stringify([formattedFirstConfig, formattedSeconfConfig]),
+    JSON.stringify([formattedFirstConfig, formattedSecondConfig]),
   );
 
   expect.assertions(1);
+});
+
+test('given that an instance of Barricade is created without requestConfig, requestConfig should be empty', () => {
+  const Barricade = require('../../network/barricade');
+  const barricade = new Barricade.Barricade();
+
+  expect(barricade.requestConfig).toEqual([]);
+
+  expect.assertions(1);
+});
+
+test('given that an instance of Barricade is created without requestConfig, when registerRequest is called should format and set requestConfig', () => {
+  const firstConfig = {
+    ...firstApiConfig,
+    responseHandler: [
+      { label: 'Success', handler: jest.fn() },
+      { label: 'Error', handler: jest.fn() },
+    ],
+  };
+  const formattedFirstConfig = {
+    ...firstApiConfig,
+    selectedResponseLabel: 'Success',
+    responseHandler: [
+      { label: 'Success', isSelected: true, handler: jest.fn() },
+      { label: 'Error', isSelected: false, handler: jest.fn() },
+    ],
+  };
+
+  const Barricade = require('../../network/barricade');
+  const barricade = new Barricade.Barricade();
+  barricade.registerRequest(firstConfig);
+
+  expect(JSON.stringify(barricade.requestConfig)).toEqual(
+    JSON.stringify([formattedFirstConfig]),
+  );
+  expect.assertions(1);
+});
+
+describe('given that Barricade is created and requestConfig is set,', () => {
+  const firstConfig = {
+    ...firstApiConfig,
+    responseHandler: [
+      { label: 'Success', handler: jest.fn() },
+      { label: 'Error', handler: jest.fn() },
+    ],
+  };
+  const secondConfig = {
+    ...secondApiConfig,
+    responseHandler: [
+      { label: 'Success', handler: jest.fn() },
+      { label: 'Error', isSelected: true, handler: jest.fn() },
+    ],
+  };
+  const formattedFirstConfig = {
+    ...firstApiConfig,
+    selectedResponseLabel: 'Success',
+    responseHandler: [
+      { label: 'Success', isSelected: true, handler: jest.fn() },
+      { label: 'Error', isSelected: false, handler: jest.fn() },
+    ],
+  };
+  const formattedSecondConfig = {
+    ...secondApiConfig,
+    selectedResponseLabel: 'Error',
+    responseHandler: [
+      { label: 'Success', isSelected: false, handler: jest.fn() },
+      { label: 'Error', isSelected: true, handler: jest.fn() },
+    ],
+  };
+  let barricade;
+  beforeEach(() => {
+    const Barricade = require('../../network/barricade');
+    barricade = new Barricade.Barricade([firstConfig, secondConfig]);
+  });
+
+  test('when unregisterRequest is called with a config in requestConfig, should remove config from requestConfig', () => {
+    barricade.unregisterRequest(secondConfig);
+
+    expect(JSON.stringify(barricade.requestConfig)).toEqual(
+      JSON.stringify([formattedFirstConfig]),
+    );
+    expect.assertions(1);
+  });
+
+  test('when unregisterRequest is called with a config not in requestConfig, should not remove config from requestConfig', () => {
+    barricade.unregisterRequest({ ...secondConfig, method: Method.Put });
+
+    expect(JSON.stringify(barricade.requestConfig)).toEqual(
+      JSON.stringify([formattedFirstConfig, formattedSecondConfig]),
+    );
+    expect.assertions(1);
+  });
 });
 
 describe('given that start function is called,', () => {
@@ -201,7 +294,7 @@ describe('given that shutdown function is called,', () => {
   });
 });
 
-test('given that inital requestConfig was updated, should reset requestConfig, when resetRequestConfig is called', () => {
+test('given that initial requestConfig was updated, should reset requestConfig, when resetRequestConfig is called', () => {
   const firstConfig = {
     ...firstApiConfig,
     responseHandler: [
@@ -224,7 +317,7 @@ test('given that inital requestConfig was updated, should reset requestConfig, w
       { label: 'Error', isSelected: false, handler: jest.fn() },
     ],
   };
-  const formattedSeconfConfig = {
+  const formattedSecondConfig = {
     ...secondApiConfig,
     selectedResponseLabel: 'Error',
     responseHandler: [
@@ -244,23 +337,23 @@ test('given that inital requestConfig was updated, should reset requestConfig, w
   barricade.resetRequestConfig();
 
   expect(JSON.stringify(barricade.requestConfig)).toEqual(
-    JSON.stringify([formattedFirstConfig, formattedSeconfConfig]),
+    JSON.stringify([formattedFirstConfig, formattedSecondConfig]),
   );
   expect.assertions(1);
 });
 
 describe('given that barricade was started and handleRequest is called,', () => {
   let barricade;
-  const mockCreateNativeXMLHttpRequest = jest.fn();
+  const mockHandleNativeXMLHttpRequest = jest.fn();
   beforeEach(() => {
     jest.resetModules();
     const Barricade = require('../../network/barricade');
     barricade = new Barricade.Barricade([
-      firstApiConfig,
-      secondApiConfig,
-      thirdApiConfig,
+      { ...firstApiConfig },
+      { ...secondApiConfig },
+      { ...thirdApiConfig },
     ]);
-    barricade.handleNativeXMLHttpRequest = mockCreateNativeXMLHttpRequest;
+    barricade.handleNativeXMLHttpRequest = mockHandleNativeXMLHttpRequest;
 
     barricade.start();
   });
@@ -268,12 +361,26 @@ describe('given that barricade was started and handleRequest is called,', () => 
   afterEach(() => {
     jest.clearAllMocks();
     barricade.shutdown();
+    barricade = undefined;
   });
 
   test('when an API which is not in requestConfig is triggered, should trigger API with nativeXMLHttpRequest', () => {
     barricade.handleRequest(mockApiRequest);
 
-    expect(mockCreateNativeXMLHttpRequest).toHaveBeenCalledWith(mockApiRequest);
+    expect(mockHandleNativeXMLHttpRequest).toHaveBeenCalledWith(mockApiRequest);
+    expect.assertions(1);
+  });
+
+  test('when an API which is in requestConfig which is disabled is triggered, should trigger API with nativeXMLHttpRequest', () => {
+    const request = getCustomMockApiRequest({
+      _method: firstApiConfig.method,
+      _url: firstApiConfig.pathEvaluation.path,
+    });
+    barricade.requestConfig[0].disabled = true;
+
+    barricade.handleRequest(request);
+
+    expect(mockHandleNativeXMLHttpRequest).toHaveBeenCalledWith(request);
     expect.assertions(1);
   });
 
@@ -286,7 +393,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+      expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
       expect(barricade.resolveRequest).toHaveBeenCalledWith(
         request,
         successResponse,
@@ -303,7 +410,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).toHaveBeenCalledWith(request);
+      expect(mockHandleNativeXMLHttpRequest).toHaveBeenCalledWith(request);
       expect(barricade.resolveRequest).not.toHaveBeenCalled();
       expect.assertions(2);
     });
@@ -318,7 +425,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+      expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
       expect(barricade.resolveRequest).toHaveBeenCalledWith(
         request,
         errorResponse,
@@ -335,7 +442,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).toHaveBeenCalledWith(request);
+      expect(mockHandleNativeXMLHttpRequest).toHaveBeenCalledWith(request);
       expect(barricade.resolveRequest).not.toHaveBeenCalled();
       expect.assertions(2);
     });
@@ -354,7 +461,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+      expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
       expect(barricade.resolveRequest).toHaveBeenCalledWith(
         request,
         successResponse,
@@ -375,7 +482,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
       barricade.resolveRequest = jest.fn();
       barricade.handleRequest(request);
 
-      expect(mockCreateNativeXMLHttpRequest).toHaveBeenCalledWith(request);
+      expect(mockHandleNativeXMLHttpRequest).toHaveBeenCalledWith(request);
       expect(barricade.resolveRequest).not.toHaveBeenCalled();
       expect.assertions(2);
     });
@@ -394,7 +501,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
     barricade.resolveRequest = jest.fn();
     barricade.handleRequest(request);
 
-    expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+    expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
     expect(barricade.resolveRequest).toHaveBeenCalledWith(
       request,
       successResponse,
@@ -418,7 +525,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
 
     await jest.advanceTimersByTime(3000);
 
-    expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+    expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
     expect(barricade.resolveRequest).toHaveBeenCalledWith(
       request,
       successResponse,
@@ -441,7 +548,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
 
     await jest.advanceTimersByTime(3000);
 
-    expect(mockCreateNativeXMLHttpRequest).not.toHaveBeenCalled();
+    expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
     expect(barricade.handleMockedXMLHttpRequest).toThrow(
       new Error(
         `Barricade intercepted undefined(undefined) API and threw an error - Cannot read properties of undefined (reading 'responseHandler').`,

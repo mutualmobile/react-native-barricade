@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 
+import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { RequestList } from '../../components/RequestList';
 import { Barricade } from '../../network/barricade';
@@ -20,7 +21,20 @@ afterEach(() => {
   barricade.shutdown();
 });
 
-test('should match RequestList snapshot', () => {
+test('given that all APIs are enabled, should match RequestList snapshot', () => {
+  const tree = renderer.create(
+    <RequestList
+      barricade={barricade}
+      onDonePressed={jest.fn}
+      onListItemPressed={jest.fn}
+    />,
+  );
+  expect(tree).toMatchSnapshot();
+  expect.assertions(1);
+});
+
+test('given that one API is disabled, should match RequestList snapshot', () => {
+  barricade.requestConfig[0].disabled = true;
   const tree = renderer.create(
     <RequestList
       barricade={barricade}
@@ -80,7 +94,7 @@ test('when a list item is pressed, should call onListItemPressed', async () => {
   const instance = tree.root;
   await act(() => {
     const findAllByTestID = instance.findAll(
-      el => el.props.testID === 'listItem0',
+      el => el.props.testID === 'requestListItem0',
     );
 
     findAllByTestID[0].props.onPress();
@@ -88,4 +102,71 @@ test('when a list item is pressed, should call onListItemPressed', async () => {
 
   expect(onListItemPressed).toHaveBeenCalled();
   expect.assertions(1);
+});
+
+describe('given that Barricade is enabled,', () => {
+  test('should match snapshot', () => {
+    const tree = renderer.create(
+      <RequestList
+        barricade={barricade}
+        onDonePressed={jest.fn}
+        onListItemPressed={jest.fn}
+      />,
+    );
+    expect(tree).toMatchSnapshot();
+    expect.assertions(1);
+  });
+
+  test('when "Disable barricade" button is pressed, should disable barricade', async () => {
+    barricade.shutdown = jest.fn();
+    const tree = renderer.create(
+      <RequestList
+        barricade={barricade}
+        onDonePressed={jest.fn}
+        onListItemPressed={jest.fn}
+      />,
+    );
+    const instance = tree.root;
+    await act(async () => {
+      await instance.findByType(Footer).props.onPress();
+    });
+
+    expect(barricade.shutdown).toHaveBeenCalled();
+    expect.assertions(1);
+  });
+});
+
+describe('given that Barricade is disabled,', () => {
+  test('should match snapshot', () => {
+    barricade.shutdown();
+    const tree = renderer.create(
+      <RequestList
+        barricade={barricade}
+        onDonePressed={jest.fn}
+        onListItemPressed={jest.fn}
+      />,
+    );
+
+    expect(tree).toMatchSnapshot();
+    expect.assertions(1);
+  });
+
+  test('when "Enable barricade" button is pressed, should enable barricade', async () => {
+    barricade.shutdown();
+    barricade.start = jest.fn();
+    const tree = renderer.create(
+      <RequestList
+        barricade={barricade}
+        onDonePressed={jest.fn}
+        onListItemPressed={jest.fn}
+      />,
+    );
+    const instance = tree.root;
+    await act(async () => {
+      await instance.findByType(Footer).props.onPress();
+    });
+
+    expect(barricade.start).toHaveBeenCalledTimes(1);
+    expect.assertions(1);
+  });
 });

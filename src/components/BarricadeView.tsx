@@ -42,7 +42,10 @@ export const BarricadeView = (props: BarricadeViewProps) => {
   const renderContent = () => {
     if (!barricade) {
       return;
-    } else if (viewType === ViewType.List) {
+    } else if (
+      viewType === ViewType.List ||
+      typeof selectedListItemIndex === 'undefined'
+    ) {
       return (
         <RequestList
           barricade={barricade}

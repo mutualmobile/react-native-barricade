@@ -28,8 +28,31 @@ const RequestList = (props: RequestListProps): JSX.Element => {
   const [refreshList, setRefreshList] = useState(0);
 
   const onResetPressed = () => {
-    barricade?.resetRequestConfig();
+    barricade.resetRequestConfig();
     setRefreshList(Math.random());
+  };
+
+  const onFooterPressed = () => {
+    barricade.running ? barricade.shutdown() : barricade.start();
+    setRefreshList(Math.random());
+  };
+
+  const renderSelectedResponse = (item: RequestConfigForLib) => {
+    return (
+      <Text style={[styles.value, themeColorStyle.textLight]}>
+        {`${item.selectedResponseLabel} `}
+        <Text
+          style={[
+            styles.circleIcon,
+            item.disabled ? themeColorStyle.error : themeColorStyle.success,
+          ]}>
+          {Unicode.Circle}
+        </Text>
+        <Text style={[styles.rightIcon, themeColorStyle.textLight]}>
+          {` ${Unicode.ChevronRight}`}
+        </Text>
+      </Text>
+    );
   };
 
   const renderListItem = ({
@@ -38,18 +61,13 @@ const RequestList = (props: RequestListProps): JSX.Element => {
   }: ListRenderItemInfo<RequestConfigForLib>) => {
     return (
       <TouchableOpacity
-        testID={`listItem${index}`}
+        testID={`requestListItem${index}`}
         style={[styles.listItemContainer, themeColorStyle.border]}
         onPress={() => onListItemPressed(index)}>
         <Text style={[styles.label, themeColorStyle.textDark]}>
           {item.label}
         </Text>
-        <Text style={[styles.value, themeColorStyle.textLight]}>
-          {item.selectedResponseLabel}{' '}
-          <Text style={[styles.icon, themeColorStyle.textLight]}>
-            {Unicode.ChevronRight}
-          </Text>
-        </Text>
+        {renderSelectedResponse(item)}
       </TouchableOpacity>
     );
   };
@@ -64,11 +82,19 @@ const RequestList = (props: RequestListProps): JSX.Element => {
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={[styles.listContainer, themeColorStyle.surface]}
-        data={barricade?.requestConfig}
+        data={barricade.requestConfig}
         renderItem={renderListItem}
         extraData={refreshList}
       />
-      <Footer barricade={barricade} />
+      <Footer
+        onPress={onFooterPressed}
+        title={
+          barricade.running ? Strings.DisableBarricade : Strings.EnableBarricade
+        }
+        titleStyle={
+          barricade.running ? themeColorStyle.error : themeColorStyle.primary
+        }
+      />
     </View>
   );
 };
@@ -99,7 +125,10 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: hScale(16),
   },
-  icon: {
+  circleIcon: {
+    fontSize: hScale(12),
+  },
+  rightIcon: {
     fontSize: hScale(18),
   },
 });

@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import {
+  NativeSyntheticEvent,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-import { Strings } from '../constants';
-import { Barricade } from '../network';
 import { useThemedColor } from '../theme';
 import { hScale } from '../utils';
 
 export type FooterProps = {
-  barricade: Barricade;
+  onPress?: (event: NativeSyntheticEvent<any>) => void;
+  title: string;
+  titleStyle: TextStyle;
 };
 
 const Footer = (props: FooterProps): JSX.Element => {
-  const { barricade } = props;
+  const { onPress, title, titleStyle } = props;
   const { themeColorStyle } = useThemedColor();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [refreshList, setRefreshList] = useState(0);
-
-  const onButtonPressed = () => {
-    barricade.running ? barricade.shutdown() : barricade.start();
-    setRefreshList(Math.random());
-  };
 
   return (
     <View
@@ -28,16 +28,9 @@ const Footer = (props: FooterProps): JSX.Element => {
         themeColorStyle.background,
         themeColorStyle.border,
       ]}>
-      <TouchableOpacity onPress={onButtonPressed} style={styles.footer}>
-        <Text
-          numberOfLines={1}
-          style={[
-            styles.title,
-            barricade.running ? themeColorStyle.error : themeColorStyle.primary,
-          ]}>
-          {barricade.running
-            ? Strings.DisableBarricade
-            : Strings.EnableBarricade}
+      <TouchableOpacity onPress={onPress} style={styles.footer}>
+        <Text numberOfLines={1} style={[styles.title, titleStyle]}>
+          {title}
         </Text>
       </TouchableOpacity>
     </View>

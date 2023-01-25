@@ -37,14 +37,14 @@ $ yarn add @mutualmobile/react-native-barricade
 
 **1. Create and start Barricade**
 
-Create an instance of Barricade with the help of the `createBarricade` function along with an array of `RequestConfig` as its function argument.
+Create an instance of Barricade with the help of the `createBarricade` function. While calling this function, you can pass an array of `RequestConfig`(optional) to register the request configs. You can also register a request config later by making use of `registerRequest` method on the barricade instance.
 
 **:warning: Make sure to do this in index.js so that you can start Barricade before hitting any API.**
 
 ```tsx
 import { createBarricade } from '@mutualmobile/react-native-barricade';
 
-const requestConfig = []; // Array of RequestConfigs for all the APIs that needs to be mocked
+const requestConfig = []; // Optional: Array of RequestConfigs for all the APIs that needs to be mocked
 const barricade = createBarricade(requestConfig);
 barricade.start(); // Start the Barricade
 
@@ -76,7 +76,25 @@ const App = () => {
 
 **3. Create RequestConfigs**
 
-Create a `RequestConfig` for each API you want to mock. Then, add these to the list of request configs shown in Step 1.
+Create a `RequestConfig` for each API you want to mock. Then, add these to the list of request configs shown in Step 1 or register them individually by calling the `registerRequest` method as shown below.
+
+```tsx
+import { getBarricadeInstance } from '@mutualmobile/react-native-barricade';
+
+const apiRequestConfig = {} // RequestConfig for a particular API that you wish to mock.
+getBarricadeInstance()?.registerRequest(apiRequestConfig);
+```
+
+**:warning: Make sure to call the `registerRequest` method only after barricade instance is created.**
+
+In case you want to unregister a config programmatically, you can do this by calling the `unregisterRequest` method similar to the registerRequest method.
+
+```tsx
+import { getBarricadeInstance } from '@mutualmobile/react-native-barricade';
+
+const apiRequestConfig = {} // RequestConfig object that was previously used for registering
+getBarricadeInstance()?.unregisterRequest(apiRequestConfig);
+```
 
 **RequestConfig:**  
 | Property              | Description                                                                                                                                                            | Type                      |
@@ -86,6 +104,7 @@ Create a `RequestConfig` for each API you want to mock. Then, add these to the l
 | **`pathEvaluation`**  | Data used to identify the current API triggered from the list of RequestConfigs.                                                                                       | `PathEvaluation`          |
 | **`responseHandler`** | List of mocked responses the current API can return with. By default, the first response from the list is selected.                                                    | `ResponseHandler[]`       |
 | **`delay`**           | The time (in milliseconds) Barricade needs to wait before responding with the mocked response. This is optional and by default it's `400`.                             | `number` / `undefined`    |
+| **`disabled`**        | Boolean used to enable/disable mocking of current API. This is optional and by default it's `undefined`.                                                               | `boolean` / `undefined`   |
 
 **PathEvaluation:**  
 | Property              | Description                                                                                                                                                            | Type                      |
@@ -159,9 +178,9 @@ const successResponseHandler = (request: Request) => {
 Barricade comes packaged with an in-app interface that allows you to select  the network responses at runtime. For this to be visible, you need to add the `BarricadeView` mentioned in Step 2 under **Usage**.
 
 <p align="center">
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/menu.png?raw=true" alt="Developer Menu" width="231" height="500"/>
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/list.png?raw=true" alt="List View" width="231" height="500"/>
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/detail.png?raw=true" alt="Detail View" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/developer-menu.png?raw=true" alt="Developer Menu" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/request-list.png?raw=true" alt="List View" width="231" height="500"/>
+<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/response-list.png?raw=true" alt="Detail View" width="231" height="500"/>
 </p>
 
 With this in place and the device shaken, you'll be able to see an option for `Barricade` in React Native's developer menu. On tapping the `Barricade` option, you’ll be redirected to a screen with the list of mocked APIs.
@@ -186,7 +205,8 @@ const App = () => {
 ```
 
 **Note:** In BarricadeView, apart from changing the selected response for any of the listed APIs, we can also:
-- Disable/Enable Barricade. This will stop/start mocking API calls and lets you check the app with the actual/mocked API responses at runtime.
+- Disable/Enable Barricade. This will stop/start mocking all the registered API calls and lets you check the app with the actual/mocked API responses at runtime.
+- Disable/Enable API Mock. This will stop/start mocking the current API calls and lets you check the app with the actual/mocked API response at runtime.
 - Reset all the changes done to the list of selected responses.
 
 ## Store Submission

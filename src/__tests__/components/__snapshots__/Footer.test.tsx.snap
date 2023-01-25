@@ -1,64 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`given that Barricade is disabled, given that Barricade is disabled, should match Footer snapshot 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "borderTopWidth": 1,
-        "height": 50,
-      },
-      Object {
-        "backgroundColor": "#EBEBEB",
-      },
-      Object {
-        "borderColor": "#DEDEDE",
-      },
-    ]
-  }
->
-  <View
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-        "marginHorizontal": 24,
-        "opacity": 1,
-      }
-    }
-  >
-    <Text
-      numberOfLines={1}
-      style={
-        Array [
-          Object {
-            "fontSize": 36,
-            "textAlign": "center",
-          },
-          Object {
-            "color": "#007aa3",
-          },
-        ]
-      }
-    >
-      Enable Barricade
-    </Text>
-  </View>
-</View>
-`;
-
-exports[`given that Barricade is enabled, should match Footer snapshot 1`] = `
+exports[`should match Footer snapshot 1`] = `
 <View
   style={
     Array [

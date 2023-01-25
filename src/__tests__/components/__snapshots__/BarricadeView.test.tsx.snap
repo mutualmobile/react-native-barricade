@@ -221,6 +221,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
                   "paddingVertical": 19.714285714285715,
                 }
               }
+              testID="responseListItem0"
             >
               <Text
                 style={
@@ -282,6 +283,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
                   "paddingVertical": 19.714285714285715,
                 }
               }
+              testID="responseListItem1"
             >
               <Text
                 style={
@@ -304,6 +306,61 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           </View>
         </View>
       </RCTScrollView>
+      <View
+        style={
+          Array [
+            Object {
+              "borderTopWidth": 1,
+              "height": 50,
+            },
+            Object {
+              "backgroundColor": "#181818",
+            },
+            Object {
+              "borderColor": "#69696D",
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+              "marginHorizontal": 24,
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "fontSize": 36,
+                  "textAlign": "center",
+                },
+                Object {
+                  "color": "#EE0003",
+                },
+              ]
+            }
+          >
+            Disable API Mock
+          </Text>
+        </View>
+      </View>
     </View>
   </RCTSafeAreaView>
 </Modal>
@@ -597,7 +654,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem0"
+              testID="requestListItem0"
             >
               <Text
                 style={
@@ -632,8 +689,21 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   ]
                 }
               >
-                Success
-                 
+                Success 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -646,7 +716,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>
@@ -678,7 +748,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem1"
+              testID="requestListItem1"
             >
               <Text
                 style={
@@ -713,8 +783,21 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   ]
                 }
               >
-                Error
-                 
+                Error 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -727,7 +810,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>
@@ -759,7 +842,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem2"
+              testID="requestListItem2"
             >
               <Text
                 style={
@@ -794,8 +877,21 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   ]
                 }
               >
-                Success
-                 
+                Success 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -808,7 +904,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>
@@ -1072,6 +1168,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
                   "paddingVertical": 19.714285714285715,
                 }
               }
+              testID="responseListItem0"
             >
               <Text
                 style={
@@ -1133,6 +1230,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
                   "paddingVertical": 19.714285714285715,
                 }
               }
+              testID="responseListItem1"
             >
               <Text
                 style={
@@ -1155,6 +1253,61 @@ exports[`given that theme is light and detail view is selected, should match Bar
           </View>
         </View>
       </RCTScrollView>
+      <View
+        style={
+          Array [
+            Object {
+              "borderTopWidth": 1,
+              "height": 50,
+            },
+            Object {
+              "backgroundColor": "#EBEBEB",
+            },
+            Object {
+              "borderColor": "#DEDEDE",
+            },
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+              "marginHorizontal": 24,
+              "opacity": 1,
+            }
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "fontSize": 36,
+                  "textAlign": "center",
+                },
+                Object {
+                  "color": "#EE0003",
+                },
+              ]
+            }
+          >
+            Disable API Mock
+          </Text>
+        </View>
+      </View>
     </View>
   </RCTSafeAreaView>
 </Modal>
@@ -1448,7 +1601,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem0"
+              testID="requestListItem0"
             >
               <Text
                 style={
@@ -1483,8 +1636,21 @@ exports[`given that theme is light and list view is selected, should match Barri
                   ]
                 }
               >
-                Success
-                 
+                Success 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -1497,7 +1663,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>
@@ -1529,7 +1695,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem1"
+              testID="requestListItem1"
             >
               <Text
                 style={
@@ -1564,8 +1730,21 @@ exports[`given that theme is light and list view is selected, should match Barri
                   ]
                 }
               >
-                Error
-                 
+                Error 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -1578,7 +1757,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>
@@ -1610,7 +1789,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                   "paddingVertical": 19.714285714285715,
                 }
               }
-              testID="listItem2"
+              testID="requestListItem2"
             >
               <Text
                 style={
@@ -1645,8 +1824,21 @@ exports[`given that theme is light and list view is selected, should match Barri
                   ]
                 }
               >
-                Success
-                 
+                Success 
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 24,
+                      },
+                      Object {
+                        "color": "#00EA6E",
+                      },
+                    ]
+                  }
+                >
+                  ●
+                </Text>
                 <Text
                   style={
                     Array [
@@ -1659,7 +1851,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                     ]
                   }
                 >
-                  ›
+                   ›
                 </Text>
               </Text>
             </View>

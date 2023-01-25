@@ -18,7 +18,7 @@ import { interceptor } from './interceptor';
 export class Barricade {
   /** Boolean that indicates whether the Barricade is enabled/disabled. */
   running = false;
-  private readonly _originalRequestConfig: RequestConfigForLib[] = [];
+  private _originalRequestConfig: RequestConfigForLib[] = [];
   private _requestConfig: RequestConfigForLib[] = [];
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
   private _nativeFetch: RNFetch.fetch;
@@ -26,9 +26,9 @@ export class Barricade {
   private _nativeRequest: RNFetch.Request;
   private _nativeResponse: RNFetch.Response;
 
-  constructor(requestConfig: RequestConfig[]) {
+  constructor(requestConfig?: RequestConfig[]) {
     this.initRequestConfig(requestConfig);
-    this._originalRequestConfig = ObjectUtils.cloneDeep(this.requestConfig);
+
     this._nativeXMLHttpRequest = global.XMLHttpRequest;
     this._nativeFetch = global.fetch;
     this._nativeHeaders = global.Headers;
@@ -99,14 +99,17 @@ export class Barricade {
 
   /**
    * Formats the RequestConfig[] to RequestConfigForLib[] and sets it to _requestConfig
-   * @param requests Array of RequestConfigs passed to be registered while creating an instance of Barricade.
+   * @param requests Optional Array of RequestConfigs passed to be registered while creating an instance of Barricade.
    */
-  private initRequestConfig(requests: RequestConfig[]) {
-    const updatedRequestConfig = requests.map<RequestConfig>(
-      this.getRequestConfigForLib,
-    );
+  private initRequestConfig(requests?: RequestConfig[]) {
+    if (requests?.length) {
+      const updatedRequestConfig = requests.map<RequestConfig>(
+        this.getRequestConfigForLib,
+      );
 
-    this._requestConfig = updatedRequestConfig;
+      this._requestConfig = updatedRequestConfig;
+      this._originalRequestConfig = ObjectUtils.cloneDeep(this.requestConfig);
+    }
   }
 
   /**
@@ -127,7 +130,7 @@ export class Barricade {
       requestUrl,
     );
 
-    if (requestConfig) {
+    if (requestConfig && !requestConfig.disabled) {
       this.handleMockedXMLHttpRequest(
         request,
         requestConfig,
@@ -244,6 +247,19 @@ export class Barricade {
   }
 
   /**
+   * Registers an API to be mocked by Barricade.
+   * @param request RequestConfig data of an API call that needs to be registered for mocking.
+   */
+  registerRequest(request: RequestConfig) {
+    const updatedRequestConfig = this.getRequestConfigForLib(request);
+
+    this.requestConfig.push(updatedRequestConfig);
+    this._originalRequestConfig.push(
+      ObjectUtils.cloneDeep(updatedRequestConfig),
+    );
+  }
+
+  /**
    * Resets selected responses for all the registered request config to its default value.
    */
   resetRequestConfig() {
@@ -297,5 +313,20 @@ export class Barricade {
     global.Request = this._nativeRequest;
     global.Response = this._nativeResponse;
     this.running = false;
+  }
+
+  /**
+   * Unregisters an API from being mocked by Barricade.
+   * @param request RequestConfig data of an API call that needs to be registered for mocking.
+   */
+  unregisterRequest(request: RequestConfig) {
+    const index = this.requestConfig.findIndex(
+      item => item.label === request.label && item.method === request.method,
+    );
+
+    if (index > -1) {
+      this.requestConfig.splice(index, 1);
+      this._originalRequestConfig.splice(index, 1);
+    }
   }
 }

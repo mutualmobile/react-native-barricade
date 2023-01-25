@@ -21,10 +21,10 @@ let barricade: Barricade | undefined;
 
 /**
  * Creates an instance of Barricade and initializes the array of RequestConfig passed to the function.
- * @param requests : Array of RequestConfig. Each item in this array should contain configuration of each API that you want to mock.
+ * @param requests : Optional Array of RequestConfig. Each item in this array should contain configuration of each API that you want to mock.
  * @returns Instance of Barricade that was created.
  */
-const createBarricade = (requests: RequestConfig[]) => {
+const createBarricade = (requests?: RequestConfig[]) => {
   barricade = new Barricade(requests);
   if (__DEV__) {
     DevSettings.addMenuItem(Strings.Barricade, () => {

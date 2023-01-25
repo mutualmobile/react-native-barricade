@@ -35,6 +35,7 @@ export interface RequestConfig {
   );
   responseHandler: ResponseHandler[];
   delay?: number;
+  disabled?: boolean;
 }
 
 export interface RequestConfigForLib extends RequestConfig {
