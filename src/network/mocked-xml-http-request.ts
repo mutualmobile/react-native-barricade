@@ -1,3 +1,4 @@
+/** This source code is based on React Native's XMLHttpRequest.js with typescript. */
 import { EventSubscription } from 'react-native';
 
 import { Event, EventTarget } from './event';

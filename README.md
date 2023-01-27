@@ -37,7 +37,7 @@ $ yarn add @mutualmobile/react-native-barricade
 
 **1. Create and start Barricade**
 
-Create an instance of Barricade with the help of the `createBarricade` function. While calling this function, you can pass an array of `RequestConfig`(optional) to register the request configs. You can also register a request config later by making use of `registerRequest` method on the barricade instance.
+Create an instance of Barricade with the help of the `createBarricade` function. While calling this function, you can pass an array of `RequestConfig`(optional) to register the request configs. You can also register a request config later by making use of the `registerRequest` method on the barricade instance.
 
 **:warning: Make sure to do this in index.js so that you can start Barricade before hitting any API.**
 
@@ -81,18 +81,18 @@ Create a `RequestConfig` for each API you want to mock. Then, add these to the l
 ```tsx
 import { getBarricadeInstance } from '@mutualmobile/react-native-barricade';
 
-const apiRequestConfig = {} // RequestConfig for a particular API that you wish to mock.
+const apiRequestConfig = {}; // RequestConfig for a particular API that you wish to mock.
 getBarricadeInstance()?.registerRequest(apiRequestConfig);
 ```
 
-**:warning: Make sure to call the `registerRequest` method only after barricade instance is created.**
+**:warning: Make sure to call the `registerRequest` method only after the Barricade instance is created.**
 
 In case you want to unregister a config programmatically, you can do this by calling the `unregisterRequest` method similar to the registerRequest method.
 
 ```tsx
 import { getBarricadeInstance } from '@mutualmobile/react-native-barricade';
 
-const apiRequestConfig = {} // RequestConfig object that was previously used for registering
+const apiRequestConfig = {}; // RequestConfig object that was previously used for registering
 getBarricadeInstance()?.unregisterRequest(apiRequestConfig);
 ```
 
@@ -104,7 +104,7 @@ getBarricadeInstance()?.unregisterRequest(apiRequestConfig);
 | **`pathEvaluation`**  | Data used to identify the current API triggered from the list of RequestConfigs.                                                                                       | `PathEvaluation`          |
 | **`responseHandler`** | List of mocked responses the current API can return with. By default, the first response from the list is selected.                                                    | `ResponseHandler[]`       |
 | **`delay`**           | The time (in milliseconds) Barricade needs to wait before responding with the mocked response. This is optional and by default it's `400`.                             | `number` / `undefined`    |
-| **`disabled`**        | Boolean used to enable/disable mocking of current API. This is optional and by default it's `undefined`.                                                               | `boolean` / `undefined`   |
+| **`disabled`**        | Boolean used to enable/disable mocking of the current API. This is optional and by default it's `undefined`.                                                           | `boolean` / `undefined`   |
 
 **PathEvaluation:**  
 | Property              | Description                                                                                                                                                            | Type                      |
@@ -116,8 +116,8 @@ getBarricadeInstance()?.unregisterRequest(apiRequestConfig);
 **PathEvaluationType:**  
 | Enum Options          | Description                                                                                                                                                            | Type                      |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| **`Callback`**        | Use this when you cannot identify the RequestConfig with just the help of `path` along with the `callback` function in `pathEvaluation`.                               | `number`                  |
-| **`Include`**         | Use this when the `path` passed in `pathEvaluation` can be anywhere within the Request URL.                                                                            | `number`                  |
+| **`Callback`**        | Use this when you cannot identify the RequestConfig with just the help of `path` property. With this type, you need to pass a `callback` function in `pathEvaluation`. | `number`                  |
+| **`Includes`**        | Use this when the `path` passed in `pathEvaluation` can be anywhere within the Request URL.                                                                            | `number`                  |
 | **`Suffix`**          | Use this when the `path` passed in `pathEvaluation` must be at the end of the Request URL.                                                                             | `number`                  |
 
 **ResponseHandler:**  
@@ -171,6 +171,34 @@ const successResponseHandler = (request: Request) => {
     response: JSON.stringify(response),
   };
 };
+```
+
+## Build and run the example app
+
+To run the example app,
+
+**1. Clone the [react-native-barricade](https://github.com/mutualmobile/react-native-barricade) GitHub repository to your computer to get the example application.**
+
+**2. Install all the dependencies**
+```bash
+$ yarn
+```
+**3. Go to example folder and install all the dependencies**
+```bash
+$ cd example
+$ yarn
+```
+
+**4. Install the pods**
+```bash
+$ cd ios && pod install && cd ..
+```
+
+**5. Run the app in android or iOS**
+```bash
+$ yarn android
+# --- or ---
+$ yarn ios
 ```
 
 ## Selection Interface
