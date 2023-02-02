@@ -6,7 +6,7 @@ import {
 import { RecentApiRequestConfig } from './api/recent.api.mock';
 import { SearchApiRequestConfig } from './api/search.api.mock';
 
-export const mockServer = () => {
+export const setupBarricade = () => {
   const barricade = createBarricade([RecentApiRequestConfig]);
   barricade.start(); // We can also call this like - getBarricadeInstance()?.start();
   getBarricadeInstance()?.registerRequest(SearchApiRequestConfig);

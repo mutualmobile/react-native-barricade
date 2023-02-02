@@ -17,7 +17,7 @@ import { interceptor } from './interceptor';
 
 export class Barricade {
   /** Boolean that indicates whether the Barricade is enabled/disabled. */
-  running = false;
+  private _running = false;
   private _originalRequestConfig: RequestConfigForLib[] = [];
   private _requestConfig: RequestConfigForLib[] = [];
   private _nativeXMLHttpRequest: typeof XMLHttpRequest;
@@ -39,6 +39,11 @@ export class Barricade {
   /** Gets the registered RequestConfig with selected response data */
   get requestConfig() {
     return this._requestConfig;
+  }
+
+  /** Boolean to identify if the Barricade is Enabled/Disabled */
+  get running() {
+    return this._running;
   }
 
   /**
@@ -292,27 +297,31 @@ export class Barricade {
   }
 
   /**
-   * Barricade starts intercepting all the API calls and mocking the registered requests
+   * Barricade starts intercepting all the API calls and mocking the registered requests in __DEV__ mode.
    */
   start() {
-    global.XMLHttpRequest = interceptor(this) as any;
-    global.fetch = RNFetch.fetch;
-    global.Headers = RNFetch.Headers;
-    global.Request = RNFetch.Request;
-    global.Response = RNFetch.Response;
-    this.running = true;
+    if (__DEV__) {
+      global.XMLHttpRequest = interceptor(this) as any;
+      global.fetch = RNFetch.fetch;
+      global.Headers = RNFetch.Headers;
+      global.Request = RNFetch.Request;
+      global.Response = RNFetch.Response;
+      this._running = true;
+    }
   }
 
   /**
-   * Barricade stops intercepting all the API calls and mocking the registered requests
+   * Barricade stops intercepting all the API calls and mocking the registered requests in __DEV__ mode.
    */
   shutdown() {
-    global.XMLHttpRequest = this._nativeXMLHttpRequest;
-    global.fetch = this._nativeFetch;
-    global.Headers = this._nativeHeaders;
-    global.Request = this._nativeRequest;
-    global.Response = this._nativeResponse;
-    this.running = false;
+    if (this._running) {
+      global.XMLHttpRequest = this._nativeXMLHttpRequest;
+      global.fetch = this._nativeFetch;
+      global.Headers = this._nativeHeaders;
+      global.Request = this._nativeRequest;
+      global.Response = this._nativeResponse;
+      this._running = false;
+    }
   }
 
   /**

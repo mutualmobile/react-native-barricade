@@ -50,6 +50,10 @@ react {
     //
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
+    
+    // TODO: Uncomment this when generating debug build with Barricade
+    // debuggableVariants=[]
+    // extraPackagerArgs=["--dev", "true"]
 }
 
 /**

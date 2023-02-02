@@ -156,7 +156,8 @@ describe('given that start function is called,', () => {
     jest.clearAllMocks();
     barricade.shutdown();
   });
-  test('should set global XMLHttpRequest', () => {
+
+  test('when in __DEV__ mode, should set global XMLHttpRequest', () => {
     jest.resetModules();
     const mockInterceptor = jest.fn();
     jest.mock('../../network/interceptor', () => {
@@ -177,7 +178,7 @@ describe('given that start function is called,', () => {
     expect.assertions(1);
   });
 
-  test('should set global fetch functions', () => {
+  test('when in __DEV__ mode, should set global fetch functions', () => {
     jest.resetModules();
     const mockFetch = jest.fn(),
       mockHeaders = jest.fn(),
@@ -208,7 +209,7 @@ describe('given that start function is called,', () => {
     expect.assertions(4);
   });
 
-  test('should set running to true', () => {
+  test('when in __DEV__ mode, should set running to true', () => {
     const Barricade = require('../../network/barricade');
     barricade = new Barricade.Barricade([
       firstApiConfig,
@@ -221,10 +222,28 @@ describe('given that start function is called,', () => {
     expect(barricade.running).toBe(true);
     expect.assertions(1);
   });
+
+  test('when not in __DEV__ mode, should not start barricade', () => {
+    (global as any).__DEV__ = false;
+
+    const Barricade = require('../../network/barricade');
+    barricade = new Barricade.Barricade([
+      firstApiConfig,
+      secondApiConfig,
+      thirdApiConfig,
+    ]);
+
+    barricade.start();
+
+    expect(barricade.running).toBe(false);
+    expect.assertions(1);
+
+    (global as any).__DEV__ = true;
+  });
 });
 
 describe('given that shutdown function is called,', () => {
-  test('should reset global XMLHttpRequest', () => {
+  test('when Barricade is running, should reset global XMLHttpRequest', () => {
     jest.resetModules();
     const mockInterceptor = jest.fn();
     jest.mock('../../network/interceptor', () => {
@@ -246,7 +265,7 @@ describe('given that shutdown function is called,', () => {
     expect.assertions(1);
   });
 
-  test('should reset global fetch functions', () => {
+  test('when Barricade is running, should reset global fetch functions', () => {
     jest.resetModules();
     const mockFetch = jest.fn(),
       mockHeaders = jest.fn(),
@@ -278,7 +297,7 @@ describe('given that shutdown function is called,', () => {
     expect.assertions(4);
   });
 
-  test('should set running to false', () => {
+  test('when Barricade is running, should set running to false', () => {
     const Barricade = require('../../network/barricade');
     const barricade = new Barricade.Barricade([
       firstApiConfig,
@@ -291,6 +310,25 @@ describe('given that shutdown function is called,', () => {
 
     expect(barricade.running).toBe(false);
     expect.assertions(1);
+  });
+
+  test('when Barricade is not running, should do nothing', () => {
+    const Barricade = require('../../network/barricade');
+    const barricade = new Barricade.Barricade([
+      firstApiConfig,
+      secondApiConfig,
+      thirdApiConfig,
+    ]);
+
+    barricade.shutdown();
+
+    expect(global.fetch).toBe(barricade._nativeFetch);
+    expect(global.Headers).toBe(barricade._nativeHeaders);
+    expect(global.Request).toBe(barricade._nativeRequest);
+    expect(global.Response).toBe(barricade._nativeResponse);
+    expect(global.XMLHttpRequest).toBe(barricade._nativeXMLHttpRequest);
+    expect(barricade.running).toBe(false);
+    expect.assertions(6);
   });
 });
 

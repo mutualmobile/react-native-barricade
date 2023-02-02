@@ -215,57 +215,56 @@ With this in place and the device shaken, you'll be able to see an option for `B
 
 **:warning: The Developer Menu is disabled in release (production) builds.**
 
-If you want to use Barricade in release mode, you will need to create a tappable text/button and onPress call `showBarricadeView`.
-
-App.tsx:
-```tsx
-import { BarricadeView, showBarricadeView } from '@mutualmobile/react-native-barricade';
-
-const App = () => {
-  return (
-    <View>
-      /* Rest of your app */
-      <Button onPress={showBarricadeView} title={"Open Barricade view"}/>
-      <BarricadeView />
-    </View>
-  );
-};
-```
-
 **Note:** In BarricadeView, apart from changing the selected response for any of the listed APIs, we can also:
 - Disable/Enable Barricade. This will stop/start mocking all the registered API calls and lets you check the app with the actual/mocked API responses at runtime.
 - Disable/Enable API Mock. This will stop/start mocking the current API calls and lets you check the app with the actual/mocked API response at runtime.
 - Reset all the changes done to the list of selected responses.
 
-## Store Submission
+## Generate Build with Barricade
 
-Barricade is safe to include with store builds (and could be used to support things like a demo mode for your app), but most of the time you will probably want to ensure that Barricade is disabled for store builds. You can achieve this by wrapping the creation of Barricade and BarricadeView inside an ENV check.
+You can enable Barricade only in __DEV__ mode. Due to this, the release builds that we usually create for testing and for uploading to store will not be able to access Barricade.
 
-index.js:
-```tsx
-import { Env } from './src/config';
+If you want to generate a build with Barricade enabled for testing purpose, you will need to create a `debug` build. Follow the below steps to generate a debug build.
 
-if (Env.enableBarricade) { // enableBarricade will be false in case of Production.
-  const requestConfig = [];
-  const barricade = createBarricade(requestConfig);
-  barricade.start();
+**Android:**
+
+<details>
+  <summary><b>For react-native version < 0.71</b></summary>
+
+In your **android/app/build.gradle** configuration file, look for the `project.ext.react` map and add the `bundleInDebug: true` and `devDisabledInDebug: false` entries to the map:
+
+```java
+project.ext.react = [
+    ...
+    bundleInDebug: true, // Will start bundling of .JS bundle and the assets in debug build
+    devDisabledInDebug: false, // Makes sure that __DEV__ is true
+    ...
+]
+```
+</details>
+
+In your **android/app/build.gradle** configuration file, inside the `react` configuration block add the below options:
+
+```java
+react {
+    ...
+    debuggableVariants=[], // Will stop from skipping bundling of JS bundle and the assets in debug build.
+    extraPackagerArgs=["--dev", "true"], // Makes sure that __DEV__ is true.
+    ...
 }
 ```
 
-App.tsx:
-```tsx
-import { BarricadeView } from '@mutualmobile/react-native-barricade';
-import { Env } from './config';
+Now generate build using the below command.
 
-const App = () => {
-  return (
-    <View>
-      /* Rest of your app */
-      {Env.enableBarricade && <BarricadeView />}
-    </View>
-  );
-};
+```bash
+cd android && ./gradlew assembleDebug
 ```
+
+**iOS:**
+
+First set the build configuration to Debug. To do this, go to `Product → Scheme → Edit Scheme (cmd + <)`, select the `Archive` tab from the side, and set the Build Configuration dropdown to `Debug`.
+
+Next tap on `Product → Archive` to archive and then distribute the app.
 
 ## Testing with jest
 

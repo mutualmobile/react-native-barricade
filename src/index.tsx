@@ -44,11 +44,12 @@ const getBarricadeInstance = () => {
 };
 
 /**
- * Shows the BarricadeView component. This is useful when you want use Barricade in release mode as Developer menu is disabled.
- * Call this function on any text/button press.
+ * Shows the BarricadeView component. This is useful when you want to show Barricade on press of any text/button press.
  */
 const showBarricadeView = () => {
-  DeviceEventEmitter.emit(EventType.ShowBarricadeView);
+  if (__DEV__) {
+    DeviceEventEmitter.emit(EventType.ShowBarricadeView);
+  }
 };
 
 export type BarricadeViewProps = {
@@ -60,32 +61,34 @@ export type BarricadeViewProps = {
  * @param props.theme Use this to select the preferred color scheme. It can be `dark` or `light`. This is optional and by default it's `light`.
  * @returns BarricadeView component.
  */
-const BarricadeView = (props: BarricadeViewProps) => {
-  const { theme = 'light' } = props;
-  const [visible, setVisibility] = useState(false);
+const BarricadeView = __DEV__
+  ? (props: BarricadeViewProps) => {
+      const { theme = 'light' } = props;
+      const [visible, setVisibility] = useState(false);
 
-  useEffect(() => {
-    DeviceEventEmitter.addListener(EventType.ShowBarricadeView, () =>
-      toggleBarricadeView(true),
-    );
-    return () => {
-      DeviceEventEmitter.removeAllListeners(EventType.ShowBarricadeView);
-    };
-  }, []);
+      useEffect(() => {
+        DeviceEventEmitter.addListener(EventType.ShowBarricadeView, () =>
+          toggleBarricadeView(true),
+        );
+        return () => {
+          DeviceEventEmitter.removeAllListeners(EventType.ShowBarricadeView);
+        };
+      }, []);
 
-  const toggleBarricadeView = (value: boolean) => {
-    setVisibility(value);
-  };
+      const toggleBarricadeView = (value: boolean) => {
+        setVisibility(value);
+      };
 
-  return (
-    <MMBarricadeView
-      barricade={barricade}
-      onRequestClose={() => toggleBarricadeView(false)}
-      theme={theme}
-      visible={visible}
-    />
-  );
-};
+      return (
+        <MMBarricadeView
+          barricade={barricade}
+          onRequestClose={() => toggleBarricadeView(false)}
+          theme={theme}
+          visible={visible}
+        />
+      );
+    }
+  : (_props: BarricadeViewProps) => <React.Fragment />;
 
 export {
   BarricadeView,
