@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+import { StyleSheet, View } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 
-import { Colors, Images } from '../assets';
+import { Colors } from '../assets';
 import { useMountEffect } from '../hooks';
 import { GeneralStackParamList, GeneralStackRouteName } from '../navigation';
-import { hScale, vScale } from '../utils';
+import { hScale } from '../utils';
 
 type Props = NativeStackScreenProps<
   GeneralStackParamList,
@@ -15,16 +15,13 @@ type Props = NativeStackScreenProps<
 export const Splash = ({ navigation }: Props) => {
   useMountEffect(() => {
     setTimeout(() => {
-      SplashScreen.hide();
-      navigation.replace(GeneralStackRouteName.Home);
+      RNBootSplash.hide({ fade: true }).then(() => {
+        navigation.replace(GeneralStackRouteName.Home);
+      });
     }, 3000);
   });
 
-  return (
-    <View style={styles.container}>
-      <Image source={Images.logo} style={styles.logo} />
-    </View>
-  );
+  return <View style={styles.container} />;
 };
 
 const styles = StyleSheet.create({
@@ -34,9 +31,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.background,
     padding: hScale(20),
-  },
-  logo: {
-    height: vScale(70),
-    width: hScale(200),
   },
 });

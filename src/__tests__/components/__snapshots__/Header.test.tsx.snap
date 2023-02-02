@@ -3,14 +3,14 @@
 exports[`given that Header is called with only title props, should match Header snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderBottomWidth": 1,
       },
-      Object {
+      {
         "backgroundColor": "#EBEBEB",
       },
-      Object {
+      {
         "borderColor": "#DEDEDE",
       },
     ]
@@ -18,7 +18,7 @@ exports[`given that Header is called with only title props, should match Header 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "height": 82.14285714285714,
@@ -29,8 +29,8 @@ exports[`given that Header is called with only title props, should match Header 
     <Text
       numberOfLines={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "fontSize": 40,
             "fontWeight": "bold",
             "left": 0,
@@ -39,7 +39,7 @@ exports[`given that Header is called with only title props, should match Header 
             "right": 0,
             "textAlign": "center",
           },
-          Object {
+          {
             "color": "#181818",
           },
         ]
@@ -49,7 +49,7 @@ exports[`given that Header is called with only title props, should match Header 
     </Text>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -61,14 +61,14 @@ exports[`given that Header is called with only title props, should match Header 
 exports[`given that Header is called with title and headerLeft props, should match Header snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderBottomWidth": 1,
       },
-      Object {
+      {
         "backgroundColor": "#EBEBEB",
       },
-      Object {
+      {
         "borderColor": "#DEDEDE",
       },
     ]
@@ -76,7 +76,7 @@ exports[`given that Header is called with title and headerLeft props, should mat
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "height": 82.14285714285714,
@@ -87,8 +87,8 @@ exports[`given that Header is called with title and headerLeft props, should mat
     <Text
       numberOfLines={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "fontSize": 40,
             "fontWeight": "bold",
             "left": 0,
@@ -97,7 +97,7 @@ exports[`given that Header is called with title and headerLeft props, should mat
             "right": 0,
             "textAlign": "center",
           },
-          Object {
+          {
             "color": "#181818",
           },
         ]
@@ -106,6 +106,23 @@ exports[`given that Header is called with title and headerLeft props, should mat
       Header with left button
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -117,7 +134,7 @@ exports[`given that Header is called with title and headerLeft props, should mat
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "marginRight": 20,
           "opacity": 1,
         }
@@ -125,13 +142,13 @@ exports[`given that Header is called with title and headerLeft props, should mat
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "margin": 16,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#007aa3",
             },
           ]
@@ -142,7 +159,7 @@ exports[`given that Header is called with title and headerLeft props, should mat
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -154,14 +171,14 @@ exports[`given that Header is called with title and headerLeft props, should mat
 exports[`given that Header is called with title and headerRight props, should match Header snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderBottomWidth": 1,
       },
-      Object {
+      {
         "backgroundColor": "#EBEBEB",
       },
-      Object {
+      {
         "borderColor": "#DEDEDE",
       },
     ]
@@ -169,7 +186,7 @@ exports[`given that Header is called with title and headerRight props, should ma
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "height": 82.14285714285714,
@@ -180,8 +197,8 @@ exports[`given that Header is called with title and headerRight props, should ma
     <Text
       numberOfLines={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "fontSize": 40,
             "fontWeight": "bold",
             "left": 0,
@@ -190,7 +207,7 @@ exports[`given that Header is called with title and headerRight props, should ma
             "right": 0,
             "textAlign": "center",
           },
-          Object {
+          {
             "color": "#181818",
           },
         ]
@@ -200,12 +217,29 @@ exports[`given that Header is called with title and headerRight props, should ma
     </Text>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     />
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -217,7 +251,7 @@ exports[`given that Header is called with title and headerRight props, should ma
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "marginLeft": 20,
           "opacity": 1,
         }
@@ -225,13 +259,13 @@ exports[`given that Header is called with title and headerRight props, should ma
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "margin": 16,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#007aa3",
             },
           ]
@@ -247,14 +281,14 @@ exports[`given that Header is called with title and headerRight props, should ma
 exports[`given that Header is called with title, headerLeft and headerRight props, should match Header snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderBottomWidth": 1,
       },
-      Object {
+      {
         "backgroundColor": "#EBEBEB",
       },
-      Object {
+      {
         "borderColor": "#DEDEDE",
       },
     ]
@@ -262,7 +296,7 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "height": 82.14285714285714,
@@ -273,8 +307,8 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
     <Text
       numberOfLines={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "fontSize": 40,
             "fontWeight": "bold",
             "left": 0,
@@ -283,7 +317,7 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
             "right": 0,
             "textAlign": "center",
           },
-          Object {
+          {
             "color": "#181818",
           },
         ]
@@ -292,6 +326,23 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
       Header with left and right buttons
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -303,7 +354,7 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "marginRight": 20,
           "opacity": 1,
         }
@@ -311,13 +362,13 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "margin": 16,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#007aa3",
             },
           ]
@@ -328,12 +379,29 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     />
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -345,7 +413,7 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "marginLeft": 20,
           "opacity": 1,
         }
@@ -353,13 +421,13 @@ exports[`given that Header is called with title, headerLeft and headerRight prop
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "margin": 16,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#007aa3",
             },
           ]

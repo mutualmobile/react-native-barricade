@@ -4,6 +4,7 @@ import {
   Request,
   RequestConfig,
   RequestConfigForLib,
+  ResponseData,
 } from '../../network/barricade.types';
 import { errorResponse, successResponse } from './request-test-data';
 
@@ -226,9 +227,7 @@ export const errorResponseApiConfig: RequestConfig = {
     {
       label: 'Success',
       handler: () => {
-        return new Promise((resolve, reject) =>
-          setTimeout(() => reject(successResponse), 1000),
-        );
+        return {} as ResponseData;
       },
     },
     {

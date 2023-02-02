@@ -8,14 +8,14 @@ exports[`given that barricade is undefined, should match snapshot 1`] = `
 >
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -32,14 +32,14 @@ exports[`given that theme is dark and detail view is selected, should match Barr
 >
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -47,11 +47,11 @@ exports[`given that theme is dark and detail view is selected, should match Barr
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
           },
-          Object {
+          {
             "backgroundColor": "#2D2D2D",
           },
         ]
@@ -59,14 +59,14 @@ exports[`given that theme is dark and detail view is selected, should match Barr
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderBottomWidth": 1,
             },
-            Object {
+            {
               "backgroundColor": "#181818",
             },
-            Object {
+            {
               "borderColor": "#69696D",
             },
           ]
@@ -74,7 +74,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "height": 82.14285714285714,
@@ -85,8 +85,8 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 40,
                   "fontWeight": "bold",
                   "left": 0,
@@ -95,7 +95,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
                   "right": 0,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#ffffff",
                 },
               ]
@@ -104,6 +104,23 @@ exports[`given that theme is dark and detail view is selected, should match Barr
             First API
           </Text>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -115,7 +132,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginRight": 20,
                 "opacity": 1,
               }
@@ -123,13 +140,13 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -140,7 +157,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -149,23 +166,23 @@ exports[`given that theme is dark and detail view is selected, should match Barr
       </View>
       <RCTScrollView
         contentContainerStyle={
-          Array [
-            Object {
+          [
+            {
               "flexGrow": 1,
             },
-            Object {
+            {
               "backgroundColor": "#2D2D2D",
             },
           ]
         }
         data={
-          Array [
-            Object {
+          [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -185,20 +202,38 @@ exports[`given that theme is dark and detail view is selected, should match Barr
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        stickyHeaderIndices={Array []}
+        stickyHeaderIndices={[]}
         style={
-          Object {
+          {
             "flexGrow": 1,
           }
         }
-        viewabilityConfigCallbackPairs={Array []}
+        viewabilityConfigCallbackPairs={[]}
       >
         <View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -210,7 +245,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#69696D",
                   "flex": 1,
@@ -225,14 +260,14 @@ exports[`given that theme is dark and detail view is selected, should match Barr
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "fontSize": 36,
                       "fontWeight": "400",
                       "marginEnd": 20,
                     },
-                    Object {
+                    {
                       "color": "#ffffff",
                     },
                   ]
@@ -242,11 +277,11 @@ exports[`given that theme is dark and detail view is selected, should match Barr
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 36,
                     },
-                    Object {
+                    {
                       "color": "#007aa3",
                     },
                   ]
@@ -257,10 +292,28 @@ exports[`given that theme is dark and detail view is selected, should match Barr
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -272,7 +325,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#69696D",
                   "flex": 1,
@@ -287,14 +340,14 @@ exports[`given that theme is dark and detail view is selected, should match Barr
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "fontSize": 36,
                       "fontWeight": "400",
                       "marginEnd": 20,
                     },
-                    Object {
+                    {
                       "color": "#ffffff",
                     },
                   ]
@@ -308,21 +361,38 @@ exports[`given that theme is dark and detail view is selected, should match Barr
       </RCTScrollView>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderTopWidth": 1,
               "height": 50,
             },
-            Object {
+            {
               "backgroundColor": "#181818",
             },
-            Object {
+            {
               "borderColor": "#69696D",
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -334,7 +404,7 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
@@ -346,12 +416,12 @@ exports[`given that theme is dark and detail view is selected, should match Barr
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 36,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#EE0003",
                 },
               ]
@@ -374,14 +444,14 @@ exports[`given that theme is dark and list view is selected, should match Barric
 >
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -389,11 +459,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
           },
-          Object {
+          {
             "backgroundColor": "#2D2D2D",
           },
         ]
@@ -401,14 +471,14 @@ exports[`given that theme is dark and list view is selected, should match Barric
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderBottomWidth": 1,
             },
-            Object {
+            {
               "backgroundColor": "#181818",
             },
-            Object {
+            {
               "borderColor": "#69696D",
             },
           ]
@@ -416,7 +486,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "height": 82.14285714285714,
@@ -427,8 +497,8 @@ exports[`given that theme is dark and list view is selected, should match Barric
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 40,
                   "fontWeight": "bold",
                   "left": 0,
@@ -437,7 +507,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
                   "right": 0,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#ffffff",
                 },
               ]
@@ -446,6 +516,23 @@ exports[`given that theme is dark and list view is selected, should match Barric
             Barricade
           </Text>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -457,7 +544,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginRight": 20,
                 "opacity": 1,
               }
@@ -465,13 +552,13 @@ exports[`given that theme is dark and list view is selected, should match Barric
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -482,12 +569,29 @@ exports[`given that theme is dark and list view is selected, should match Barric
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -499,7 +603,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginLeft": 20,
                 "opacity": 1,
               }
@@ -507,13 +611,13 @@ exports[`given that theme is dark and list view is selected, should match Barric
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -526,32 +630,32 @@ exports[`given that theme is dark and list view is selected, should match Barric
       </View>
       <RCTScrollView
         contentContainerStyle={
-          Array [
-            Object {
+          [
+            {
               "flexGrow": 1,
             },
-            Object {
+            {
               "backgroundColor": "#2D2D2D",
             },
           ]
         }
         data={
-          Array [
-            Object {
+          [
+            {
               "delay": 2000,
               "label": "First API",
               "method": "GET",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "path": "/first/api",
                 "type": 2,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Error",
@@ -559,20 +663,20 @@ exports[`given that theme is dark and list view is selected, should match Barric
               ],
               "selectedResponseLabel": "Success",
             },
-            Object {
+            {
               "label": "Second API",
               "method": "POST",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "path": "/second/api",
                 "type": 1,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Error",
@@ -580,21 +684,21 @@ exports[`given that theme is dark and list view is selected, should match Barric
               ],
               "selectedResponseLabel": "Error",
             },
-            Object {
+            {
               "label": "Third API",
               "method": "POST",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "callback": [Function],
                 "path": "/third/api",
                 "type": 0,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Error",
@@ -618,20 +722,38 @@ exports[`given that theme is dark and list view is selected, should match Barric
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        stickyHeaderIndices={Array []}
+        stickyHeaderIndices={[]}
         style={
-          Object {
+          {
             "flexGrow": 1,
           }
         }
-        viewabilityConfigCallbackPairs={Array []}
+        viewabilityConfigCallbackPairs={[]}
       >
         <View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -643,7 +765,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#69696D",
                   "flex": 1,
@@ -658,15 +780,15 @@ exports[`given that theme is dark and list view is selected, should match Barric
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#ffffff",
                     },
                   ]
@@ -676,14 +798,14 @@ exports[`given that theme is dark and list view is selected, should match Barric
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#EBEBEB",
                     },
                   ]
@@ -692,11 +814,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 Success 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -706,11 +828,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#EBEBEB",
                       },
                     ]
@@ -722,10 +844,28 @@ exports[`given that theme is dark and list view is selected, should match Barric
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -737,7 +877,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#69696D",
                   "flex": 1,
@@ -752,15 +892,15 @@ exports[`given that theme is dark and list view is selected, should match Barric
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#ffffff",
                     },
                   ]
@@ -770,14 +910,14 @@ exports[`given that theme is dark and list view is selected, should match Barric
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#EBEBEB",
                     },
                   ]
@@ -786,11 +926,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 Error 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -800,11 +940,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#EBEBEB",
                       },
                     ]
@@ -816,10 +956,28 @@ exports[`given that theme is dark and list view is selected, should match Barric
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -831,7 +989,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#69696D",
                   "flex": 1,
@@ -846,15 +1004,15 @@ exports[`given that theme is dark and list view is selected, should match Barric
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#ffffff",
                     },
                   ]
@@ -864,14 +1022,14 @@ exports[`given that theme is dark and list view is selected, should match Barric
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#EBEBEB",
                     },
                   ]
@@ -880,11 +1038,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 Success 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -894,11 +1052,11 @@ exports[`given that theme is dark and list view is selected, should match Barric
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#EBEBEB",
                       },
                     ]
@@ -913,21 +1071,38 @@ exports[`given that theme is dark and list view is selected, should match Barric
       </RCTScrollView>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderTopWidth": 1,
               "height": 50,
             },
-            Object {
+            {
               "backgroundColor": "#181818",
             },
-            Object {
+            {
               "borderColor": "#69696D",
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -939,7 +1114,7 @@ exports[`given that theme is dark and list view is selected, should match Barric
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
@@ -951,12 +1126,12 @@ exports[`given that theme is dark and list view is selected, should match Barric
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 36,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#EE0003",
                 },
               ]
@@ -979,14 +1154,14 @@ exports[`given that theme is light and detail view is selected, should match Bar
 >
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -994,11 +1169,11 @@ exports[`given that theme is light and detail view is selected, should match Bar
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
           },
-          Object {
+          {
             "backgroundColor": "#ffffff",
           },
         ]
@@ -1006,14 +1181,14 @@ exports[`given that theme is light and detail view is selected, should match Bar
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderBottomWidth": 1,
             },
-            Object {
+            {
               "backgroundColor": "#EBEBEB",
             },
-            Object {
+            {
               "borderColor": "#DEDEDE",
             },
           ]
@@ -1021,7 +1196,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "height": 82.14285714285714,
@@ -1032,8 +1207,8 @@ exports[`given that theme is light and detail view is selected, should match Bar
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 40,
                   "fontWeight": "bold",
                   "left": 0,
@@ -1042,7 +1217,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
                   "right": 0,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1051,6 +1226,23 @@ exports[`given that theme is light and detail view is selected, should match Bar
             First API
           </Text>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -1062,7 +1254,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginRight": 20,
                 "opacity": 1,
               }
@@ -1070,13 +1262,13 @@ exports[`given that theme is light and detail view is selected, should match Bar
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -1087,7 +1279,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -1096,23 +1288,23 @@ exports[`given that theme is light and detail view is selected, should match Bar
       </View>
       <RCTScrollView
         contentContainerStyle={
-          Array [
-            Object {
+          [
+            {
               "flexGrow": 1,
             },
-            Object {
+            {
               "backgroundColor": "#ffffff",
             },
           ]
         }
         data={
-          Array [
-            Object {
+          [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -1132,20 +1324,38 @@ exports[`given that theme is light and detail view is selected, should match Bar
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        stickyHeaderIndices={Array []}
+        stickyHeaderIndices={[]}
         style={
-          Object {
+          {
             "flexGrow": 1,
           }
         }
-        viewabilityConfigCallbackPairs={Array []}
+        viewabilityConfigCallbackPairs={[]}
       >
         <View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -1157,7 +1367,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#DEDEDE",
                   "flex": 1,
@@ -1172,14 +1382,14 @@ exports[`given that theme is light and detail view is selected, should match Bar
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "fontSize": 36,
                       "fontWeight": "400",
                       "marginEnd": 20,
                     },
-                    Object {
+                    {
                       "color": "#181818",
                     },
                   ]
@@ -1189,11 +1399,11 @@ exports[`given that theme is light and detail view is selected, should match Bar
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "fontSize": 36,
                     },
-                    Object {
+                    {
                       "color": "#007aa3",
                     },
                   ]
@@ -1204,10 +1414,28 @@ exports[`given that theme is light and detail view is selected, should match Bar
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -1219,7 +1447,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#DEDEDE",
                   "flex": 1,
@@ -1234,14 +1462,14 @@ exports[`given that theme is light and detail view is selected, should match Bar
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "fontSize": 36,
                       "fontWeight": "400",
                       "marginEnd": 20,
                     },
-                    Object {
+                    {
                       "color": "#181818",
                     },
                   ]
@@ -1255,21 +1483,38 @@ exports[`given that theme is light and detail view is selected, should match Bar
       </RCTScrollView>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderTopWidth": 1,
               "height": 50,
             },
-            Object {
+            {
               "backgroundColor": "#EBEBEB",
             },
-            Object {
+            {
               "borderColor": "#DEDEDE",
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1281,7 +1526,7 @@ exports[`given that theme is light and detail view is selected, should match Bar
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
@@ -1293,12 +1538,12 @@ exports[`given that theme is light and detail view is selected, should match Bar
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 36,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#EE0003",
                 },
               ]
@@ -1321,14 +1566,14 @@ exports[`given that theme is light and list view is selected, should match Barri
 >
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -1336,11 +1581,11 @@ exports[`given that theme is light and list view is selected, should match Barri
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
           },
-          Object {
+          {
             "backgroundColor": "#ffffff",
           },
         ]
@@ -1348,14 +1593,14 @@ exports[`given that theme is light and list view is selected, should match Barri
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderBottomWidth": 1,
             },
-            Object {
+            {
               "backgroundColor": "#EBEBEB",
             },
-            Object {
+            {
               "borderColor": "#DEDEDE",
             },
           ]
@@ -1363,7 +1608,7 @@ exports[`given that theme is light and list view is selected, should match Barri
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "height": 82.14285714285714,
@@ -1374,8 +1619,8 @@ exports[`given that theme is light and list view is selected, should match Barri
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 40,
                   "fontWeight": "bold",
                   "left": 0,
@@ -1384,7 +1629,7 @@ exports[`given that theme is light and list view is selected, should match Barri
                   "right": 0,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1393,6 +1638,23 @@ exports[`given that theme is light and list view is selected, should match Barri
             Barricade
           </Text>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -1404,7 +1666,7 @@ exports[`given that theme is light and list view is selected, should match Barri
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginRight": 20,
                 "opacity": 1,
               }
@@ -1412,13 +1674,13 @@ exports[`given that theme is light and list view is selected, should match Barri
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -1429,12 +1691,29 @@ exports[`given that theme is light and list view is selected, should match Barri
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -1446,7 +1725,7 @@ exports[`given that theme is light and list view is selected, should match Barri
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "marginLeft": 20,
                 "opacity": 1,
               }
@@ -1454,13 +1733,13 @@ exports[`given that theme is light and list view is selected, should match Barri
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                     "margin": 16,
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "#007aa3",
                   },
                 ]
@@ -1473,32 +1752,32 @@ exports[`given that theme is light and list view is selected, should match Barri
       </View>
       <RCTScrollView
         contentContainerStyle={
-          Array [
-            Object {
+          [
+            {
               "flexGrow": 1,
             },
-            Object {
+            {
               "backgroundColor": "#ffffff",
             },
           ]
         }
         data={
-          Array [
-            Object {
+          [
+            {
               "delay": 2000,
               "label": "First API",
               "method": "GET",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "path": "/first/api",
                 "type": 2,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Error",
@@ -1506,20 +1785,20 @@ exports[`given that theme is light and list view is selected, should match Barri
               ],
               "selectedResponseLabel": "Success",
             },
-            Object {
+            {
               "label": "Second API",
               "method": "POST",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "path": "/second/api",
                 "type": 1,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Error",
@@ -1527,21 +1806,21 @@ exports[`given that theme is light and list view is selected, should match Barri
               ],
               "selectedResponseLabel": "Error",
             },
-            Object {
+            {
               "label": "Third API",
               "method": "POST",
-              "pathEvaluation": Object {
+              "pathEvaluation": {
                 "callback": [Function],
                 "path": "/third/api",
                 "type": 0,
               },
-              "responseHandler": Array [
-                Object {
+              "responseHandler": [
+                {
                   "handler": [Function],
                   "isSelected": true,
                   "label": "Success",
                 },
-                Object {
+                {
                   "handler": [Function],
                   "isSelected": false,
                   "label": "Error",
@@ -1565,20 +1844,38 @@ exports[`given that theme is light and list view is selected, should match Barri
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        stickyHeaderIndices={Array []}
+        stickyHeaderIndices={[]}
         style={
-          Object {
+          {
             "flexGrow": 1,
           }
         }
-        viewabilityConfigCallbackPairs={Array []}
+        viewabilityConfigCallbackPairs={[]}
       >
         <View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -1590,7 +1887,7 @@ exports[`given that theme is light and list view is selected, should match Barri
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#DEDEDE",
                   "flex": 1,
@@ -1605,15 +1902,15 @@ exports[`given that theme is light and list view is selected, should match Barri
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#181818",
                     },
                   ]
@@ -1623,14 +1920,14 @@ exports[`given that theme is light and list view is selected, should match Barri
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#69696D",
                     },
                   ]
@@ -1639,11 +1936,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 Success 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -1653,11 +1950,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#69696D",
                       },
                     ]
@@ -1669,10 +1966,28 @@ exports[`given that theme is light and list view is selected, should match Barri
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -1684,7 +1999,7 @@ exports[`given that theme is light and list view is selected, should match Barri
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#DEDEDE",
                   "flex": 1,
@@ -1699,15 +2014,15 @@ exports[`given that theme is light and list view is selected, should match Barri
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#181818",
                     },
                   ]
@@ -1717,14 +2032,14 @@ exports[`given that theme is light and list view is selected, should match Barri
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#69696D",
                     },
                   ]
@@ -1733,11 +2048,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 Error 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -1747,11 +2062,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#69696D",
                       },
                     ]
@@ -1763,10 +2078,28 @@ exports[`given that theme is light and list view is selected, should match Barri
             </View>
           </View>
           <View
+            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={null}
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -1778,7 +2111,7 @@ exports[`given that theme is light and list view is selected, should match Barri
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "borderBottomWidth": 1,
                   "borderColor": "#DEDEDE",
                   "flex": 1,
@@ -1793,15 +2126,15 @@ exports[`given that theme is light and list view is selected, should match Barri
             >
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 36,
                       "fontWeight": "400",
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "#181818",
                     },
                   ]
@@ -1811,14 +2144,14 @@ exports[`given that theme is light and list view is selected, should match Barri
               </Text>
               <Text
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "flex": 1,
                       "flexWrap": "wrap",
                       "fontSize": 32,
                       "textAlign": "right",
                     },
-                    Object {
+                    {
                       "color": "#69696D",
                     },
                   ]
@@ -1827,11 +2160,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 Success 
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 24,
                       },
-                      Object {
+                      {
                         "color": "#00EA6E",
                       },
                     ]
@@ -1841,11 +2174,11 @@ exports[`given that theme is light and list view is selected, should match Barri
                 </Text>
                 <Text
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "fontSize": 36,
                       },
-                      Object {
+                      {
                         "color": "#69696D",
                       },
                     ]
@@ -1860,21 +2193,38 @@ exports[`given that theme is light and list view is selected, should match Barri
       </RCTScrollView>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "borderTopWidth": 1,
               "height": 50,
             },
-            Object {
+            {
               "backgroundColor": "#EBEBEB",
             },
-            Object {
+            {
               "borderColor": "#DEDEDE",
             },
           ]
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1886,7 +2236,7 @@ exports[`given that theme is light and list view is selected, should match Barri
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
@@ -1898,12 +2248,12 @@ exports[`given that theme is light and list view is selected, should match Barri
           <Text
             numberOfLines={1}
             style={
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 36,
                   "textAlign": "center",
                 },
-                Object {
+                {
                   "color": "#EE0003",
                 },
               ]

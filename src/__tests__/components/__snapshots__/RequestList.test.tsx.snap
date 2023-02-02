@@ -3,11 +3,11 @@
 exports[`given that Barricade is disabled, should match snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
       },
-      Object {
+      {
         "backgroundColor": "#ffffff",
       },
     ]
@@ -15,14 +15,14 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderBottomWidth": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -30,7 +30,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "height": 82.14285714285714,
@@ -41,8 +41,8 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 40,
               "fontWeight": "bold",
               "left": 0,
@@ -51,7 +51,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
               "right": 0,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#181818",
             },
           ]
@@ -60,6 +60,23 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         Barricade
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -71,7 +88,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginRight": 20,
             "opacity": 1,
           }
@@ -79,13 +96,13 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -96,12 +113,29 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       />
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -113,7 +147,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 20,
             "opacity": 1,
           }
@@ -121,13 +155,13 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -140,33 +174,33 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
   </View>
   <RCTScrollView
     contentContainerStyle={
-      Array [
-        Object {
+      [
+        {
           "flexGrow": 1,
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
       ]
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "delay": 2000,
           "disabled": true,
           "label": "First API",
           "method": "GET",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/first/api",
             "type": 2,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -174,20 +208,20 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           ],
           "selectedResponseLabel": "Success",
         },
-        Object {
+        {
           "label": "Second API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/second/api",
             "type": 1,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Error",
@@ -195,21 +229,21 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           ],
           "selectedResponseLabel": "Error",
         },
-        Object {
+        {
           "label": "Third API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "callback": [Function],
             "path": "/third/api",
             "type": 0,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -233,20 +267,38 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "flexGrow": 1,
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -258,7 +310,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -273,15 +325,15 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -291,14 +343,14 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -307,11 +359,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#EE0003",
                   },
                 ]
@@ -321,11 +373,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -337,10 +389,28 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -352,7 +422,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -367,15 +437,15 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -385,14 +455,14 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -401,11 +471,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             Error 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -415,11 +485,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -431,10 +501,28 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -446,7 +534,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -461,15 +549,15 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -479,14 +567,14 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -495,11 +583,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -509,11 +597,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -528,21 +616,38 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
   </RCTScrollView>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderTopWidth": 1,
           "height": 50,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -554,7 +659,7 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -566,12 +671,12 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#007aa3",
             },
           ]
@@ -587,11 +692,11 @@ exports[`given that Barricade is disabled, should match snapshot 1`] = `
 exports[`given that Barricade is enabled, should match snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
       },
-      Object {
+      {
         "backgroundColor": "#ffffff",
       },
     ]
@@ -599,14 +704,14 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderBottomWidth": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -614,7 +719,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "height": 82.14285714285714,
@@ -625,8 +730,8 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 40,
               "fontWeight": "bold",
               "left": 0,
@@ -635,7 +740,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
               "right": 0,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#181818",
             },
           ]
@@ -644,6 +749,23 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         Barricade
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -655,7 +777,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginRight": 20,
             "opacity": 1,
           }
@@ -663,13 +785,13 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -680,12 +802,29 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       />
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -697,7 +836,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 20,
             "opacity": 1,
           }
@@ -705,13 +844,13 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -724,33 +863,33 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
   </View>
   <RCTScrollView
     contentContainerStyle={
-      Array [
-        Object {
+      [
+        {
           "flexGrow": 1,
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
       ]
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "delay": 2000,
           "disabled": true,
           "label": "First API",
           "method": "GET",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/first/api",
             "type": 2,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -758,20 +897,20 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           ],
           "selectedResponseLabel": "Success",
         },
-        Object {
+        {
           "label": "Second API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/second/api",
             "type": 1,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Error",
@@ -779,21 +918,21 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           ],
           "selectedResponseLabel": "Error",
         },
-        Object {
+        {
           "label": "Third API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "callback": [Function],
             "path": "/third/api",
             "type": 0,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -817,20 +956,38 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "flexGrow": 1,
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -842,7 +999,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -857,15 +1014,15 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -875,14 +1032,14 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -891,11 +1048,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#EE0003",
                   },
                 ]
@@ -905,11 +1062,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -921,10 +1078,28 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -936,7 +1111,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -951,15 +1126,15 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -969,14 +1144,14 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -985,11 +1160,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             Error 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -999,11 +1174,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -1015,10 +1190,28 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1030,7 +1223,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -1045,15 +1238,15 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1063,14 +1256,14 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -1079,11 +1272,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -1093,11 +1286,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -1112,21 +1305,38 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
   </RCTScrollView>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderTopWidth": 1,
           "height": 50,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -1138,7 +1348,7 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -1150,12 +1360,12 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#EE0003",
             },
           ]
@@ -1171,11 +1381,11 @@ exports[`given that Barricade is enabled, should match snapshot 1`] = `
 exports[`given that all APIs are enabled, should match RequestList snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
       },
-      Object {
+      {
         "backgroundColor": "#ffffff",
       },
     ]
@@ -1183,14 +1393,14 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderBottomWidth": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -1198,7 +1408,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "height": 82.14285714285714,
@@ -1209,8 +1419,8 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 40,
               "fontWeight": "bold",
               "left": 0,
@@ -1219,7 +1429,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
               "right": 0,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#181818",
             },
           ]
@@ -1228,6 +1438,23 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         Barricade
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1239,7 +1466,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginRight": 20,
             "opacity": 1,
           }
@@ -1247,13 +1474,13 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -1264,12 +1491,29 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       />
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1281,7 +1525,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 20,
             "opacity": 1,
           }
@@ -1289,13 +1533,13 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -1308,32 +1552,32 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
   </View>
   <RCTScrollView
     contentContainerStyle={
-      Array [
-        Object {
+      [
+        {
           "flexGrow": 1,
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
       ]
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "delay": 2000,
           "label": "First API",
           "method": "GET",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/first/api",
             "type": 2,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -1341,20 +1585,20 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           ],
           "selectedResponseLabel": "Success",
         },
-        Object {
+        {
           "label": "Second API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/second/api",
             "type": 1,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Error",
@@ -1362,21 +1606,21 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           ],
           "selectedResponseLabel": "Error",
         },
-        Object {
+        {
           "label": "Third API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "callback": [Function],
             "path": "/third/api",
             "type": 0,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -1400,20 +1644,38 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "flexGrow": 1,
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1425,7 +1687,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -1440,15 +1702,15 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1458,14 +1720,14 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -1474,11 +1736,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -1488,11 +1750,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -1504,10 +1766,28 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1519,7 +1799,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -1534,15 +1814,15 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1552,14 +1832,14 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -1568,11 +1848,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             Error 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -1582,11 +1862,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -1598,10 +1878,28 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -1613,7 +1911,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -1628,15 +1926,15 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -1646,14 +1944,14 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -1662,11 +1960,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -1676,11 +1974,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -1695,21 +1993,38 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
   </RCTScrollView>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderTopWidth": 1,
           "height": 50,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -1721,7 +2036,7 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -1733,12 +2048,12 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#EE0003",
             },
           ]
@@ -1754,11 +2069,11 @@ exports[`given that all APIs are enabled, should match RequestList snapshot 1`] 
 exports[`given that one API is disabled, should match RequestList snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
       },
-      Object {
+      {
         "backgroundColor": "#ffffff",
       },
     ]
@@ -1766,14 +2081,14 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderBottomWidth": 1,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
@@ -1781,7 +2096,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "height": 82.14285714285714,
@@ -1792,8 +2107,8 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 40,
               "fontWeight": "bold",
               "left": 0,
@@ -1802,7 +2117,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
               "right": 0,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#181818",
             },
           ]
@@ -1811,6 +2126,23 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         Barricade
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1822,7 +2154,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginRight": 20,
             "opacity": 1,
           }
@@ -1830,13 +2162,13 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -1847,12 +2179,29 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       />
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1864,7 +2213,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 20,
             "opacity": 1,
           }
@@ -1872,13 +2221,13 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       >
         <Text
           style={
-            Array [
-              Object {
+            [
+              {
                 "fontSize": 36,
                 "margin": 16,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "color": "#007aa3",
               },
             ]
@@ -1891,33 +2240,33 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
   </View>
   <RCTScrollView
     contentContainerStyle={
-      Array [
-        Object {
+      [
+        {
           "flexGrow": 1,
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
       ]
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "delay": 2000,
           "disabled": true,
           "label": "First API",
           "method": "GET",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/first/api",
             "type": 2,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -1925,20 +2274,20 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           ],
           "selectedResponseLabel": "Success",
         },
-        Object {
+        {
           "label": "Second API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "path": "/second/api",
             "type": 1,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Error",
@@ -1946,21 +2295,21 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           ],
           "selectedResponseLabel": "Error",
         },
-        Object {
+        {
           "label": "Third API",
           "method": "POST",
-          "pathEvaluation": Object {
+          "pathEvaluation": {
             "callback": [Function],
             "path": "/third/api",
             "type": 0,
           },
-          "responseHandler": Array [
-            Object {
+          "responseHandler": [
+            {
               "handler": [Function],
               "isSelected": true,
               "label": "Success",
             },
-            Object {
+            {
               "handler": [Function],
               "isSelected": false,
               "label": "Error",
@@ -1984,20 +2333,38 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "flexGrow": 1,
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -2009,7 +2376,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -2024,15 +2391,15 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -2042,14 +2409,14 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -2058,11 +2425,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#EE0003",
                   },
                 ]
@@ -2072,11 +2439,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -2088,10 +2455,28 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -2103,7 +2488,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -2118,15 +2503,15 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -2136,14 +2521,14 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -2152,11 +2537,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             Error 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -2166,11 +2551,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -2182,10 +2567,28 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -2197,7 +2600,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "borderBottomWidth": 1,
               "borderColor": "#DEDEDE",
               "flex": 1,
@@ -2212,15 +2615,15 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 36,
                   "fontWeight": "400",
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "#181818",
                 },
               ]
@@ -2230,14 +2633,14 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
           </Text>
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "flexWrap": "wrap",
                   "fontSize": 32,
                   "textAlign": "right",
                 },
-                Object {
+                {
                   "color": "#69696D",
                 },
               ]
@@ -2246,11 +2649,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             Success 
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 24,
                   },
-                  Object {
+                  {
                     "color": "#00EA6E",
                   },
                 ]
@@ -2260,11 +2663,11 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
             </Text>
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "fontSize": 36,
                   },
-                  Object {
+                  {
                     "color": "#69696D",
                   },
                 ]
@@ -2279,21 +2682,38 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
   </RCTScrollView>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "borderTopWidth": 1,
           "height": 50,
         },
-        Object {
+        {
           "backgroundColor": "#EBEBEB",
         },
-        Object {
+        {
           "borderColor": "#DEDEDE",
         },
       ]
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -2305,7 +2725,7 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -2317,12 +2737,12 @@ exports[`given that one API is disabled, should match RequestList snapshot 1`] =
       <Text
         numberOfLines={1}
         style={
-          Array [
-            Object {
+          [
+            {
               "fontSize": 36,
               "textAlign": "center",
             },
-            Object {
+            {
               "color": "#EE0003",
             },
           ]

@@ -3,21 +3,38 @@
 exports[`should match Footer snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderTopWidth": 1,
         "height": 50,
       },
-      Object {
+      {
         "backgroundColor": "#EBEBEB",
       },
-      Object {
+      {
         "borderColor": "#DEDEDE",
       },
     ]
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -29,7 +46,7 @@ exports[`should match Footer snapshot 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -41,12 +58,12 @@ exports[`should match Footer snapshot 1`] = `
     <Text
       numberOfLines={1}
       style={
-        Array [
-          Object {
+        [
+          {
             "fontSize": 36,
             "textAlign": "center",
           },
-          Object {
+          {
             "color": "#EE0003",
           },
         ]

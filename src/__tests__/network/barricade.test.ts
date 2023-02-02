@@ -541,6 +541,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
     barricade.start();
 
     const request = getCustomMockApiRequest({
+      setResponseData: jest.fn(),
       _method: errorResponseApiConfig.method,
       _url: errorResponseApiConfig.pathEvaluation.path,
     });
