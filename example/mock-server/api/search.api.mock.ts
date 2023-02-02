@@ -4,6 +4,7 @@ import {
   Request,
   PathEvaluationType,
   RequestConfig,
+  ResponseData,
 } from '@mutualmobile/react-native-barricade';
 
 import * as searchPageOne from '../mocks/search/success/searchPage1.mock.json';
@@ -13,7 +14,7 @@ import * as errorData from '../mocks/search/error/searchError.mock.json';
 import * as noData from '../mocks/common/noData.mock.json';
 import { apiConfig } from '../../src/network';
 
-const successResponseHandler = (request: Request) => {
+const successResponseHandler = (request: Request): ResponseData => {
   const { page } = request.params ?? {};
 
   let response = searchPageThree;
@@ -30,7 +31,7 @@ const successResponseHandler = (request: Request) => {
   };
 };
 
-const noDataResponseHandler = () => {
+const noDataResponseHandler = (): ResponseData => {
   return {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -38,7 +39,7 @@ const noDataResponseHandler = () => {
   };
 };
 
-const errorResponseHandler = () => {
+const errorResponseHandler = (): ResponseData => {
   return {
     status: HttpStatusCode.BAD_REQUEST,
     headers: { 'Content-Type': 'application/json' },
@@ -46,7 +47,7 @@ const errorResponseHandler = () => {
   };
 };
 
-const loadMoreResponseHandler = (request: Request) => {
+const loadMoreResponseHandler = (request: Request): ResponseData => {
   const { page } = request.params ?? {};
 
   if (page === '3') {

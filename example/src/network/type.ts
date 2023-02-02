@@ -14,9 +14,8 @@ export interface ErrorResponse {
   timestamp?: string;
 }
 
-export interface ResponseData<T> {
+export interface SuccessResponse {
   stat: HttpStatus;
-  photos: T;
   message?: string;
   code?: number;
 }

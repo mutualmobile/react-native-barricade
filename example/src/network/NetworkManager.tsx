@@ -5,7 +5,7 @@ import { Strings } from '../assets';
 import { Env } from '../config';
 import { HttpStatusCodes } from '../constants';
 import { store } from '../redux';
-import { IError, ErrorResponse, ResponseData } from './type';
+import { IError, ErrorResponse, SuccessResponse } from './type';
 
 const DEFAULT_TIMEOUT = 60 * 1000;
 const RESPONSE_FORMAT = 'json';
@@ -46,7 +46,10 @@ export class NetworkManager {
     return NetworkManager.myInstance;
   }
 
-  appRequest = async <T,>(options: AxiosRequestConfig, showError = false) => {
+  appRequest = async <T extends SuccessResponse>(
+    options: AxiosRequestConfig,
+    showError = false,
+  ): Promise<T> => {
     if (store.getState().globalReducer.hasNetwork) {
       return appClient(options)
         .then(response => this.onSuccess<T>(response))
@@ -71,7 +74,7 @@ export class NetworkManager {
     }
   };
 
-  onSuccess: <T>(response: AxiosResponse<ResponseData<T>>) => ResponseData<T> =
+  onSuccess: <T extends SuccessResponse>(response: AxiosResponse<T>) => T =
     response => {
       const result = response.data;
       return result;

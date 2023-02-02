@@ -5,6 +5,7 @@ export const Colors = {
   secondary: '#0063dc',
 
   text: '#000',
+  lightText: '#303030',
   textAlt: '#fff',
 
   input: '#000',

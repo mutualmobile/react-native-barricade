@@ -4,6 +4,7 @@ import {
   PathEvaluationType,
   Request,
   RequestConfig,
+  ResponseData,
 } from '@mutualmobile/react-native-barricade';
 
 import * as recentPageOne from '../mocks/recent/success/recentPage1.mock.json';
@@ -12,7 +13,7 @@ import * as errorData from '../mocks/recent/error/recentError.mock.json';
 import * as noData from '../mocks/common/noData.mock.json';
 import { apiConfig } from '../../src/network';
 
-const successResponseHandler = (request: Request) => {
+const successResponseHandler = (request: Request): ResponseData => {
   const { page } = request.params ?? {};
   const response = page === '1' ? recentPageOne : recentPageTwo;
 
@@ -23,7 +24,7 @@ const successResponseHandler = (request: Request) => {
   };
 };
 
-const noDataResponseHandler = () => {
+const noDataResponseHandler = (): ResponseData => {
   return {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
@@ -31,7 +32,7 @@ const noDataResponseHandler = () => {
   };
 };
 
-const errorResponseHandler = () => {
+const errorResponseHandler = (): ResponseData => {
   return {
     status: HttpStatusCode.BAD_REQUEST,
     headers: { 'Content-Type': 'application/json' },
@@ -39,7 +40,7 @@ const errorResponseHandler = () => {
   };
 };
 
-const loadMoreResponseHandler = (request: Request) => {
+const loadMoreResponseHandler = (request: Request): ResponseData => {
   // Here we can make use of many other properties in Request like headers/params to return mocked response.
   const { page } = request.params ?? {};
 

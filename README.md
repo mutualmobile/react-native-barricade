@@ -129,7 +129,7 @@ getBarricadeInstance()?.unregisterRequest(apiRequestConfig);
 
 ## Example
 
-In this example, we will setup Barricade to be able to respond to the `flickr search` API with one of two possible responses.
+In this example, we will setup Barricade to be able to respond to the `flickr search` API with one of two possible responses. It also shows how to mock an API that is requested using libraries like `axios` that depend on `XMLHttpRequest`
 
 ```tsx
 const SearchApiRequestConfig: RequestConfig = {
@@ -169,6 +169,25 @@ const successResponseHandler = (request: Request) => {
     status: HttpStatusCode.OK,
     headers: { 'Content-Type': 'application/json' },
     response: JSON.stringify(response),
+  };
+};
+```
+
+**Using fetch:**
+ 
+If you are using `fetch` to make an API request, then the response needs of type Blob.
+
+```tsx
+const successResponseHandler = (request: Request) => {
+  const { page } = request.params ?? {};
+  const response = page === '1' ? searchPageOne : searchPageTwo; // JSON responses
+
+  return {
+    status: HttpStatusCode.OK,
+    headers: { 'Content-Type': 'application/json' },
+    response: new Blob([JSON.stringify(response)], {
+      type: 'application/json',
+    }),
   };
 };
 ```

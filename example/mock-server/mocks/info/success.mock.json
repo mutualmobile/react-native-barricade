@@ -1,0 +1,168 @@
+{
+  "photo": {
+    "id": "52575234776",
+    "secret": "9e054845a3",
+    "server": "65535",
+    "farm": 66,
+    "dateuploaded": "1671543841",
+    "isfavorite": 0,
+    "license": 0,
+    "safety_level": 0,
+    "rotation": 0,
+    "originalsecret": "25af05b76b",
+    "originalformat": "jpg",
+    "owner": {
+      "nsid": "127247666@N05",
+      "username": "Japanese Flower and Bird Art",
+      "realname": "http://readercollection.com",
+      "location": "",
+      "iconserver": "7884",
+      "iconfarm": 8,
+      "path_alias": "",
+      "gift": {
+        "gift_eligible": "1",
+        "eligible_durations": ["year", "month", "week"],
+        "new_flow": "1"
+      }
+    },
+    "title": { "_content": "Spiderwort" },
+    "description": {
+      "_content": "Japanese art print by Misao Koga (active late 1900s)"
+    },
+    "visibility": { "ispublic": 1, "isfriend": 0, "isfamily": 0 },
+    "dates": {
+      "posted": "1671543841",
+      "taken": "2022-12-19 17:59:27",
+      "takengranularity": 0,
+      "takenunknown": 1,
+      "lastupdate": "1672409765"
+    },
+    "views": 43,
+    "editability": { "cancomment": 0, "canaddmeta": 0 },
+    "publiceditability": { "cancomment": 0, "canaddmeta": 0 },
+    "usage": { "candownload": 1, "canblog": 0, "canprint": 0, "canshare": 1 },
+    "comments": { "_content": 0 },
+    "notes": {
+      "note": []
+    },
+    "people": { "haspeople": 0 },
+    "tags": {
+      "tag": [
+        {
+          "id": "127242326-52575234776-535",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "flower",
+          "_content": "flower",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-28658",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "commelinaceae",
+          "_content": "commelinaceae",
+          "machine_tag": 0
+        },
+        {
+          "id": "127242326-52575234776-387656",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "misao",
+          "_content": "misao",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-383651",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "koga",
+          "_content": "koga",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-1180",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "modern",
+          "_content": "modern",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-88401",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "woodblock",
+          "_content": "woodblock",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-1606",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "print",
+          "_content": "print",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-1038",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "japan",
+          "_content": "japan",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-1970",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "japanese",
+          "_content": "japanese",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-607",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "art",
+          "_content": "art",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-34748853",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "readercollection",
+          "_content": "readercollection",
+          "machine_tag": ""
+        },
+        {
+          "id": "127242326-52575234776-48505",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "spiderwort",
+          "_content": "spiderwort",
+          "machine_tag": 0
+        },
+        {
+          "id": "127242326-52575234776-174040",
+          "author": "127247666@N05",
+          "authorname": "Japanese Flower and Bird Art",
+          "raw": "tradescantia",
+          "_content": "tradescantia",
+          "machine_tag": 0
+        }
+      ]
+    },
+    "urls": {
+      "url": [
+        {
+          "type": "photopage",
+          "_content": "https://www.flickr.com/photos/127247666@N05/52575234776/"
+        }
+      ]
+    },
+    "media": "photo"
+  },
+  "stat": "ok"
+}

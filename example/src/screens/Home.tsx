@@ -87,7 +87,7 @@ export const Home = ({ navigation }: Props) => {
   };
 
   const navigateToDetailsScreen = (item: PhotoServiceTypes.Photo) => {
-    navigation.navigate(GeneralStackRouteName.Details, { data: item });
+    navigation.navigate(GeneralStackRouteName.Details, { photoId: item.id });
   };
 
   const renderSearchText = () => {
@@ -112,7 +112,12 @@ export const Home = ({ navigation }: Props) => {
         onPress={() => navigateToDetailsScreen(item)}>
         <Image
           source={{
-            uri: getImageUrl(item, ImageSizeSuffix.Small),
+            uri: getImageUrl(
+              item.id,
+              item.secret,
+              item.server,
+              ImageSizeSuffix.Small,
+            ),
           }}
           style={styles.img}
           resizeMode="cover"

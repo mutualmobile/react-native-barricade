@@ -1,4 +1,5 @@
 import { Strings } from '../../assets';
+import { HttpStatus } from '../../constants';
 import { PhotoService, PhotoServiceTypes } from '../../services';
 import { AppDispatch } from '../store';
 import { PhotoActions } from '../type';
@@ -7,8 +8,8 @@ export function getSearchResults(searchText: string, page: number) {
   return (dispatch: AppDispatch) => {
     return PhotoService.searchPhotos(searchText, page)
       .then(response => {
-        if (response.stat === 'ok') {
-          dispatch(setSearchResults(response?.photos));
+        if (response.stat === HttpStatus.ok) {
+          dispatch(setSearchResults(response.photos));
         } else {
           dispatch(
             setSearchError(
@@ -68,8 +69,8 @@ export function getRecentResults(page: number) {
   return (dispatch: AppDispatch) => {
     return PhotoService.getRecentPhotos(page)
       .then(response => {
-        if (response.stat === 'ok') {
-          dispatch(setRecentResults(response?.photos));
+        if (response.stat === HttpStatus.ok) {
+          dispatch(setRecentResults(response.photos));
         } else {
           dispatch(
             setRecentError(
