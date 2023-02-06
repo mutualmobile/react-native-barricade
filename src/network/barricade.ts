@@ -97,7 +97,7 @@ export class Barricade {
       }
     }
     const result = request as RequestConfigForLib;
-    result.selectedResponseLabel = selectedItem!.label;
+    result.selectedResponseLabel = selectedItem?.label;
 
     return result;
   }
@@ -243,7 +243,7 @@ export class Barricade {
     xhr.responseType = request.responseType;
     xhr.timeout = request.timeout ?? 0;
     xhr.withCredentials = request.withCredentials;
-    for (let h in request._headers) {
+    for (const h in request._headers) {
       xhr.setRequestHeader(h, request._headers[h]);
     }
 
