@@ -1,5 +1,10 @@
 # @mutualmobile/react-native-barricade
 
+![Code Coverage](https://img.shields.io/static/v1?label=coverage&message=95&color=brightgreen)
+[![License](https://img.shields.io/github/license/mutualmobile/react-native-barricade)](https://github.com/mutualmobile/react-native-barricade/blob/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@mutualmobile/react-native-barricade)](https://www.npmjs.com/package/@mutualmobile/react-native-barricade)
+[![Known Vulnerabilities](https://snyk.io/test/github/mutualmobile/react-native-barricade/badge.svg)](https://snyk.io/test/github/mutualmobile/react-native-barricade)
+
 A local server configurable at runtime to develop, test, and prototype your React Native app. Using just mock responses, Barricade can build the whole app without getting blocked by the unavailability of APIs.
 
 `Barricade` works by replacing the global `XMLHttpRequest` and `fetch` object with the `MockedXMLHttpRequest`. It blocks all outgoing network calls that are configured with Barricade and returns a registered local response without requiring any changes to the existing network code.
