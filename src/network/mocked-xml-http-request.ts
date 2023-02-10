@@ -1,7 +1,7 @@
 /** This source code is based on React Native's XMLHttpRequest.js with typescript. */
 import { EventSubscription } from 'react-native';
 
-import { Event, EventTarget } from './event';
+import { Event, EventTarget, ProgressEvent } from './event';
 import { HttpStatusCodeText } from './http-codes';
 
 const BlobManager = require('react-native/Libraries/Blob/BlobManager');
@@ -29,13 +29,13 @@ const SUPPORTED_RESPONSE_TYPES = {
 };
 
 export class XMLHttpRequestEventTarget extends EventTarget {
-  onload?: Function;
-  onloadstart?: Function;
-  onprogress?: Function;
-  ontimeout?: Function;
-  onerror?: Function;
-  onabort?: Function;
-  onloadend?: Function;
+  onload?: (e: Event) => void;
+  onloadstart?: (e: Event) => void;
+  onprogress?: (e: ProgressEvent) => void;
+  ontimeout?: (e: Event) => void;
+  onerror?: (e: Event) => void;
+  onabort?: (e: Event) => void;
+  onloadend?: (e: Event) => void;
 }
 
 export class MockedXMLHttpRequest extends EventTarget {
@@ -51,14 +51,14 @@ export class MockedXMLHttpRequest extends EventTarget {
   LOADING: number = LOADING;
   DONE: number = DONE;
 
-  onload?: Function;
-  onloadstart?: Function;
-  onprogress?: Function;
-  ontimeout?: Function;
-  onerror?: Function;
-  onabort?: Function;
-  onloadend?: Function;
-  onreadystatechange?: Function;
+  onload?: (e: Event) => void;
+  onloadstart?: (e: Event) => void;
+  onprogress?: (e: ProgressEvent) => void;
+  ontimeout?: (e: Event) => void;
+  onerror?: (e: Event) => void;
+  onabort?: (e: Event) => void;
+  onloadend?: (e: Event) => void;
+  onreadystatechange?: (e: Event) => void;
 
   readyState: number = UNSENT;
   responseHeaders?: Record<string, string>;
@@ -75,8 +75,8 @@ export class MockedXMLHttpRequest extends EventTarget {
   _aborted = false;
   _cachedResponse?: Response | null;
   _hasError = false;
-  _headers: Record<string, any> = {};
-  _lowerCaseResponseHeaders: Record<string, any> = {};
+  _headers: Record<string, string> = {};
+  _lowerCaseResponseHeaders: Record<string, string> = {};
   _method?: string;
   _response: string | Blob | ArrayBuffer | undefined = '';
   _responseType: XMLHttpRequestResponseType = '';
@@ -85,8 +85,9 @@ export class MockedXMLHttpRequest extends EventTarget {
   _timedOut = false;
 
   statusText = '';
-  _cachedRequestBody: any = null;
-  _requestBody: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _cachedRequestBody?: any;
+  _requestBody?: string;
 
   constructor() {
     super();
@@ -288,7 +289,7 @@ export class MockedXMLHttpRequest extends EventTarget {
     return value !== undefined ? value : null;
   }
 
-  setRequestHeader(header: string, value: any): void {
+  setRequestHeader(header: string, value: string): void {
     if (this.readyState !== this.OPENED) {
       throw new Error('Request has not been opened');
     }
@@ -343,12 +344,12 @@ export class MockedXMLHttpRequest extends EventTarget {
     this._reset();
   }
 
-  setResponseHeaders(responseHeaders: Record<string, any>) {
+  setResponseHeaders(responseHeaders: Record<string, string>) {
     this.responseHeaders = responseHeaders || {};
     const headers = responseHeaders || {};
 
     this._lowerCaseResponseHeaders = Object.keys(headers).reduce(
-      (previousValue: Record<string, any>, currentValue: string) => {
+      (previousValue: Record<string, string>, currentValue: string) => {
         previousValue[currentValue.toLowerCase()] = headers[currentValue];
         return previousValue;
       },

@@ -301,7 +301,7 @@ export class Barricade {
    */
   start() {
     if (__DEV__) {
-      global.XMLHttpRequest = interceptor(this) as any;
+      global.XMLHttpRequest = interceptor(this);
       global.fetch = RNFetch.fetch;
       global.Headers = RNFetch.Headers;
       global.Request = RNFetch.Request;

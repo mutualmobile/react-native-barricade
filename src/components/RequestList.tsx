@@ -18,7 +18,7 @@ import { Header } from './Header';
 
 type RequestListProps = {
   barricade: Barricade;
-  onDonePressed?: (event: NativeSyntheticEvent<any>) => void;
+  onDonePressed?: <T>(event: NativeSyntheticEvent<T>) => void;
   onListItemPressed: (index: number) => void;
 };
 

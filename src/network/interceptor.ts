@@ -20,5 +20,5 @@ export function interceptor(ctx: Barricade) {
     }
   }
 
-  return InterceptedMockedXMLHttpRequest;
+  return InterceptedMockedXMLHttpRequest as unknown as typeof XMLHttpRequest;
 }

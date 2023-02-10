@@ -12,7 +12,7 @@ import { useThemedColor } from '../theme';
 import { hScale, vScale } from '../utils';
 
 export type ButtonProps = {
-  onPress?: (event: NativeSyntheticEvent<any>) => void;
+  onPress?: <T>(event: NativeSyntheticEvent<T>) => void;
   title: string;
 };
 

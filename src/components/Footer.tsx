@@ -12,7 +12,7 @@ import { useThemedColor } from '../theme';
 import { hScale } from '../utils';
 
 export type FooterProps = {
-  onPress?: (event: NativeSyntheticEvent<any>) => void;
+  onPress?: <T>(event: NativeSyntheticEvent<T>) => void;
   title: string;
   titleStyle: TextStyle;
 };

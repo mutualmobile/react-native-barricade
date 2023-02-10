@@ -18,7 +18,7 @@ enum ViewType {
 
 type BarricadeViewProps = {
   barricade?: Barricade;
-  onRequestClose?: (event: NativeSyntheticEvent<any>) => void;
+  onRequestClose?: <T>(event: NativeSyntheticEvent<T>) => void;
   theme?: ThemeType;
   visible: boolean;
 };

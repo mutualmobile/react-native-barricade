@@ -13,15 +13,20 @@ export const XHR_EVENTS = [
   'readystatechange',
 ];
 
+type FunctionListener = (event: Event) => void;
+type ObjectListener = { handleEvent: FunctionListener };
+type Listener = FunctionListener | ObjectListener;
+
 export class EventTarget {
-  _eventListeners: Record<string, any> = {};
+  _eventListeners: Record<string, Listener[]> = {};
 
   constructor() {
     for (let i = XHR_EVENTS.length - 1; i >= 0; i--) {
       const eventName = XHR_EVENTS[i];
       this.addEventListener(eventName, (event: Event) => {
-        // @ts-ignore
-        const listener = this['on' + eventName];
+        const listener = this[
+          ('on' + eventName) as unknown as keyof FunctionListener
+        ] as FunctionListener;
 
         if (listener && typeof listener === 'function') {
           listener.call(event.target, event);
@@ -51,12 +56,12 @@ export class EventTarget {
 
     for (let i = 0; i < listeners.length; i++) {
       if (typeof listeners[i] === 'function') {
-        listeners[i].call(this, event);
+        (listeners[i] as FunctionListener).call(this, event);
       } else if (
-        listeners[i].handleEvent &&
-        typeof listeners[i].handleEvent === 'function'
+        (listeners[i] as ObjectListener).handleEvent &&
+        typeof (listeners[i] as ObjectListener).handleEvent === 'function'
       ) {
-        listeners[i].handleEvent(event);
+        (listeners[i] as ObjectListener).handleEvent(event);
       }
     }
 
@@ -64,13 +69,10 @@ export class EventTarget {
   }
 
   _progress(lengthComputable: boolean, loaded: number, total: number) {
-    const event = new Event('progress');
+    const event = new ProgressEvent('progress');
     event.target = this;
-    // @ts-ignore
     event.lengthComputable = lengthComputable;
-    // @ts-ignore
     event.loaded = loaded;
-    // @ts-ignore
     event.total = total;
     this.dispatchEvent(event);
   }
@@ -186,4 +188,20 @@ export class Event {
    * The unix time of this event.
    */
   timeStamp: number = Date.now();
+}
+
+export class ProgressEvent extends Event {
+  lengthComputable = false;
+  loaded = 0;
+  total = 0;
+  target: EventTarget | null = null;
+
+  constructor(
+    type: string,
+    bubbles = false,
+    cancelable = false,
+    target: EventTarget | null = null,
+  ) {
+    super(type, bubbles, cancelable, target);
+  }
 }
