@@ -7,7 +7,7 @@ import { HttpStatusCodes } from '../constants';
 import { store } from '../redux';
 import { IError, ErrorResponse, SuccessResponse } from './type';
 
-const DEFAULT_TIMEOUT = 60 * 1000;
+const DEFAULT_TIMEOUT = 10 * 1000;
 const RESPONSE_FORMAT = 'json';
 
 const appClient = axios.create({

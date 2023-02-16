@@ -96,5 +96,16 @@ export function apiTestResult() {
         console.log('🚀 ~ file: photo-action.ts:95 ~ return ~ error', error);
         // dispatch(setSearchError(error.data.message));
       });
+    // return fetch(`${Env.baseUrl}${apiConfig.photos.error}`, {
+    //   method: HttpMethod.GET,
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('🚀 ~ file: photo-action.ts:113 ~ return ~ data', data);
+    //     return data;
+    //   })
+    //   .catch(error => {
+    //     console.log('🚀 ~ file: photo-action.ts:95 ~ return ~ error', error);
+    //   });
   };
 }
