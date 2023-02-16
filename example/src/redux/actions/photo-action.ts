@@ -86,10 +86,14 @@ export function getRecentResults(page: number) {
   };
 }
 
-export function apiTestResult() {
+export function apiTestResult(data) {
   return (dispatch: AppDispatch) => {
-    return PhotoService.apiTest()
+    return PhotoService.apiTest(data)
       .then(response => {
+        console.log(
+          '🚀 ~ file: photo-action.ts:110 ~ return ~ response',
+          response,
+        );
         return response;
       })
       .catch(error => {

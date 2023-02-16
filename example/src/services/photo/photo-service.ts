@@ -44,15 +44,12 @@ export class PhotoService {
     );
   };
 
-  static apiTest = () => {
+  static apiTest = data => {
+    console.log('🚀 ~ file: photo-service.ts:32 ~ PhotoService ~ data', data);
     return NetworkManager.getInstance().appRequest({
-      method: HttpMethod.GET,
+      method: HttpMethod.POST,
       url: apiConfig.photos.error,
-      params: {
-        // content_type: SearchContentType.Photos,
-        // page,
-        // per_page: 20,
-      },
+      data,
     });
   };
 }

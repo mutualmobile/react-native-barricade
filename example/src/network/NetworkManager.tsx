@@ -14,16 +14,18 @@ const appClient = axios.create({
   baseURL: Env.baseUrl,
   timeout: DEFAULT_TIMEOUT,
   headers: {
+    // 'Content-Type': 'multipart/form-data',
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
+    Authorization: `Bearer public_W142hbGGZ4LkUvwHHr6U2rqKYARw`,
   },
 });
 
 appClient.interceptors.request.use(config => {
   config.params = {
     ...config.params,
-    api_key: Env.flickrKey,
-    format: RESPONSE_FORMAT,
+    // api_key: Env.flickrKey,
+    // format: RESPONSE_FORMAT,
     nojsoncallback: 1,
   };
   return config;

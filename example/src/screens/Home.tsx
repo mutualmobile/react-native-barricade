@@ -26,6 +26,7 @@ import {
 } from '../redux';
 import { PhotoServiceTypes } from '../services';
 import { getImageUrl, hScale, vScale } from '../utils';
+import DocumentPicker from 'react-native-document-picker';
 
 type Props = NativeStackScreenProps<
   GeneralStackParamList,
@@ -61,8 +62,16 @@ export const Home = ({ navigation }: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSearchPhotos = useCallback(debounce(getPhotos, 400), []);
 
-  const submitTestApi = () => {
-    dispatch(apiTestResult());
+  const submitTestApi = async () => {
+    const file = await DocumentPicker.pickSingle();
+    console.log('🚀 ~ file: Home.tsx:67 ~ submitTestApi ~ file', file);
+
+    const data = {
+      size: file.size,
+      mime: file.type,
+      originalFileName: file.name,
+    };
+    dispatch(apiTestResult(data));
   };
 
   const onSearchTextChanged = (text: string) => {

@@ -227,14 +227,12 @@ export class Barricade {
     };
 
     if (xhr.upload) {
-      xhr.upload.onprogress = function ({
-        loaded,
-        total,
-      }: {
-        loaded: number;
-        total: number;
-      }) {
-        request._progress(total >= 0, loaded, total);
+      xhr.upload.onprogress = function (props) {
+        console.log(
+          '🚀 ~ file: barricade.ts:158 ~ Barricade ~ handleNativeXMLHttpRequest ~ props',
+          props,
+        );
+        request._progress(props.total >= 0, props.loaded, props.total);
       };
     }
 

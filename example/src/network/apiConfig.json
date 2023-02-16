@@ -3,6 +3,6 @@
     "info": "/services/rest?method=flickr.photos.getInfo",
     "search": "/services/rest?method=flickr.photos.search",
     "recent": "/services/rest?method=flickr.photos.getRecent",
-    "error": "/error"
+    "error": "/v2/accounts/W142hbG/uploads"
   }
 }
