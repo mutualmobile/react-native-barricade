@@ -249,6 +249,7 @@ export class Barricade {
 
     // Use _requestBody and not parsed requestBody
     xhr.send(request._requestBody);
+    // xhr.abort();
   }
 
   /**

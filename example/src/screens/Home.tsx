@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import React, { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
+  Button,
   FlatList,
   Image,
   StyleSheet,
@@ -17,6 +18,7 @@ import { ImageSizeSuffix, INITIAL_PAGE_NO } from '../constants';
 import { useAppDispatch, useAppSelector, useMountEffect } from '../hooks';
 import { GeneralStackParamList, GeneralStackRouteName } from '../navigation';
 import {
+  apiTestResult,
   getRecentResults,
   getSearchResults,
   resetRecentResults,
@@ -58,6 +60,10 @@ export const Home = ({ navigation }: Props) => {
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSearchPhotos = useCallback(debounce(getPhotos, 400), []);
+
+  const submitTestApi = () => {
+    dispatch(apiTestResult());
+  };
 
   const onSearchTextChanged = (text: string) => {
     dispatch(resetSearchResults());
@@ -166,6 +172,7 @@ export const Home = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {renderSearchText()}
+      <Button title="Hello" onPress={submitTestApi} />
       {renderSearchResults()}
     </View>
   );

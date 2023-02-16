@@ -43,4 +43,16 @@ export class PhotoService {
       },
     );
   };
+
+  static apiTest = () => {
+    return NetworkManager.getInstance().appRequest({
+      method: HttpMethod.GET,
+      url: apiConfig.photos.error,
+      params: {
+        // content_type: SearchContentType.Photos,
+        // page,
+        // per_page: 20,
+      },
+    });
+  };
 }

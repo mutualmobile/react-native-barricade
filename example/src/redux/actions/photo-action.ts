@@ -85,3 +85,16 @@ export function getRecentResults(page: number) {
       });
   };
 }
+
+export function apiTestResult() {
+  return (dispatch: AppDispatch) => {
+    return PhotoService.apiTest()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        console.log('🚀 ~ file: photo-action.ts:95 ~ return ~ error', error);
+        // dispatch(setSearchError(error.data.message));
+      });
+  };
+}

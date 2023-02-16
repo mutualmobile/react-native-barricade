@@ -1,7 +1,8 @@
 {
   "photos": {
     "info": "/services/rest?method=flickr.photos.getInfo",
+    "search": "/services/rest?method=flickr.photos.search",
     "recent": "/services/rest?method=flickr.photos.getRecent",
-    "search": "/services/rest?method=flickr.photos.search"
+    "error": "/error"
   }
 }
