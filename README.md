@@ -14,7 +14,7 @@ A local server configurable at runtime to develop, test, and prototype your Reac
 Most other local server implementations only support a single response per request, but Barricade supports multiple responses per request. This allows us to present the user with an interface to modify the selected mock response for a request at runtime.
 
 <p align="center">
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/media/demo.gif?raw=true" alt="Example App" width="231" height="500" />
+<img src="https://user-images.githubusercontent.com/101397708/215129902-f114be8e-552d-44fd-b514-7b366a9506a0.gif" alt="Example App" width="231" height="500" />
 </p>
 
 ## How does Barricade help?
@@ -230,9 +230,9 @@ $ yarn ios
 Barricade comes packaged with an in-app interface that allows you to select  the network responses at runtime. For this to be visible, you need to add the `BarricadeView` mentioned in Step 2 under **Usage**.
 
 <p align="center">
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/developer-menu.png?raw=true" alt="Developer Menu" width="231" height="500"/>
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/request-list.png?raw=true" alt="List View" width="231" height="500"/>
-<img src="https://github.com/mutualmobile/react-native-barricade/blob/main/docs/screenshots/response-list.png?raw=true" alt="Detail View" width="231" height="500"/>
+<img src="https://user-images.githubusercontent.com/101397708/215427001-8dd8e998-e7dc-4375-b888-ce0e0e4825f1.png" alt="Developer Menu" width="231" height="500"/>
+<img src="https://user-images.githubusercontent.com/101397708/215427137-ccd20140-a303-4124-8fdf-8353ae0de882.png" alt="Request List View" width="231" height="500"/>
+<img src="https://user-images.githubusercontent.com/101397708/215427206-03a58748-2188-4989-9c9b-dd77b15fa63a.png" alt="Response List View" width="231" height="500"/>
 </p>
 
 With this in place and the device shaken, you'll be able to see an option for `Barricade` in React Native's developer menu. On tapping the `Barricade` option, you’ll be redirected to a screen with the list of mocked APIs.
