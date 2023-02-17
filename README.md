@@ -218,7 +218,12 @@ $ yarn
 $ cd ios && pod install && cd ..
 ```
 
-**5. Run the app in android or iOS**
+**5. Generate and Add your Flickr API key**
+
+Generate your Flickr API key from [here](https://www.flickr.com/services/api/misc.api_keys.html).
+Then add your API key to `flickrKey` property in `example/src/config/dev.ts` and `example/src/config/prod.ts` files.
+
+**6. Run the app in android or iOS**
 ```bash
 $ yarn android
 # --- or ---
