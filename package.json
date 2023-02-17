@@ -1,6 +1,6 @@
 {
   "name": "@mutualmobile/react-native-barricade",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0",
   "description": "A local server configurable at runtime to develop, test, and prototype your React Native app. Using just mock responses, Barricade can build the whole app without getting blocked by the unavailability of APIs.",
   "homepage": "https://github.com/mutualmobile/react-native-barricade#readme",
   "main": "lib/index.js",
