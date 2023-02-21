@@ -4,6 +4,9 @@ import { MockedXMLHttpRequest } from './mocked-xml-http-request';
 
 export function interceptor(ctx: Barricade) {
   class InterceptedMockedXMLHttpRequest extends MockedXMLHttpRequest {
+    _method?: string;
+    _url?: string;
+
     constructor() {
       super();
     }

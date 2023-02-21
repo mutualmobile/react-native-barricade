@@ -846,14 +846,19 @@ describe('given that handleNativeXMLHttpRequest is called,', () => {
         },
       };
     });
-    const _progress = jest.fn();
+    const dispatchEvent = jest.fn();
     const setResponseData = jest.fn();
-    const request = { ...mockApiRequest, _progress, setResponseData };
+    const request = { ...mockApiRequest, dispatchEvent, setResponseData };
     barricade._nativeXMLHttpRequest = _nativeXMLHttpRequest;
 
     barricade.handleNativeXMLHttpRequest(request);
 
-    expect(request._progress).toHaveBeenCalledWith(true, 50, 100);
+    expect(request.dispatchEvent).toHaveBeenCalledWith({
+      type: 'progress',
+      lengthComputable: true,
+      loaded: 50,
+      total: 100,
+    });
     expect.assertions(1);
   });
 });

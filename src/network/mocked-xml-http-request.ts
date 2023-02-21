@@ -1,89 +1,9 @@
 /** This source code is based on React Native's XMLHttpRequest.js with typescript. */
-import { EventSubscription } from 'react-native';
+const XMLHttpRequest = require('react-native/Libraries/Network/XMLHttpRequest');
 
-import { Event, EventTarget, ProgressEvent } from './event';
 import { HttpStatusCodeText } from './http-codes';
 
-const BlobManager = require('react-native/Libraries/Blob/BlobManager');
-const base64 = require('base64-js');
-const invariant = require('invariant');
-
-// The native blob module is optional so inject it here if available.
-if (BlobManager.isAvailable) {
-  BlobManager.addNetworkingHandler();
-}
-
-const UNSENT = 0;
-const OPENED = 1;
-const HEADERS_RECEIVED = 2;
-const LOADING = 3;
-const DONE = 4;
-
-const SUPPORTED_RESPONSE_TYPES = {
-  arraybuffer: typeof global.ArrayBuffer === 'function',
-  blob: typeof global.Blob === 'function',
-  document: false,
-  json: true,
-  text: true,
-  '': true,
-};
-
-export class XMLHttpRequestEventTarget extends EventTarget {
-  onload?: (e: Event) => void;
-  onloadstart?: (e: Event) => void;
-  onprogress?: (e: ProgressEvent) => void;
-  ontimeout?: (e: Event) => void;
-  onerror?: (e: Event) => void;
-  onabort?: (e: Event) => void;
-  onloadend?: (e: Event) => void;
-}
-
-export class MockedXMLHttpRequest extends EventTarget {
-  static UNSENT: number = UNSENT;
-  static OPENED: number = OPENED;
-  static HEADERS_RECEIVED: number = HEADERS_RECEIVED;
-  static LOADING: number = LOADING;
-  static DONE: number = DONE;
-
-  UNSENT: number = UNSENT;
-  OPENED: number = OPENED;
-  HEADERS_RECEIVED: number = HEADERS_RECEIVED;
-  LOADING: number = LOADING;
-  DONE: number = DONE;
-
-  onload?: (e: Event) => void;
-  onloadstart?: (e: Event) => void;
-  onprogress?: (e: ProgressEvent) => void;
-  ontimeout?: (e: Event) => void;
-  onerror?: (e: Event) => void;
-  onabort?: (e: Event) => void;
-  onloadend?: (e: Event) => void;
-  onreadystatechange?: (e: Event) => void;
-
-  readyState: number = UNSENT;
-  responseHeaders?: Record<string, string>;
-  status: keyof typeof HttpStatusCodeText | 0 = 0;
-  timeout = 0;
-  responseURL?: string;
-  withCredentials = true;
-
-  upload: XMLHttpRequestEventTarget = new XMLHttpRequestEventTarget();
-
-  _requestId?: number;
-  _subscriptions: Array<EventSubscription> = [];
-
-  _aborted = false;
-  _cachedResponse?: Response | null;
-  _hasError = false;
-  _headers: Record<string, string> = {};
-  _lowerCaseResponseHeaders: Record<string, string> = {};
-  _method?: string;
-  _response: string | Blob | ArrayBuffer | undefined = '';
-  _responseType: XMLHttpRequestResponseType = '';
-  _sent = false;
-  _url?: string;
-  _timedOut = false;
-
+export class MockedXMLHttpRequest extends XMLHttpRequest {
   statusText = '';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _cachedRequestBody?: any;
@@ -95,120 +15,10 @@ export class MockedXMLHttpRequest extends EventTarget {
   }
 
   _reset(): void {
-    this.readyState = this.UNSENT;
-    this.responseHeaders = undefined;
-    this.status = 0;
-    delete this.responseURL;
+    super._reset();
 
-    this._requestId = undefined;
-
-    this._cachedResponse = undefined;
-    this._hasError = false;
-    this._headers = {};
-    this._response = '';
-    this._responseType = '';
-    this._sent = false;
-    this._lowerCaseResponseHeaders = {};
     this._cachedRequestBody = undefined;
     this._requestBody = undefined;
-
-    this._clearSubscriptions();
-    this._timedOut = false;
-  }
-
-  get responseType(): XMLHttpRequestResponseType {
-    return this._responseType;
-  }
-
-  set responseType(responseType: XMLHttpRequestResponseType) {
-    if (this._sent) {
-      throw new Error(
-        "Failed to set the 'responseType' property on 'XMLHttpRequest': The " +
-          'response type cannot be set after the request has been sent.',
-      );
-    }
-    if (!SUPPORTED_RESPONSE_TYPES.hasOwnProperty(responseType)) {
-      console.warn(
-        `The provided value '${responseType}' is not a valid 'responseType'.`,
-      );
-      return;
-    }
-
-    // redboxes early, e.g. for 'arraybuffer' on ios 7
-    invariant(
-      SUPPORTED_RESPONSE_TYPES[responseType] || responseType === 'document',
-      `The provided value '${responseType}' is unsupported in this environment.`,
-    );
-
-    if (responseType === 'blob') {
-      invariant(
-        BlobManager.isAvailable,
-        'Native module BlobModule is required for blob support',
-      );
-    }
-
-    this._responseType = responseType;
-  }
-
-  get responseText() {
-    if (this._responseType !== '' && this._responseType !== 'text') {
-      throw new Error(
-        "The 'responseText' property is only available if 'responseType' " +
-          `is set to '' or 'text', but it is '${this._responseType}'.`,
-      );
-    }
-    if (this.readyState < LOADING) {
-      return '';
-    }
-    return this._response;
-  }
-
-  get response() {
-    const { responseType } = this;
-    if (responseType === '' || responseType === 'text') {
-      return this.readyState < LOADING || this._hasError ? '' : this._response;
-    }
-
-    if (this.readyState !== DONE) {
-      return null;
-    }
-
-    if (this._cachedResponse !== undefined) {
-      return this._cachedResponse;
-    }
-
-    switch (responseType) {
-      case 'arraybuffer':
-        this._cachedResponse = base64.toByteArray(this._response).buffer;
-        break;
-
-      case 'blob':
-        if (typeof this._response === 'object' && this._response) {
-          this._cachedResponse = BlobManager.createFromOptions(this._response);
-        } else if (this._response === '') {
-          this._cachedResponse = BlobManager.createFromParts([]);
-        } else {
-          throw new Error(`Invalid response for blob: ${this._response}`);
-        }
-        break;
-
-      case 'document':
-        this._cachedResponse = null;
-        break;
-
-      case 'json':
-        try {
-          this._cachedResponse = JSON.parse((this._response as string) ?? '');
-        } catch (_) {
-          this._cachedResponse = null;
-        }
-        break;
-
-      default:
-        this._cachedResponse = null;
-    }
-
-    return this._cachedResponse;
   }
 
   get requestBody() {
@@ -216,103 +26,11 @@ export class MockedXMLHttpRequest extends EventTarget {
       this._cachedRequestBody = this._requestBody;
       if (this._requestBody) {
         try {
-          this._cachedRequestBody = JSON.parse(
-            (this._requestBody as string) ?? '',
-          );
+          this._cachedRequestBody = JSON.parse(this._requestBody as string);
         } catch (_) {}
       }
     }
     return this._cachedRequestBody;
-  }
-
-  _clearSubscriptions(): void {
-    (this._subscriptions || []).forEach(sub => {
-      if (sub) {
-        sub.remove();
-      }
-    });
-    this._subscriptions = [];
-  }
-
-  getAllResponseHeaders() {
-    if (!this.responseHeaders) {
-      // according to the spec, return null if no response has been received
-      return null;
-    }
-
-    // Assign to non-nullable local variable.
-    const responseHeaders = this.responseHeaders;
-
-    const unsortedHeaders: Map<
-      string,
-      { lowerHeaderName: string; upperHeaderName: string; headerValue: string }
-    > = new Map();
-    for (const rawHeaderName of Object.keys(responseHeaders)) {
-      const headerValue = responseHeaders[rawHeaderName];
-      const lowerHeaderName = rawHeaderName.toLowerCase();
-      const header = unsortedHeaders.get(lowerHeaderName);
-      if (header) {
-        header.headerValue += ', ' + headerValue;
-        unsortedHeaders.set(lowerHeaderName, header);
-      } else {
-        unsortedHeaders.set(lowerHeaderName, {
-          lowerHeaderName,
-          upperHeaderName: rawHeaderName.toUpperCase(),
-          headerValue,
-        });
-      }
-    }
-
-    // Sort in ascending order, with a being less than b if a's name is legacy-uppercased-byte less than b's name.
-    const sortedHeaders = [...unsortedHeaders.values()].sort((a, b) => {
-      if (a.upperHeaderName < b.upperHeaderName) {
-        return -1;
-      }
-      if (a.upperHeaderName > b.upperHeaderName) {
-        return 1;
-      }
-      return 0;
-    });
-
-    // Combine into single text response.
-    return (
-      sortedHeaders
-        .map(header => {
-          return header.lowerHeaderName + ': ' + header.headerValue;
-        })
-        .join('\r\n') + '\r\n'
-    );
-  }
-
-  getResponseHeader(header: string) {
-    const value = this._lowerCaseResponseHeaders[header.toLowerCase()];
-    return value !== undefined ? value : null;
-  }
-
-  setRequestHeader(header: string, value: string): void {
-    if (this.readyState !== this.OPENED) {
-      throw new Error('Request has not been opened');
-    }
-
-    this._headers[header.toLowerCase()] = String(value);
-  }
-
-  open(method: string, url: string, async = true): void {
-    /* Other optional arguments are not supported yet */
-    if (this.readyState !== this.UNSENT) {
-      throw new Error('Cannot open, already sending');
-    }
-    if (async !== undefined && !async) {
-      // async is default
-      throw new Error('Synchronous http requests are not supported');
-    }
-    if (!url) {
-      throw new Error('Cannot load an empty url');
-    }
-    this._method = method.toUpperCase();
-    this._url = url;
-    this._aborted = false;
-    this.setReadyState(this.OPENED);
   }
 
   send(data?: string) {
@@ -326,54 +44,8 @@ export class MockedXMLHttpRequest extends EventTarget {
     this._requestBody = data;
     this._sent = true;
 
-    this.dispatchEvent(new Event('loadstart', false, false, this));
-  }
-
-  abort(): void {
-    this._aborted = true;
-    if (
-      !(
-        this.readyState === this.UNSENT ||
-        (this.readyState === this.OPENED && !this._sent) ||
-        this.readyState === this.DONE
-      )
-    ) {
-      this._reset();
-      this.setReadyState(this.DONE);
-    }
-    this._reset();
-  }
-
-  setResponseHeaders(responseHeaders: Record<string, string>) {
-    this.responseHeaders = responseHeaders || {};
-    const headers = responseHeaders || {};
-
-    this._lowerCaseResponseHeaders = Object.keys(headers).reduce(
-      (previousValue: Record<string, string>, currentValue: string) => {
-        previousValue[currentValue.toLowerCase()] = headers[currentValue];
-        return previousValue;
-      },
-      {},
-    );
-  }
-
-  setReadyState(newState: number): void {
-    this.readyState = newState;
-    this.dispatchEvent(new Event('readystatechange'));
-    if (newState === this.DONE) {
-      if (this._aborted) {
-        this.dispatchEvent(new Event('abort'));
-      } else if (this._hasError) {
-        if (this._timedOut) {
-          this.dispatchEvent(new Event('timeout'));
-        } else {
-          this.dispatchEvent(new Event('error'));
-        }
-      } else {
-        this.dispatchEvent(new Event('load', false, false, this));
-      }
-      this.dispatchEvent(new Event('loadend', false, false, this));
-    }
+    // this.dispatchEvent(new Event('loadstart', false, false));
+    this.dispatchEvent({ type: 'loadstart' });
   }
 
   setResponseData(
@@ -383,7 +55,8 @@ export class MockedXMLHttpRequest extends EventTarget {
     responseURL?: string,
   ) {
     this.status = typeof status === 'number' ? status : 200;
-    this.statusText = HttpStatusCodeText[this.status];
+    this.statusText =
+      HttpStatusCodeText[this.status as keyof typeof HttpStatusCodeText];
     if (responseURL || responseURL === '') {
       this.responseURL = responseURL;
     } else {

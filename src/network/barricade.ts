@@ -234,7 +234,12 @@ export class Barricade {
         loaded: number;
         total: number;
       }) {
-        request._progress(total >= 0, loaded, total);
+        request.dispatchEvent({
+          type: 'progress',
+          lengthComputable: total >= 0,
+          loaded,
+          total,
+        });
       };
     }
 

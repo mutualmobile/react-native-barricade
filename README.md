@@ -1,6 +1,6 @@
 # @mutualmobile/react-native-barricade
 
-![Code Coverage](https://img.shields.io/static/v1?label=coverage&message=95&color=brightgreen)
+![Code Coverage](https://img.shields.io/static/v1?label=coverage&message=100&color=brightgreen)
 [![License](https://img.shields.io/github/license/mutualmobile/react-native-barricade)](https://github.com/mutualmobile/react-native-barricade/blob/main/LICENSE)
 [![NPM Version](https://img.shields.io/npm/v/@mutualmobile/react-native-barricade)](https://www.npmjs.com/package/@mutualmobile/react-native-barricade)
 [![Known Vulnerabilities](https://snyk.io/test/github/mutualmobile/react-native-barricade/badge.svg)](https://snyk.io/test/github/mutualmobile/react-native-barricade)

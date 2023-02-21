@@ -156,6 +156,22 @@ describe('MockedXMLHttpRequest,', () => {
       expect.assertions(1);
     });
 
+    test('when send is called with data and requestBody is set, requestBody should return cached response', () => {
+      const requestBody = 'some data';
+      const spy = jest.spyOn(JSON, 'parse');
+
+      xmlHttpRequest.send(requestBody);
+
+      expect(xmlHttpRequest.requestBody).toBe(requestBody);
+
+      // Calling xmlHttpRequest.requestBody again should return cached response
+      expect(xmlHttpRequest.requestBody).toBe(requestBody);
+      // JSON.parse is called only the first time
+      expect(spy).toHaveBeenCalledTimes(1);
+
+      expect.assertions(3);
+    });
+
     test('should trigger loadstart event', () => {
       xmlHttpRequest.onloadstart = jest.fn();
 
@@ -224,7 +240,7 @@ describe('MockedXMLHttpRequest,', () => {
       xmlHttpRequest.send();
     });
 
-    test('should set status', () => {
+    test('when status is number, should set status', () => {
       expect(xmlHttpRequest.status).toBe(0);
 
       xmlHttpRequest.setResponseData(
@@ -234,6 +250,19 @@ describe('MockedXMLHttpRequest,', () => {
       );
 
       expect(xmlHttpRequest.status).toBe(successResponse.status);
+      expect.assertions(2);
+    });
+
+    test('when status is not number, should set status as 200', () => {
+      expect(xmlHttpRequest.status).toBe(0);
+
+      xmlHttpRequest.setResponseData(
+        'OK' as any,
+        successResponse.headers,
+        successResponse.response,
+      );
+
+      expect(xmlHttpRequest.status).toBe(200);
       expect.assertions(2);
     });
 
@@ -277,7 +306,7 @@ describe('MockedXMLHttpRequest,', () => {
       expect.assertions(2);
     });
 
-    test('should set response headers', () => {
+    test('when headers is passed, should set response headers', () => {
       expect(xmlHttpRequest.getAllResponseHeaders()).toBe(null);
 
       xmlHttpRequest.setResponseData(
@@ -289,6 +318,19 @@ describe('MockedXMLHttpRequest,', () => {
       expect(xmlHttpRequest.getAllResponseHeaders()).toBe(
         `accept: application/json, text/plain, */*\r\ncontent-type: application/json\r\n`,
       );
+      expect.assertions(2);
+    });
+
+    test('when headers is not passed, should set response headers as empty', () => {
+      expect(xmlHttpRequest.getAllResponseHeaders()).toBe(null);
+
+      xmlHttpRequest.setResponseData(
+        successResponse.status,
+        undefined as any,
+        successResponse.response,
+      );
+
+      expect(xmlHttpRequest.getAllResponseHeaders()).toBe('\r\n');
       expect.assertions(2);
     });
 
@@ -1030,32 +1072,6 @@ describe('MockedXMLHttpRequest,', () => {
       expect.assertions(1);
 
       jest.clearAllMocks();
-    });
-  });
-
-  describe('given that _clearSubscriptions is called,', () => {
-    beforeEach(() => {
-      xmlHttpRequest.open(mockApiRequest._method, mockApiRequest._url, true);
-    });
-
-    test('when there are no subscriptions, should not throw error', () => {
-      xmlHttpRequest._clearSubscriptions();
-
-      expect(xmlHttpRequest._clearSubscriptions).not.toThrow();
-      expect(xmlHttpRequest._subscriptions).toMatchObject([]);
-      expect.assertions(2);
-    });
-
-    test('should remove all subscriptions and set subscriptions to empty', () => {
-      const remove = jest.fn();
-      const subscriptions = [{ remove }] as unknown as Array<EventSubscription>;
-      xmlHttpRequest._subscriptions.push(subscriptions[0]);
-
-      xmlHttpRequest._clearSubscriptions();
-
-      expect(remove).toHaveBeenCalled();
-      expect(xmlHttpRequest._subscriptions).toMatchObject([]);
-      expect.assertions(2);
     });
   });
 });
