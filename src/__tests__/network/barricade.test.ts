@@ -589,9 +589,7 @@ describe('given that barricade was started and handleRequest is called,', () => 
 
     expect(mockHandleNativeXMLHttpRequest).not.toHaveBeenCalled();
     expect(barricade.handleMockedXMLHttpRequest).toThrow(
-      new Error(
-        `Barricade intercepted undefined(undefined) API and threw an error - Cannot read properties of undefined (reading 'responseHandler').`,
-      ),
+      `Barricade intercepted undefined(undefined) API and threw an error - Cannot read properties of undefined (reading 'responseHandler').`,
     );
     expect.assertions(2);
   });

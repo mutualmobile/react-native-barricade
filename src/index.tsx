@@ -27,9 +27,7 @@ let barricade: Barricade | undefined;
 const createBarricade = (requests?: RequestConfig[]) => {
   barricade = new Barricade(requests);
   if (__DEV__) {
-    DevSettings.addMenuItem(Strings.Barricade, () => {
-      showBarricadeView();
-    });
+    DevSettings.addMenuItem(Strings.Barricade, showBarricadeView);
   }
 
   return barricade;

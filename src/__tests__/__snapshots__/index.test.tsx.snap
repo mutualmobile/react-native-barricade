@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given that its not __DEV__ mode and barricade is undefined, should match snapshot 1`] = `null`;

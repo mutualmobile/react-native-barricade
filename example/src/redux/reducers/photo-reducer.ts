@@ -84,7 +84,7 @@ export const photoReducer = (
             searchError:
               (action.payload as PhotoServiceTypes.Photos).page ===
                 INITIAL_PAGE_NO ||
-              (!state.recentResult && action.payload.photo?.length === 0)
+              (!state.searchResult && action.payload.photo?.length === 0)
                 ? Strings.home.search_no_data
                 : undefined,
             searchPage: (action.payload as PhotoServiceTypes.Photos).page + 1,

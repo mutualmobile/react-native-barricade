@@ -71,8 +71,8 @@ export const Home = ({ navigation }: Props) => {
     if (
       !isLoading &&
       (isSearch
-        ? searchPage <= searchTotalPages
-        : recentPage <= recentTotalPages)
+        ? searchPage > 1 && searchPage <= searchTotalPages
+        : recentPage > 1 && recentPage <= recentTotalPages)
     ) {
       getPhotos(searchText, isSearch ? searchPage : recentPage);
     }
@@ -155,7 +155,7 @@ export const Home = ({ navigation }: Props) => {
         renderItem={renderResultItem}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         onEndReached={onEndReachedThreshold}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={1}
         ListFooterComponent={renderFooter}
         refreshing={isLoading}
         onRefresh={onRefresh}
