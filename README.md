@@ -325,7 +325,7 @@ After that, we need to add the setup file in the jest config. You can add it und
 
 Barricade was created by [Prajna Boloor](https://www.linkedin.com/in/prajna-boloor/) at [Mutual Mobile](http://www.mutualmobile.com).
 
-A special shout-out to the React Nativeteam at Mutual Mobile for their feedback.
+A special shout-out to the React Native team at Mutual Mobile for their feedback.
 
 ## License
 
